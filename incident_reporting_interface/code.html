@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Phenomena Report Submission</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#c4010b",
+                        "surface": "#131313",
+                        "inverse-primary": "#006e16",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "on-primary": "#003907",
+                        "on-secondary": "#432c00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-dim": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary": "#690003",
+                        "surface-tint": "#00e639",
+                        "on-primary-fixed-variant": "#00530e",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "outline-variant": "#3b4b37",
+                        "on-secondary-fixed-variant": "#614000",
+                        "secondary-fixed-dim": "#ffba43",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary": "#ffd393",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-fixed": "#281800",
+                        "on-tertiary-fixed": "#410001",
+                        "primary-container": "#00ff41",
+                        "tertiary": "#fff7f6",
+                        "outline": "#84967e",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#ffd2cc",
+                        "on-primary-container": "#007117",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#ffddaf",
+                        "secondary-container": "#fdaf00",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#ffb4aa",
+                        "on-primary-fixed": "#002203",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed": "#72ff70",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#00e639",
+                        "on-secondary-container": "#694600",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ebffe2",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "on-surface-variant": "#b9ccb2",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+        .mono-data { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        input[type="text"], input[type="date"], input[type="time"], select, textarea {
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid theme('colors.surface-variant');
+            color: theme('colors.on-surface');
+            border-radius: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            box-shadow: none;
+            border-bottom-color: theme('colors.secondary-container');
+        }
+        .form-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: theme('colors.on-surface-variant');
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col md:flex-row antialiased">
+<!-- TopAppBar (Mobile/Desktop Header) -->
+<header class="bg-[#131313]/90 backdrop-blur-md text-[#00FF41] font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs fixed top-0 w-full rounded-none border-b border-stone-800 bg-stone-900/50 flat no shadows flex justify-between items-center px-6 h-14 z-50 transition-all duration-75 ease-in-out">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-xl">security</span>
+<span class="text-xl font-bold text-[#00FF41] tracking-tighter">AERIAL PHENOMENA MONITOR</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden md:inline-block mr-4 opacity-80">CLEARANCE: LEVEL 5</span>
+<div class="flex gap-4">
+<span class="material-symbols-outlined hover:bg-stone-800 hover:text-[#00FF41] cursor-pointer" onclick="window.location.href='../security_clearance_access/code.html'">security</span>
+<span class="material-symbols-outlined hover:bg-stone-800 hover:text-[#00FF41] cursor-pointer" onclick="window.location.href='../sensor_calibration_protocol/code.html'">sensors</span>
+<span class="material-symbols-outlined hover:bg-stone-800 hover:text-[#00FF41] cursor-pointer">settings</span>
+</div>
+<img alt="Sovereign Intel Operator" class="w-8 h-8 rounded-none border border-outline-variant" data-alt="Black and white high contrast portrait of an intelligence operator with intense stare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-cuFYG7q98t3oMsj1DY8HKIMLDLqVOGlPJ_4vdtNFQXgFtj9dRF9KcKwfauvuKUlLhRJS9wNTO1cW_6B3slfSiJYoC_PIsEJTLstZRnoDy9tACusE8MMJq9cde9uCOPUypYt1ZmswIHheGVVaCA5KvykgcapGtLNYB3_YMia9Ts5gAhFN6xQw62KYnCo-hggJ6XS_pe2sqXUmEK69sNCaTgFyITFN3IQT9CQZx6y1bGxpKzksAw9un0DeG3XX9qIUz9Yo9KhK80k"/>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex bg-[#1c1b1b] text-[#00FF41] font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex-col justify-between py-8 z-40 tonal shift using surface_container_low flat no shadows">
+<div>
+<div class="px-6 mb-8">
+<div class="text-lg font-black text-[#00FF41] font-headline">INTEL_CORE_V.2</div>
+<div class="font-['Inter'] text-[10px] uppercase tracking-widest text-stone-500 mt-1">STATUS: ENCRYPTED</div>
+</div>
+<div class="flex flex-col">
+<a href="../global_surveillance_dashboard/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-4 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined">radar</span>
+<span>Live Feed</span>
+</a>
+<a href="../sensor_calibration_protocol/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-4 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined">terminal</span>
+<span>Signal Logs</span>
+</a>
+<a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-4 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined">security</span>
+<span>Threat Matrix</span>
+</a>
+<a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 bg-[#00FF41]/5 text-[#00FF41] border-l-2 border-[#00FF41] py-3 px-4 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined">database</span>
+<span>Archived Data</span>
+</a>
+</div>
+</div>
+<div class="px-6 flex flex-col gap-4">
+<button class="w-full bg-[#00FF41] text-[#003907] py-2 font-bold font-headline tracking-widest hover:bg-[#72ff70] transition-colors" onclick="window.location.href='../global_surveillance_dashboard/code.html'">INITIATE SCAN</button>
+<div class="border border-stone-700 p-3 text-[9px] text-stone-500 font-mono">
+<div class="text-[#00FF41] mb-2 tracking-widest">TOKEN_DATA_STREAM</div>
+<div class="flex justify-between mb-1"><span>CONTRACT</span><span class="text-stone-400">0x0000...0000</span></div>
+<div class="flex justify-between mb-1"><span>X_FEED</span><span class="text-stone-400">@INTEL_CORE</span></div>
+<div class="flex justify-between"><span>DEX_SCR</span><span class="text-[#00FF41]">LIVE</span></div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">memory</span>
+<span>System Settings</span>
+</div>
+<a href="../security_clearance_access/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">power_settings_new</span>
+<span>Emergency Purge</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-14 md:ml-64 p-6 md:p-12 relative overflow-y-auto">
+<div class="max-w-5xl mx-auto">
+<!-- Header Section -->
+<div class="mb-12 border-b border-surface-variant pb-6 relative">
+<div class="absolute right-0 top-0 opacity-10 font-headline text-6xl tracking-widest pointer-events-none -rotate-2 origin-top-right text-primary">CLASSIFIED</div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-secondary-fixed-dim text-on-secondary-fixed-variant px-2 py-0.5 text-xs font-bold font-headline tracking-widest">FORM: X-77</span>
+<span class="text-on-surface-variant text-xs mono-data">DOC_ID: 994-A/B</span>
+</div>
+<h1 class="text-4xl md:text-5xl font-headline font-bold text-on-surface tracking-tight mb-2">INCIDENT REPORT</h1>
+<p class="text-on-surface-variant font-mono text-sm max-w-2xl">SUBMIT UNIDENTIFIED AERIAL PHENOMENA DATA FOR INTEL ANALYSIS. ALL ENTRIES ARE LOGGED AND ENCRYPTED OFF-SITE.</p>
+</div>
+<!-- Form Container -->
+<form class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10" onsubmit="window.location.href='../incident_intel_case_412_x/code.html'; return false;">
+<!-- Left Column (Data Entry) -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Meta Information Panel -->
+<section class="bg-surface-container-low p-6 relative">
+<div class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-on-surface-variant opacity-50"></div>
+<div class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-on-surface-variant opacity-50"></div>
+<div class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-on-surface-variant opacity-50"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-on-surface-variant opacity-50"></div>
+<h2 class="font-headline text-lg text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">schedule</span> TEMPORAL DATA
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="form-label">Date of Encounter</label>
+<input class="w-full bg-surface-container py-2 px-3 mono-data text-sm" required="" type="date"/>
+</div>
+<div>
+<label class="form-label">Time (Local/24H)</label>
+<input class="w-full bg-surface-container py-2 px-3 mono-data text-sm" required="" type="time"/>
+</div>
+<div class="md:col-span-2">
+<label class="form-label">Duration of Event</label>
+<select class="w-full bg-surface-container py-2 px-3 mono-data text-sm">
+<option>&lt; 10 Seconds</option>
+<option>10 - 60 Seconds</option>
+<option>1 - 5 Minutes</option>
+<option>&gt; 5 Minutes</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Witness Description Panel -->
+<section class="bg-surface-container-low p-6">
+<h2 class="font-headline text-lg text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">description</span> WITNESS TESTIMONY
+                        </h2>
+<div class="space-y-6">
+<div>
+<label class="form-label">Phenomenon Classification</label>
+<select class="w-full bg-surface-container py-2 px-3 mono-data text-sm">
+<option>CLASS A (Luminous Object)</option>
+<option>CLASS B (Metallic Craft)</option>
+<option>CLASS C (Anomalous Weather)</option>
+<option>CLASS D (Biological/Entity)</option>
+</select>
+</div>
+<div>
+<label class="form-label">Detailed Narrative</label>
+<textarea class="w-full bg-surface-container py-2 px-3 text-sm font-body leading-relaxed" placeholder="Describe trajectory, velocity, color, and any physiological effects..." required="" rows="5"></textarea>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Location & Evidence) -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Location Selection Panel -->
+<section class="bg-surface-container-low p-1 relative flex flex-col h-[300px]">
+<div class="absolute top-4 left-4 z-10 bg-surface/80 backdrop-blur px-2 py-1 border border-outline-variant">
+<span class="form-label mb-0 text-[10px]">GEOLOCATION ACQUISITION</span>
+</div>
+<div class="flex-1 bg-surface-container-lowest relative overflow-hidden group">
+<!-- Simulated Map Image -->
+<img alt="Topographic Map" class="w-full h-full object-cover opacity-60 mix-blend-luminosity grayscale group-hover:scale-105 transition-transform duration-1000 ease-out" data-alt="High contrast black and grey topographic map with tight contour lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSBSTH-5470g2P6KYNB_TE2ObOE_9SPP37xjvwVvo5lH9aZCdD5c8KsUrtXy_agRrE-fak9VKkE-xBrI9f8K8NdArMDOfKFmyqUBPnmMYmMaEZAsMmMEX-NmhNTtHUjrJzncLUSkGBDv7ktc-wQmBleLL3D0NEd7WzRbLNe6duA0Dg8LdZ43WIz8NpB17UuaaJPvXjSslvbB4c-QvECWbSWIS3mYMhIEj8SATwAA4OgYtDxJfbNmy0RBR-SKUGpIaQE7YYRYzXRAY"/>
+<!-- Crosshair Overlay -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-8 h-8 border border-primary relative">
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-primary -translate-y-1/2"></div>
+<div class="absolute left-1/2 top-0 w-[1px] h-full bg-primary -translate-x-1/2"></div>
+</div>
+</div>
+<!-- Coordinates Display -->
+<div class="absolute bottom-2 right-2 bg-surface px-2 py-1 flex items-center gap-2 border border-surface-variant">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="mono-data text-[10px] text-primary">LAT: 37.2431 N / LNG: 115.7930 W</span>
+</div>
+</div>
+<div class="p-3">
+<input class="w-full text-xs mono-data bg-transparent" placeholder="Manual Coordinate Entry (Optional)" type="text"/>
+</div>
+</section>
+<!-- Evidence Upload Panel -->
+<section class="bg-surface-container-low p-6 border border-dashed border-outline-variant hover:border-primary transition-colors cursor-pointer group">
+<h2 class="font-headline text-lg text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">upload_file</span> EVIDENCE UPLOAD
+                        </h2>
+<div class="h-32 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:text-primary transition-colors mb-2">cloud_upload</span>
+<p class="text-sm font-body text-on-surface-variant mb-1">Drag &amp; Drop media files here</p>
+<p class="text-[10px] mono-data text-outline">SUPPORTED: .JPG, .RAW, .MP4, .WAV (MAX 50MB)</p>
+</div>
+</section>
+<!-- Submit Action -->
+<div class="pt-4">
+<button class="w-full bg-primary-container text-on-primary font-headline font-bold text-lg py-4 flex items-center justify-center gap-2 hover:bg-primary transition-colors relative overflow-hidden group" type="submit">
+<div class="absolute inset-0 bg-gradient-to-r from-primary-fixed to-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="relative z-10 flex items-center gap-2">
+<span class="material-symbols-outlined">send</span>
+                                SUBMIT TO INTEL
+                            </span>
+</button>
+<p class="text-center text-[10px] mono-data text-error mt-3">WARNING: FALSIFICATION OF DATA IS A CLASS 3 OFFENSE.</p>
+</div>
+</div>
+</form>
+</div>
+</main>
+</body></html>

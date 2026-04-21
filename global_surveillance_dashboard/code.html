@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AERIAL PHENOMENA MONITOR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&amp;family=Inter:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#c4010b",
+                        "surface": "#131313",
+                        "inverse-primary": "#006e16",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "on-primary": "#003907",
+                        "on-secondary": "#432c00",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-dim": "#131313",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary": "#690003",
+                        "surface-tint": "#00e639",
+                        "on-primary-fixed-variant": "#00530e",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-surface": "#e5e2e1",
+                        "outline-variant": "#3b4b37",
+                        "on-secondary-fixed-variant": "#614000",
+                        "secondary-fixed-dim": "#ffba43",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary": "#ffd393",
+                        "tertiary-fixed": "#ffdad5",
+                        "on-secondary-fixed": "#281800",
+                        "on-tertiary-fixed": "#410001",
+                        "primary-container": "#00ff41",
+                        "tertiary": "#fff7f6",
+                        "outline": "#84967e",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#ffd2cc",
+                        "on-primary-container": "#007117",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#ffddaf",
+                        "secondary-container": "#fdaf00",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#ffb4aa",
+                        "on-primary-fixed": "#002203",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed": "#72ff70",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#00e639",
+                        "on-secondary-container": "#694600",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ebffe2",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "on-surface-variant": "#b9ccb2",
+                        "error": "#ffb4ab"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "sm": "0px",
+                        "md": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "2xl": "0px",
+                        "3xl": "0px",
+                        "full": "0px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #131313; color: #e5e2e1; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #3b4b37; }
+        .grid-bg { background-size: 40px 40px; background-image: linear-gradient(to right, rgba(59, 75, 55, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(59, 75, 55, 0.1) 1px, transparent 1px); }
+        @keyframes radar-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes scan-flash { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+    </style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+</head>
+<body class="font-body antialiased text-on-surface bg-surface h-screen overflow-hidden flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#131313]/90 backdrop-blur-md fixed top-0 w-full rounded-none border-b border-stone-800 flex justify-between items-center px-6 h-14 z-50">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold text-[#00FF41] tracking-tighter font-headline">AERIAL PHENOMENA MONITOR</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs text-[#00FF41]">
+                CLEARANCE: LEVEL 5
+            </div>
+<div class="flex items-center gap-4">
+<button aria-label="security" class="text-stone-500 hover:text-[#00FF41] transition-all duration-75 ease-in-out active:scale-95" onclick="window.location.href='../security_clearance_access/code.html'">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button aria-label="sensors" class="text-stone-500 hover:text-[#00FF41] transition-all duration-75 ease-in-out active:scale-95" onclick="window.location.href='../sensor_calibration_protocol/code.html'">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+<button aria-label="settings" class="text-stone-500 hover:text-[#00FF41] transition-all duration-75 ease-in-out active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-14">
+<!-- SideNavBar -->
+<nav class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40">
+<div>
+<div class="px-6 mb-8">
+<div class="text-lg font-black text-[#00FF41] font-headline">INTEL_CORE_V.2</div>
+<div class="font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums text-stone-500 mt-1">STATUS: ENCRYPTED</div>
+</div>
+<div class="flex flex-col w-full">
+<a class="bg-[#00FF41]/5 text-[#00FF41] border-l-2 border-[#00FF41] py-3 px-6 flex items-center gap-3 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums font-bold" href="#">
+<span class="material-symbols-outlined text-[18px]">radar</span>
+                        Live Feed
+                    </a>
+<a class="text-stone-500 py-3 px-6 flex items-center gap-3 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums" href="../sensor_calibration_protocol/code.html">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                        Signal Logs
+                    </a>
+<a class="text-stone-500 py-3 px-6 flex items-center gap-3 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums" href="../incident_intel_case_412_x/code.html">
+<span class="material-symbols-outlined text-[18px]">security</span>
+                        Threat Matrix
+                    </a>
+<a class="text-stone-500 py-3 px-6 flex items-center gap-3 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums" href="../incident_intel_case_412_x/code.html">
+<span class="material-symbols-outlined text-[18px]">database</span>
+                        Archived Data
+                    </a>
+</div>
+</div>
+<div class="px-6 flex flex-col gap-4">
+<button id="scan-btn" class="w-full bg-primary-container text-on-primary py-3 px-4 font-headline text-xs font-bold tracking-widest hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2" onclick="initiateScan()">
+                    INITIATE SCAN
+                </button>
+<!-- Token Utilities Section -->
+<div class="flex flex-col gap-3 mb-4">
+<div class="text-[10px] font-headline font-bold text-stone-500 uppercase tracking-[0.2em] mb-1">TOKEN_DATA_STREAM</div>
+<!-- Contract Address Box -->
+<div class="bg-[#00FF41]/5 border border-[#00FF41]/20 p-2 flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="text-[8px] font-mono text-[#00FF41]/60 uppercase tracking-widest">CONTRACT_ADDRESS</span>
+<button class="hover:text-[#00FF41] transition-colors text-stone-500" title="Copy Address">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="font-mono text-[10px] text-[#00FF41] break-all selection:bg-[#00FF41] selection:text-black">
+            0x0000000000000000000000000000000000000000
+        </div>
+</div>
+<!-- Social/Utility Buttons -->
+<div class="flex gap-2">
+<a class="flex-1 bg-stone-800/50 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-[#00FF41]/5 transition-all p-2 flex items-center justify-center gap-2 group" href="#">
+<svg class="w-3.5 h-3.5 fill-current text-stone-400 group-hover:text-[#00FF41]" viewbox="0 0 24 24">
+<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"></path>
+</svg>
+<span class="text-[9px] font-mono text-stone-400 group-hover:text-[#00FF41] uppercase tracking-tighter">X_FEED</span>
+</a>
+<a class="flex-1 bg-stone-800/50 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-[#00FF41]/5 transition-all p-2 flex items-center justify-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-[16px] text-stone-400 group-hover:text-[#00FF41]">monitoring</span>
+<span class="text-[9px] font-mono text-stone-400 group-hover:text-[#00FF41] uppercase tracking-tighter">DEX_SCR</span>
+</a>
+</div>
+</div><div class="flex flex-col gap-2 mt-4">
+<a class="text-stone-500 flex items-center gap-3 hover:text-stone-200 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums" href="#">
+<span class="material-symbols-outlined text-[16px]">memory</span>
+                        System Settings
+                    </a>
+<a class="text-error-container flex items-center gap-3 hover:text-error cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums mt-2" href="../security_clearance_access/code.html">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+                        Emergency Purge
+                    </a>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-6 grid grid-cols-12 gap-6 grid-bg h-[calc(100vh-3.5rem)] overflow-y-auto relative">
+<!-- Global Map Area -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<!-- Threat Indicator Banner -->
+<div class="bg-error-container/20 border border-error-container/50 p-4 flex items-center justify-between backdrop-blur-sm relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1638202993928-7267aad84c31?q=80&amp;w=2000&amp;auto=format&amp;fit=crop')] opacity-[0.03] mix-blend-overlay"></div>
+<div class="flex items-center gap-4 z-10">
+<span class="material-symbols-outlined text-error-container text-3xl animate-pulse">warning</span>
+<div>
+<h2 id="threat-level" class="font-headline text-xl font-bold text-error-container tracking-widest">THREAT LEVEL: ALPHA</h2>
+<p class="font-mono text-xs text-error-container/70 mt-1">MULTIPLE UNIDENTIFIED SIGNATURES DETECTED IN SECTOR 7G</p>
+</div>
+</div>
+<div class="z-10 font-mono text-xs text-error-container/50 text-right">
+<div>SYS_TIME: <span class="text-error-container" id="clock">14:52:03 UTC</span></div>
+<div>ENC_KEY: VALID</div>
+</div>
+</div>
+<!-- Main Map Canvas -->
+<div class="flex-1 bg-surface-container-low relative border border-outline-variant/20 overflow-hidden min-h-[400px]">
+<!-- Three.js Interactive Globe -->
+<div id="globe-container" class="absolute inset-0" style="cursor:grab;"></div>
+<!-- Sighting Tooltip -->
+<div id="sighting-info" class="absolute top-4 left-4 bg-surface-container-high/90 border border-outline-variant/30 p-2 backdrop-blur-sm w-36 pointer-events-none z-10" style="display:none;">
+<div class="font-mono text-[9px] mb-1" id="sig-id">SIG_ID: ---</div>
+<div class="font-mono text-[8px] text-on-surface-variant" id="sig-lat">LAT: ---</div>
+<div class="font-mono text-[8px] text-on-surface-variant" id="sig-lng">LNG: ---</div>
+</div>
+<!-- Map UI Overlay -->
+<div class="absolute top-4 right-4 flex flex-col gap-2">
+<button onclick="globeZoomIn()" class="bg-surface-container-high/80 border border-outline-variant/50 w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary-container transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<button onclick="globeZoomOut()" class="bg-surface-container-high/80 border border-outline-variant/50 w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary-container transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<button onclick="globeReset()" class="bg-surface-container-high/80 border border-outline-variant/50 w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary-container transition-colors backdrop-blur-sm mt-4">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+</button>
+</div>
+<!-- Coordinates Footer -->
+<div class="absolute bottom-0 w-full bg-surface-container-lowest/80 border-t border-outline-variant/20 py-2 px-4 flex justify-between items-center backdrop-blur-sm">
+<div class="font-mono text-[10px] text-on-surface-variant">DRAG TO ROTATE · SCROLL TO ZOOM</div>
+<div class="font-mono text-[10px] text-primary-container flex items-center gap-2">
+<span class="w-2 h-2 bg-primary-container inline-block animate-pulse"></span>
+                            SATELLITE UPLINK ACTIVE
+                        </div>
+</div>
+</div>
+</div>
+<!-- Side Panel Area -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Radar Widget -->
+<div class="bg-surface-container-low p-6 border border-outline-variant/20 relative overflow-hidden">
+<div class="text-xs font-headline font-bold text-on-surface mb-6 flex justify-between items-center tracking-widest">
+                        LOCAL SWEEP
+                        <span class="material-symbols-outlined text-primary-container text-[16px]">radar</span>
+</div>
+<div class="relative w-full aspect-square flex items-center justify-center">
+<!-- Radar Circles -->
+<div class="absolute w-full h-full border border-primary-container/20 rounded-full"></div>
+<div class="absolute w-3/4 h-3/4 border border-primary-container/20 rounded-full"></div>
+<div class="absolute w-2/4 h-2/4 border border-primary-container/20 rounded-full"></div>
+<div class="absolute w-1/4 h-1/4 border border-primary-container/30 rounded-full bg-primary-container/5"></div>
+<!-- Crosshairs -->
+<div class="absolute w-full h-[1px] bg-primary-container/20"></div>
+<div class="absolute h-full w-[1px] bg-primary-container/20"></div>
+<!-- Sweep Line -->
+<div id="radar-sweep" class="absolute w-1/2 h-[1px] bg-gradient-to-r from-transparent to-primary-container origin-left top-1/2 left-1/2" style="transform:rotate(-45deg);transform-origin:left center;"></div>
+<!-- Blips -->
+<div class="absolute top-[30%] left-[60%] w-2 h-2 bg-secondary-container rounded-full shadow-[0_0_8px_#fdaf00]"></div>
+<div class="absolute top-[70%] left-[40%] w-1.5 h-1.5 bg-primary-container rounded-full shadow-[0_0_8px_#00ff41]"></div>
+<!-- Center Dot -->
+<div class="absolute w-2 h-2 bg-primary-container rounded-full z-10"></div>
+</div>
+<div class="mt-6 flex justify-between font-mono text-[10px] text-on-surface-variant border-t border-outline-variant/20 pt-4">
+<div>RNG: 50KM</div>
+<div>AZ: 245°</div>
+<div class="text-primary-container">SCAN: ACTV</div>
+</div>
+</div>
+<!-- Activity Log -->
+<div class="bg-surface-container-low flex-1 flex flex-col border border-outline-variant/20 overflow-hidden min-h-[250px]">
+<div class="px-4 py-3 border-b border-outline-variant/20 flex justify-between items-center bg-surface-container-highest/30">
+<span class="text-xs font-headline font-bold text-on-surface tracking-widest">ACTIVITY LOG</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">list_alt</span>
+</div>
+<div id="activity-log" class="p-4 flex-1 overflow-y-auto flex flex-col gap-3 font-mono text-[10px]">
+<div class="flex items-start gap-3 border-l-2 border-error-container pl-2 py-1 bg-error-container/5">
+<span class="text-error-container opacity-80 min-w-[60px]">14:51:22</span>
+<div class="text-on-surface">
+<span class="text-error-container font-bold">ALERT:</span> Unidentified anomaly detected in designated no-fly zone (Sector 7G).
+                            </div>
+</div>
+<div class="flex items-start gap-3 border-l-2 border-secondary-container pl-2 py-1 bg-secondary-container/5">
+<span class="text-secondary-container opacity-80 min-w-[60px]">14:48:05</span>
+<div class="text-on-surface">
+<span class="text-secondary-container font-bold">WARN:</span> Signal interference on comms channel Beta. Attempting re-routing.
+                            </div>
+</div>
+<div class="flex items-start gap-3 border-l-2 border-outline-variant pl-2 py-1">
+<span class="text-on-surface-variant opacity-80 min-w-[60px]">14:45:00</span>
+<div class="text-on-surface-variant">
+                                System routine diagnostic completed. All systems nominal.
+                            </div>
+</div>
+<div class="flex items-start gap-3 border-l-2 border-primary-container pl-2 py-1">
+<span class="text-primary-container opacity-80 min-w-[60px]">14:30:12</span>
+<div class="text-on-surface">
+<span class="text-primary-container font-bold">UPLINK:</span> Connection to orbital asset Alpha-9 established. Data stream stable.
+                            </div>
+</div>
+<div class="flex items-start gap-3 border-l-2 border-outline-variant pl-2 py-1">
+<span class="text-on-surface-variant opacity-80 min-w-[60px]">14:15:33</span>
+<div class="text-on-surface-variant">
+                                Scheduled data dump to secure archive initiated.
+                            </div>
+</div>
+</div>
+</div>
+<!-- External Comm Links -->
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-surface-container-low border border-outline-variant/30 py-3 px-4 flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors text-on-surface font-headline text-xs tracking-widest font-bold">
+<svg aria-hidden="true" class="w-4 h-4 fill-current text-on-surface" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"></path></svg>
+                        INTEL FEED
+                    </button>
+<button class="bg-surface-container-low border border-outline-variant/30 py-3 px-4 flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors text-on-surface font-headline text-xs tracking-widest font-bold">
+<span class="material-symbols-outlined text-[16px]">monitoring</span>
+                        MARKET DATA
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<script>
+(function () {
+  const container = document.getElementById('globe-container');
+  if (!container || typeof THREE === 'undefined') return;
+
+  const scene = new THREE.Scene();
+
+  function sz() { return { w: container.clientWidth || 600, h: container.clientHeight || 400 }; }
+  const { w, h } = sz();
+
+  const camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
+  let camDist = 2.5;
+  camera.position.z = camDist;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(w, h);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x000000, 0);
+  container.appendChild(renderer.domElement);
+  Object.assign(renderer.domElement.style, { width: '100%', height: '100%', display: 'block' });
+
+  // Globe group
+  const globe = new THREE.Group();
+  scene.add(globe);
+
+  // Load Earth textures
+  const loader = new THREE.TextureLoader();
+  loader.crossOrigin = 'anonymous';
+  const earthTex = loader.load('https://raw.githubusercontent.com/mrdoob/three.js/r155/examples/textures/planets/earth_atmos_2048.jpg');
+  const specTex  = loader.load('https://raw.githubusercontent.com/mrdoob/three.js/r155/examples/textures/planets/earth_specular_2048.jpg');
+
+  // Earth sphere with real texture
+  globe.add(new THREE.Mesh(
+    new THREE.SphereGeometry(1, 64, 48),
+    new THREE.MeshPhongMaterial({
+      map: earthTex,
+      specularMap: specTex,
+      specular: new THREE.Color(0x334466),
+      shininess: 14,
+    })
+  ));
+
+  // Tactical grid overlay — very subtle green lines
+  globe.add(new THREE.Mesh(
+    new THREE.SphereGeometry(1.006, 24, 16),
+    new THREE.MeshBasicMaterial({ color: 0x00ff41, wireframe: true, transparent: true, opacity: 0.07 })
+  ));
+
+  // Atmosphere glow (blue halo like real Earth)
+  scene.add(new THREE.Mesh(
+    new THREE.SphereGeometry(1.15, 48, 32),
+    new THREE.MeshBasicMaterial({ color: 0x4499ff, transparent: true, opacity: 0.10, side: THREE.BackSide })
+  ));
+
+  // Lighting — white sunlight so the Earth texture shows correctly
+  scene.add(new THREE.AmbientLight(0x404040, 1.2));
+  const sun = new THREE.DirectionalLight(0xffffff, 2.2);
+  sun.position.set(5, 3, 5);
+  scene.add(sun);
+
+  // UFO sighting locations
+  const sightings = [
+    { lat: 45.92,  lng:  12.04,  id: 'UNK-402', color: 0xfdaf00 },
+    { lat: 31.23,  lng: 121.47,  id: 'TRK-991', color: 0x00ff41 },
+    { lat: 51.51,  lng:  -0.12,  id: 'SIG-107', color: 0xfdaf00 },
+    { lat: 37.77,  lng:-122.42,  id: 'UNK-891', color: 0xff3333 },
+    { lat:-33.87,  lng: 151.21,  id: 'TRK-445', color: 0x00ff41 },
+    { lat: 55.75,  lng:  37.62,  id: 'SIG-230', color: 0xfdaf00 },
+    { lat: 19.43,  lng: -99.13,  id: 'UNK-512', color: 0xff3333 },
+    { lat: 28.61,  lng:  77.21,  id: 'TRK-003', color: 0x00ff41 },
+    { lat:-22.90,  lng: -43.17,  id: 'SIG-774', color: 0xfdaf00 },
+    { lat: 35.68,  lng: 139.69,  id: 'UNK-019', color: 0xff3333 },
+  ];
+
+  function toVec3(lat, lng, r) {
+    const phi = (90 - lat) * Math.PI / 180;
+    const theta = (lng + 180) * Math.PI / 180;
+    return new THREE.Vector3(
+      -r * Math.sin(phi) * Math.cos(theta),
+       r * Math.cos(phi),
+       r * Math.sin(phi) * Math.sin(theta)
+    );
+  }
+
+  const markers = [];
+  sightings.forEach(s => {
+    const pos = toVec3(s.lat, s.lng, 1.02);
+
+    const dot = new THREE.Mesh(
+      new THREE.SphereGeometry(0.02, 8, 8),
+      new THREE.MeshBasicMaterial({ color: s.color })
+    );
+    dot.position.copy(pos);
+    dot.userData = s;
+    globe.add(dot);
+    markers.push(dot);
+
+    const halo = new THREE.Mesh(
+      new THREE.TorusGeometry(0.035, 0.007, 6, 20),
+      new THREE.MeshBasicMaterial({ color: s.color, transparent: true, opacity: 0.5 })
+    );
+    halo.position.copy(pos);
+    halo.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), pos.clone().normalize());
+    globe.add(halo);
+  });
+
+  // Drag rotation
+  let dragging = false, prev = { x: 0, y: 0 }, vx = 0, vy = 0;
+
+  container.addEventListener('mousedown', e => {
+    dragging = true; prev = { x: e.clientX, y: e.clientY }; vx = vy = 0;
+    container.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    vy = (e.clientX - prev.x) * 0.005;
+    vx = (e.clientY - prev.y) * 0.005;
+    globe.rotation.y += vy;
+    globe.rotation.x = Math.max(-1.2, Math.min(1.2, globe.rotation.x + vx));
+    prev = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', () => { dragging = false; container.style.cursor = 'grab'; });
+
+  // Touch support
+  container.addEventListener('touchstart', e => {
+    const t = e.touches[0]; dragging = true; prev = { x: t.clientX, y: t.clientY }; vx = vy = 0;
+  });
+  container.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = e.touches[0];
+    vy = (t.clientX - prev.x) * 0.005; vx = (t.clientY - prev.y) * 0.005;
+    globe.rotation.y += vy;
+    globe.rotation.x = Math.max(-1.2, Math.min(1.2, globe.rotation.x + vx));
+    prev = { x: t.clientX, y: t.clientY };
+  }, { passive: false });
+  container.addEventListener('touchend', () => { dragging = false; });
+
+  // Scroll to zoom
+  container.addEventListener('wheel', e => {
+    e.preventDefault();
+    camDist = Math.max(1.6, Math.min(5, camDist + e.deltaY * 0.003));
+  }, { passive: false });
+
+  // Zoom / reset buttons
+  window.globeZoomIn  = () => { camDist = Math.max(1.6, camDist - 0.35); };
+  window.globeZoomOut = () => { camDist = Math.min(5,   camDist + 0.35); };
+  window.globeReset   = () => { globe.rotation.set(0, 0, 0); camDist = 2.5; vx = vy = 0; };
+
+  // Hover tooltip
+  const raycaster = new THREE.Raycaster();
+  const mouse2d   = new THREE.Vector2();
+  const infoEl  = document.getElementById('sighting-info');
+  const sigIdEl = document.getElementById('sig-id');
+  const sigLatEl = document.getElementById('sig-lat');
+  const sigLngEl = document.getElementById('sig-lng');
+
+  container.addEventListener('mousemove', e => {
+    if (dragging || !infoEl) return;
+    const r = container.getBoundingClientRect();
+    mouse2d.x =  ((e.clientX - r.left) / r.width)  * 2 - 1;
+    mouse2d.y = -((e.clientY - r.top)  / r.height) * 2 + 1;
+    raycaster.setFromCamera(mouse2d, camera);
+    const hits = raycaster.intersectObjects(markers);
+    if (hits.length) {
+      const s = hits[0].object.userData;
+      sigIdEl.textContent  = 'SIG_ID: ' + s.id;
+      sigIdEl.style.color  = '#' + s.color.toString(16).padStart(6, '0');
+      sigLatEl.textContent = 'LAT: ' + Math.abs(s.lat).toFixed(2) + (s.lat >= 0 ? ' N' : ' S');
+      sigLngEl.textContent = 'LNG: ' + Math.abs(s.lng).toFixed(2) + (s.lng >= 0 ? ' E' : ' W');
+      infoEl.style.display = 'block';
+    } else {
+      infoEl.style.display = 'none';
+    }
+  });
+  container.addEventListener('mouseleave', () => { if (infoEl) infoEl.style.display = 'none'; });
+
+  // Render loop
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!dragging) {
+      globe.rotation.y += 0.0015;
+      vx *= 0.93; vy *= 0.93;
+      globe.rotation.y += vy;
+      globe.rotation.x = Math.max(-1.2, Math.min(1.2, globe.rotation.x + vx));
+    }
+    camera.position.z += (camDist - camera.position.z) * 0.1;
+    const cw = container.clientWidth, ch = container.clientHeight;
+    if (renderer.domElement.width !== cw || renderer.domElement.height !== ch) {
+      renderer.setSize(cw, ch);
+      camera.aspect = cw / ch;
+      camera.updateProjectionMatrix();
+    }
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ── Initiate Scan ──────────────────────────────────────────────────
+const DETECTIONS = [
+  { level:'ALERT', color:'border-error-container text-error-container', bg:'bg-error-container/5',
+    msg:'New anomalous signature acquired — Class DELTA object, Sector 12B. Velocity: INDETERMINATE.' },
+  { level:'WARN',  color:'border-secondary-container text-secondary-container', bg:'bg-secondary-container/5',
+    msg:'Gravitational distortion reading 3.4× baseline near grid ref 47°N 09°E.' },
+  { level:'UPLINK',color:'border-primary-container text-primary-container', bg:'',
+    msg:'Orbital asset Alpha-9 confirmed lock on object. Telemetry stream active.' },
+  { level:'ALERT', color:'border-error-container text-error-container', bg:'bg-error-container/5',
+    msg:'EMP pulse detected at Sector 7G perimeter — all comms temporarily disrupted.' },
+];
+
+function initiateScan() {
+  const btn = document.getElementById('scan-btn');
+  if (!btn || btn.dataset.scanning === '1') return;
+  btn.dataset.scanning = '1';
+
+  // — Button → SCANNING state
+  btn.textContent = '';
+  btn.innerHTML = '<span style="animation:scan-flash 0.8s ease-in-out infinite">● SCANNING...</span>';
+  btn.style.cssText = 'background:transparent;border:1px solid #00ff41;color:#00ff41;';
+
+  // — Radar sweep spins
+  const sweep = document.getElementById('radar-sweep');
+  if (sweep) sweep.style.animation = 'radar-spin 1.5s linear infinite';
+
+  // — Threat banner
+  const banner = document.getElementById('threat-level');
+  if (banner) {
+    banner.textContent = 'SCANNING: ACTIVE SWEEP';
+    banner.style.animation = 'scan-flash 0.8s ease-in-out infinite';
+  }
+
+  // — Drip detections into the log every ~1 s
+  const log = document.getElementById('activity-log');
+  const detection = DETECTIONS[Math.floor(Math.random() * DETECTIONS.length)];
+  let step = 0;
+
+  const drip = setInterval(() => {
+    if (!log || step >= 2) { clearInterval(drip); return; }
+    const now = new Date();
+    const t = [now.getHours(), now.getMinutes(), now.getSeconds()]
+                .map(n => String(n).padStart(2,'0')).join(':');
+    const row = document.createElement('div');
+    row.className = `flex items-start gap-3 border-l-2 ${detection.color} pl-2 py-1 ${detection.bg}`;
+    row.innerHTML = step === 0
+      ? `<span class="opacity-80 min-w-[60px]">${t}</span><div class="text-on-surface-variant">Scanning sector arrays… signal lock in progress.</div>`
+      : `<span class="opacity-80 min-w-[60px]">${t}</span><div class="text-on-surface"><span class="font-bold">${detection.level}:</span> ${detection.msg}</div>`;
+    log.prepend(row);
+    step++;
+  }, 1200);
+
+  // — After 3.5 s: wrap up
+  setTimeout(() => {
+    clearInterval(drip);
+
+    if (sweep) sweep.style.animation = '';
+    if (banner) {
+      banner.textContent = 'THREAT LEVEL: ALPHA';
+      banner.style.animation = '';
+    }
+
+    btn.dataset.scanning = '0';
+    btn.style.cssText = '';
+    btn.textContent = 'INITIATE SCAN';
+  }, 3600);
+}
+</script>
+</body></html>

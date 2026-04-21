@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Iron Sentry - Sensor Calibration Protocol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#00e639",
+                        "surface": "#131313",
+                        "on-primary": "#003907",
+                        "primary": "#ebffe2",
+                        "on-surface": "#e5e2e1",
+                        "outline": "#84967e",
+                        "inverse-on-surface": "#313030",
+                        "background": "#131313",
+                        "on-surface-variant": "#b9ccb2",
+                        "surface-dim": "#131313",
+                        "on-tertiary-fixed": "#410001",
+                        "on-secondary-container": "#694600",
+                        "on-primary-fixed-variant": "#00530e",
+                        "secondary-fixed": "#ffddaf",
+                        "tertiary-container": "#ffd2cc",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary": "#690003",
+                        "on-secondary-fixed-variant": "#614000",
+                        "tertiary-fixed": "#ffdad5",
+                        "primary-container": "#00ff41",
+                        "outline-variant": "#3b4b37",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error": "#690005",
+                        "secondary-container": "#fdaf00",
+                        "on-primary-fixed": "#002203",
+                        "inverse-primary": "#006e16",
+                        "on-tertiary-fixed-variant": "#930005",
+                        "on-secondary-fixed": "#281800",
+                        "surface-variant": "#353534",
+                        "tertiary": "#fff7f6",
+                        "primary-fixed": "#72ff70",
+                        "on-tertiary-container": "#c4010b",
+                        "surface-bright": "#3a3939",
+                        "secondary": "#ffd393",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed-dim": "#00e639",
+                        "inverse-surface": "#e5e2e1",
+                        "secondary-fixed-dim": "#ffba43",
+                        "on-primary-container": "#007117",
+                        "tertiary-fixed-dim": "#ffb4aa",
+                        "surface-container": "#201f1f",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "on-secondary": "#432c00",
+                        "on-error-container": "#ffdad6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #3b4b3720 1px, transparent 1px), linear-gradient(to bottom, #3b4b3720 1px, transparent 1px)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .bg-grid { background-size: 24px 24px; background-image: theme('backgroundImage.grid-pattern'); }
+    </style>
+</head>
+<body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-hidden text-on-background">
+<!-- Top Navigation (Web) / Bottom Navigation (Mobile) - Shared Component Context -->
+<!-- Applying Shared Component TopAppBar styling -->
+<nav class="hidden md:flex flex-row justify-between items-center w-full px-6 bg-[#131313] docked full-width top-0 h-16 border-b border-[#3b4b37]/20 z-50 fixed top-0 w-full">
+<div class="flex items-center gap-8">
+<span class="font-['Space_Grotesk'] text-xl font-black tracking-tighter text-[#00FF41]">IRON SENTRY</span>
+<div class="flex gap-6">
+<a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../global_surveillance_dashboard/code.html">DIAGNOSTICS</a>
+<a class="text-[#00FF41] border-b-2 border-[#00FF41] pb-1 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="#">CALIBRATION</a>
+<a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../incident_intel_case_412_x/code.html">LOGS</a>
+<a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../global_surveillance_dashboard/code.html">TELEMETRY</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[#00FF41]">
+<span class="material-symbols-outlined text-[#00FF41] cursor-pointer hover:text-primary-container transition-colors" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-[#00FF41] cursor-pointer hover:text-primary-container transition-colors" data-icon="notifications_active">notifications_active</span>
+</div>
+</nav>
+<!-- Side Navigation (Shared Component Integration) -->
+<nav class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 hidden md:flex">
+<div>
+<div class="px-6 mb-8">
+<div class="text-lg font-black text-[#00FF41] font-headline">INTEL_CORE_V.2</div>
+<div class="font-['Inter'] text-[10px] uppercase tracking-widest text-stone-500 mt-1">STATUS: ENCRYPTED</div>
+</div>
+<div class="flex flex-col w-full">
+<a href="../global_surveillance_dashboard/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">radar</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Live Feed</span>
+</a>
+<a href="#" class="flex items-center gap-4 bg-[#00FF41]/5 text-[#00FF41] border-l-2 border-[#00FF41] py-3 px-6 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Signal Logs</span>
+</a>
+<a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">security</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Threat Matrix</span>
+</a>
+<a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">database</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Archived Data</span>
+</a>
+</div>
+</div>
+<div class="px-6 flex flex-col gap-4">
+<button class="w-full bg-[#00FF41] text-[#003907] py-2 font-bold font-headline tracking-widest hover:bg-[#72ff70] transition-colors" onclick="window.location.href='../global_surveillance_dashboard/code.html'">INITIATE SCAN</button>
+<div class="border border-stone-700 p-3 text-[9px] text-stone-500 font-mono">
+<div class="text-[#00FF41] mb-2 tracking-widest">TOKEN_DATA_STREAM</div>
+<div class="flex justify-between mb-1"><span>CONTRACT</span><span class="text-stone-400">0x0000...0000</span></div>
+<div class="flex justify-between mb-1"><span>X_FEED</span><span class="text-stone-400">@INTEL_CORE</span></div>
+<div class="flex justify-between"><span>DEX_SCR</span><span class="text-[#00FF41]">LIVE</span></div>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">memory</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">System Settings</span>
+</div>
+<a href="../security_clearance_access/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+<span class="material-symbols-outlined text-sm">power_settings_new</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Emergency Purge</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 mt-16 p-6 overflow-y-auto h-[calc(100vh-4rem)] flex flex-col gap-6">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant font-mono text-[10px] mb-2 uppercase tracking-widest">
+<span>SYSTEM</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span>SENSORS</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary-fixed">CALIBRATION</span>
+</div>
+<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-[0.1em] text-on-surface">SENSOR CALIBRATION PROTOCOL</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 bg-surface-container border border-outline-variant text-[10px] font-mono tracking-widest text-on-surface-variant">CLEARANCE LEVEL 5</span>
+<span class="px-2 py-1 bg-surface-container border border-error/30 text-[10px] font-mono tracking-widest text-error">CLASSIFIED</span>
+</div>
+</header>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-[500px]">
+<!-- Left Sidebar: Controls -->
+<section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-6 relative">
+<div class="absolute -top-3 -left-2 text-[10px] font-mono text-on-surface-variant/50 bg-background px-1">CTRL_PNL</div>
+<div class="flex flex-col gap-1 border-b border-outline-variant/20 pb-4">
+<h3 class="font-headline text-sm tracking-widest text-primary-fixed">SIGNAL TUNING</h3>
+<p class="font-mono text-[10px] text-on-surface-variant">ADJUST ARRAY PARAMETERS</p>
+</div>
+<!-- Sliders -->
+<div class="flex flex-col gap-5">
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center font-mono text-xs">
+<label class="text-on-surface">GAIN CONTROL</label>
+<span class="text-primary-fixed">42.5 dB</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-none appearance-none [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:w-3 [&amp;::-webkit-slider-thumb]:h-5 [&amp;::-webkit-slider-thumb]:bg-primary-container [&amp;::-webkit-slider-thumb]:cursor-pointer cursor-pointer" max="100" min="0" type="range" value="42.5"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center font-mono text-xs">
+<label class="text-on-surface">FREQ OFFSET</label>
+<span class="text-secondary-container">+1.04 MHz</span>
+</div>
+<input class="w-full h-1 bg-surface-variant rounded-none appearance-none [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:w-3 [&amp;::-webkit-slider-thumb]:h-5 [&amp;::-webkit-slider-thumb]:bg-secondary-container [&amp;::-webkit-slider-thumb]:cursor-pointer cursor-pointer" max="5" min="-5" step="0.01" type="range" value="1.04"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center font-mono text-xs">
+<label class="text-on-surface">SIGNAL FILTERING</label>
+<span class="text-primary-fixed">HIGH PASS</span>
+</div>
+<select class="bg-surface-container border border-outline-variant/50 text-on-surface font-mono text-xs p-2 focus:ring-1 focus:ring-primary-container focus:border-primary-container outline-none rounded-none cursor-pointer appearance-none">
+<option>LOW PASS</option>
+<option selected="">HIGH PASS</option>
+<option>BAND PASS</option>
+<option>NOTCH</option>
+</select>
+</div>
+</div>
+<!-- Contract Info (Repurposed for UI consistency) -->
+<div class="mt-auto pt-4 border-t border-outline-variant/20">
+<p class="font-mono text-[10px] text-on-surface-variant mb-2">SYSTEM IDENTIFIER</p>
+<div class="flex items-center justify-between bg-surface-container border border-outline-variant/30 p-2 font-mono text-[10px] text-on-surface break-all">
+<span>0x7F2a...98B4</span>
+<span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-primary-fixed">content_copy</span>
+</div>
+<div class="flex gap-2 mt-3">
+<button class="flex-1 bg-surface-container border border-outline-variant/30 py-1.5 text-[10px] font-mono hover:bg-surface-variant hover:text-primary-fixed transition-colors flex justify-center items-center gap-1">
+<span>EXT_LNK_1</span>
+</button>
+<button class="flex-1 bg-surface-container border border-outline-variant/30 py-1.5 text-[10px] font-mono hover:bg-surface-variant hover:text-primary-fixed transition-colors flex justify-center items-center gap-1">
+<span>EXT_LNK_2</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Central Visualization -->
+<section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col overflow-hidden min-h-[300px]">
+<!-- Stamp -->
+<div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none overflow-hidden z-0">
+<span class="font-headline text-8xl font-black tracking-tighter text-on-surface transform -rotate-12 whitespace-nowrap">TOP SECRET</span>
+</div>
+<div class="absolute top-2 left-2 flex gap-2 z-10">
+<span class="px-2 py-0.5 bg-primary-fixed-dim/20 text-primary-fixed border border-primary-fixed/30 font-mono text-[10px]">LIVE FEED</span>
+<span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">FREQ_SPECTROGRAM</span>
+</div>
+<!-- Abstract Visualization Area (CSS gradient based) -->
+<div class="flex-1 relative bg-surface-dim mt-8 mx-2 mb-2 border border-outline-variant/20 flex items-center justify-center z-10" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, #3b4b3720 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, #3b4b3720 20px);">
+<!-- Waveform representation using gradients and borders -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary-fixed/5 via-primary-fixed/10 to-transparent opacity-50"></div>
+<div class="w-full h-1/2 flex items-end justify-center px-4 gap-1 opacity-70">
+<!-- Simulated Spectrogram Bars -->
+<div class="w-full h-full flex items-end gap-1">
+<div class="flex-1 bg-primary-fixed" style="height: 20%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 35%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 15%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 60%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 85%;"></div>
+<div class="flex-1 bg-primary-container" style="height: 100%;"></div>
+<div class="flex-1 bg-primary-container" style="height: 90%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 50%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 30%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 25%;"></div>
+<div class="flex-1 bg-secondary-container" style="height: 40%;"></div>
+<div class="flex-1 bg-primary-fixed" style="height: 10%;"></div>
+</div>
+</div>
+<!-- Scanner line -->
+<div class="absolute top-0 bottom-0 left-1/3 w-px bg-primary-container shadow-[0_0_10px_#00ff41]"></div>
+<!-- Grid labels -->
+<div class="absolute bottom-1 left-2 font-mono text-[8px] text-outline">0 MHz</div>
+<div class="absolute bottom-1 right-2 font-mono text-[8px] text-outline">100 MHz</div>
+<div class="absolute top-2 left-2 font-mono text-[8px] text-outline">+10 dB</div>
+<div class="absolute bottom-6 left-2 font-mono text-[8px] text-outline">-90 dB</div>
+</div>
+</section>
+<!-- Right Sidebar: Diagnostics -->
+<section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4">
+<div class="flex flex-col gap-1 border-b border-outline-variant/20 pb-4">
+<h3 class="font-headline text-sm tracking-widest text-on-surface">DIAGNOSTIC STATUS</h3>
+<p class="font-mono text-[10px] text-on-surface-variant">ARRAY TELEMETRY</p>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Status Item 1 -->
+<div class="bg-surface-container p-3 border-l-2 border-primary-container">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono text-[10px] text-on-surface-variant">ARRAY ALPHA</span>
+<span class="px-1.5 py-0.5 bg-primary-container/10 text-primary-fixed font-mono text-[9px] tracking-widest">OK</span>
+</div>
+<div class="font-mono text-xs text-on-surface">ONLINE / CALIBRATING</div>
+</div>
+<!-- Status Item 2 -->
+<div class="bg-surface-container p-3 border-l-2 border-outline-variant">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono text-[10px] text-on-surface-variant">SYNC DELTA</span>
+</div>
+<div class="font-mono text-sm text-secondary-container">0.002ms</div>
+</div>
+<!-- Status Item 3 -->
+<div class="bg-surface-container p-3 border-l-2 border-outline-variant">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono text-[10px] text-on-surface-variant">INTERFERENCE LVL</span>
+</div>
+<div class="font-mono text-sm text-primary-fixed">LOW</div>
+<div class="w-full bg-surface-variant h-1 mt-2">
+<div class="bg-primary-fixed h-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+<!-- Log Snippet -->
+<div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 h-24 overflow-hidden relative">
+<div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
+<ul class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80">
+<li>&gt; INIT CALIBRATION SEQ...</li>
+<li>&gt; ALIGNING SENSOR ALPHA... [DONE]</li>
+<li>&gt; CHECKING SYNC... DELTA 0.002ms</li>
+<li class="text-secondary-fixed">&gt; WARNING: MINOR NOISE DETECTED</li>
+<li>&gt; FILTERING FREQUENCIES...</li>
+</ul>
+</div>
+</section>
+</div>
+<!-- Footer / Action Area -->
+<footer class="mt-auto bg-surface-container border border-outline-variant/30 p-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative overflow-hidden">
+<!-- Ambient Glow behind button -->
+<div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] pointer-events-none"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-fixed animate-pulse">check_circle</span>
+<span class="font-mono text-sm tracking-widest text-primary-fixed">CALIBRATION COMPLETE</span>
+</div>
+<button class="bg-gradient-to-r from-primary-fixed to-primary-container text-on-primary font-headline font-bold text-sm px-8 py-3 tracking-widest hover:opacity-90 transition-opacity flex items-center gap-2 rounded-none border-none cursor-pointer">
+                APPLY SETTINGS
+                <span class="material-symbols-outlined text-[18px]">publish</span>
+</button>
+</footer>
+</main>
+<!-- Bottom Navigation (Mobile) - Shared Component Context -->
+<nav class="md:hidden flex justify-around items-center bg-[#131313]/95 backdrop-blur-md fixed bottom-0 left-0 w-full z-50 h-16 border-t border-[#3b4b37]/30 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-[#72ff70]/30 font-['Inter'] uppercase text-[9px] font-bold tracking-tighter hover:bg-[#2a2a2a] tactile scale-95 duration-100 flex-1 h-full" href="../global_surveillance_dashboard/code.html">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+            LIVE FEED
+        </a>
+<a class="flex flex-col items-center justify-center text-[#00FF41] bg-[#00FF41]/10 px-4 py-1 font-['Inter'] uppercase text-[9px] font-bold tracking-tighter tactile scale-95 duration-100 flex-1 h-full" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+            ARRAY
+        </a>
+<a class="flex flex-col items-center justify-center text-[#72ff70]/30 font-['Inter'] uppercase text-[9px] font-bold tracking-tighter hover:bg-[#2a2a2a] tactile scale-95 duration-100 flex-1 h-full" href="../incident_intel_case_412_x/code.html">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+            INTEL
+        </a>
+<a class="flex flex-col items-center justify-center text-[#72ff70]/30 font-['Inter'] uppercase text-[9px] font-bold tracking-tighter hover:bg-[#2a2a2a] tactile scale-95 duration-100 flex-1 h-full" href="../incident_intel_case_412_x/code.html">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+            LOGS
+        </a>
+</nav>
+</body></html>
