@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/security_clearance_access/code.html" }
+  ]
+}
