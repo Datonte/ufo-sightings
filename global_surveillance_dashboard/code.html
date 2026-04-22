@@ -204,7 +204,7 @@
 <!-- Three.js Interactive Globe -->
 <div id="globe-container" class="absolute inset-0" style="cursor:grab;"></div>
 <!-- Sighting Tooltip -->
-<div id="sighting-info" class="absolute top-4 left-4 bg-surface-container-high/95 border border-[#00FF41]/40 p-3 backdrop-blur-sm w-52 z-10" style="display:none;">
+<div id="sighting-info" class="absolute bg-surface-container-high/95 border border-[#00FF41]/40 p-3 backdrop-blur-sm w-52 z-10" style="display:none;top:16px;left:16px;">
   <div class="font-mono text-[10px] text-[#00FF41] font-bold mb-2 flex items-center gap-2">
     <span id="sig-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;"></span>
     <span id="sig-id">---</span>
@@ -596,30 +596,7 @@
   const mouse2d   = new THREE.Vector2();
   const infoEl  = document.getElementById('sighting-info');
 
-  let hideTimer = null;
   const sigLink = document.getElementById('sig-link');
-
-  function showTooltip(s) {
-    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-    const hexColor = '#' + s.color.toString(16).padStart(6,'0');
-    document.getElementById('sig-dot').style.background = hexColor;
-    document.getElementById('sig-id').textContent = s.id;
-    document.getElementById('sig-id').style.color = hexColor;
-    document.getElementById('sig-lat').textContent = Math.abs(s.lat).toFixed(4) + (s.lat >= 0 ? ' N' : ' S');
-    document.getElementById('sig-lng').textContent = Math.abs(s.lng).toFixed(4) + (s.lng >= 0 ? ' E' : ' W');
-    document.getElementById('sig-cls').textContent = s.cls;
-    document.getElementById('sig-status').textContent = s.status;
-    document.getElementById('sig-status').style.color = s.status === 'TRACKING' || s.status === 'CONFIRMED' ? '#00ff41' : s.status === 'SIGNAL LOST' ? '#ff3333' : '#ffdd00';
-    document.getElementById('sig-alt').textContent = s.alt;
-    document.getElementById('sig-vel').textContent = s.vel;
-    document.getElementById('sig-first').textContent = s.first;
-    if (sigLink) sigLink.href = sightingUrls[s.id] || '#';
-    infoEl.style.display = 'block';
-  }
-
-  function scheduleHide() {
-    hideTimer = setTimeout(() => { if (infoEl) infoEl.style.display = 'none'; }, 400);
-  }
 
   container.addEventListener('mousemove', e => {
     if (dragging || !infoEl) return;
@@ -630,22 +607,39 @@
     const hits = raycaster.intersectObjects(markers);
     if (hits.length) {
       container.style.cursor = 'pointer';
-      showTooltip(hits[0].object.userData);
+      const s = hits[0].object.userData;
+      const hexColor = '#' + s.color.toString(16).padStart(6,'0');
+      document.getElementById('sig-dot').style.background = hexColor;
+      document.getElementById('sig-id').textContent = s.id;
+      document.getElementById('sig-id').style.color = hexColor;
+      document.getElementById('sig-lat').textContent = Math.abs(s.lat).toFixed(4) + (s.lat >= 0 ? ' N' : ' S');
+      document.getElementById('sig-lng').textContent = Math.abs(s.lng).toFixed(4) + (s.lng >= 0 ? ' E' : ' W');
+      document.getElementById('sig-cls').textContent = s.cls;
+      document.getElementById('sig-status').textContent = s.status;
+      document.getElementById('sig-status').style.color = s.status === 'TRACKING' || s.status === 'CONFIRMED' ? '#00ff41' : s.status === 'SIGNAL LOST' ? '#ff3333' : '#ffdd00';
+      document.getElementById('sig-alt').textContent = s.alt;
+      document.getElementById('sig-vel').textContent = s.vel;
+      document.getElementById('sig-first').textContent = s.first;
+      if (sigLink) sigLink.href = sightingUrls[s.id] || '#';
+      // Position tooltip near the mouse cursor
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const tipW = infoEl.offsetWidth || 210;
+      const tipH = infoEl.offsetHeight || 220;
+      infoEl.style.left = (x + 16 + tipW > r.width ? x - tipW - 8 : x + 16) + 'px';
+      infoEl.style.top  = (y - 10 + tipH > r.height ? r.height - tipH - 8 : Math.max(4, y - 10)) + 'px';
+      infoEl.style.display = 'block';
     } else {
       container.style.cursor = 'default';
-      scheduleHide();
+      // Don't hide — keep tooltip visible until mouse leaves globe entirely
     }
   });
-
-  // Keep tooltip open while mouse is over it
-  infoEl.addEventListener('mouseenter', () => { if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; } });
-  infoEl.addEventListener('mouseleave', () => { scheduleHide(); });
 
   let globeHovered = false;
   container.addEventListener('mouseenter', () => { globeHovered = true; });
   container.addEventListener('mouseleave', () => {
     globeHovered = false;
-    scheduleHide();
+    if (infoEl) infoEl.style.display = 'none';
     container.style.cursor = 'default';
   });
 
