@@ -87,8 +87,18 @@
     </style>
 </head>
 <body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-hidden text-on-background">
-<!-- Top Navigation (Web) / Bottom Navigation (Mobile) - Shared Component Context -->
-<!-- Applying Shared Component TopAppBar styling -->
+<!-- Sidebar overlay backdrop (mobile only) -->
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-30 hidden" onclick="closeSidebar()"></div>
+<!-- Top Navigation (Web) / Mobile Header -->
+<!-- Mobile-visible header bar -->
+<header class="md:hidden bg-[#131313] fixed top-0 w-full h-14 border-b border-[#3b4b37]/20 z-50 flex items-center justify-between px-4">
+<button class="text-[#00FF41]" onclick="openSidebar()" aria-label="Open menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-['Space_Grotesk'] text-sm font-black tracking-tighter text-[#00FF41]">IRON SENTRY</span>
+<span class="material-symbols-outlined text-[#00FF41]">notifications_active</span>
+</header>
+<!-- Desktop top nav -->
 <nav class="hidden md:flex flex-row justify-between items-center w-full px-6 bg-[#131313] docked full-width top-0 h-16 border-b border-[#3b4b37]/20 z-50 fixed top-0 w-full">
 <div class="flex items-center gap-8">
 <span class="font-['Space_Grotesk'] text-xl font-black tracking-tighter text-[#00FF41]">IRON SENTRY</span>
@@ -105,7 +115,10 @@
 </div>
 </nav>
 <!-- Side Navigation (Shared Component Integration) -->
-<nav class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 hidden md:flex">
+<nav id="sidebar" class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 transition-transform duration-300 -translate-x-full md:translate-x-0">
+<button class="md:hidden absolute top-4 right-4 text-stone-400 hover:text-white" onclick="closeSidebar()" aria-label="Close menu">
+<span class="material-symbols-outlined">close</span>
+</button>
 <div>
 <div class="px-6 mb-8">
 <div class="text-lg font-black text-[#00FF41] font-headline">INTEL_CORE_V.2</div>
@@ -151,7 +164,7 @@
 </div>
 </nav>
 <!-- Main Content Area -->
-<main class="flex-1 md:ml-64 mt-16 p-6 overflow-y-auto h-[calc(100vh-4rem)] flex flex-col gap-6">
+<main class="flex-1 md:ml-64 mt-14 md:mt-16 p-3 md:p-6 overflow-y-auto h-[calc(100vh-4rem)] flex flex-col gap-4 md:gap-6 pb-20 md:pb-6">
 <!-- Header Section -->
 <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
 <div>
@@ -324,6 +337,16 @@
 </button>
 </footer>
 </main>
+<script>
+function openSidebar() {
+  document.getElementById('sidebar').style.transform = 'translateX(0)';
+  document.getElementById('sidebar-backdrop').classList.remove('hidden');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').style.transform = '';
+  document.getElementById('sidebar-backdrop').classList.add('hidden');
+}
+</script>
 <!-- Bottom Navigation (Mobile) - Shared Component Context -->
 <nav class="md:hidden flex justify-around items-center bg-[#131313]/95 backdrop-blur-md fixed bottom-0 left-0 w-full z-50 h-16 border-t border-[#3b4b37]/30 shadow-[0_-4px_24px_rgba(0,0,0,0.5)]">
 <a class="flex flex-col items-center justify-center text-[#72ff70]/30 font-['Inter'] uppercase text-[9px] font-bold tracking-tighter hover:bg-[#2a2a2a] tactile scale-95 duration-100 flex-1 h-full" href="../global_surveillance_dashboard/code.html">

@@ -92,11 +92,15 @@
       </style>
 </head>
 <body class="bg-surface text-on-surface font-body min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary">
+<!-- Sidebar overlay backdrop (mobile only) -->
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-30 hidden" onclick="closeSidebar()"></div>
 <!-- TopAppBar -->
-<header class="bg-[#131313]/90 backdrop-blur-md fixed top-0 w-full rounded-none border-b border-stone-800 flex justify-between items-center px-6 h-14 z-50 transition-all duration-75 ease-in-out">
-<div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-[#00FF41] cursor-pointer hover:text-white transition-colors" data-icon="menu">menu</span>
-<span class="font-headline font-bold text-[#00FF41] tracking-tighter text-xl cursor-pointer">AERIAL PHENOMENA MONITOR</span>
+<header class="bg-[#131313]/90 backdrop-blur-md fixed top-0 w-full rounded-none border-b border-stone-800 flex justify-between items-center px-4 md:px-6 h-14 z-50 transition-all duration-75 ease-in-out">
+<div class="flex items-center gap-2 md:gap-4">
+<button class="md:hidden text-[#00FF41] mr-1" onclick="openSidebar()" aria-label="Open menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline font-bold text-[#00FF41] tracking-tighter text-xl cursor-pointer"><span class="hidden sm:inline">AERIAL PHENOMENA </span>MONITOR</span>
 </div>
 <div class="flex items-center gap-6">
 <span class="font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs text-stone-500 hidden md:block">CLEARANCE: LEVEL 5</span>
@@ -111,7 +115,10 @@
 </div>
 </header>
 <!-- SideNavBar -->
-<nav class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40">
+<nav id="sidebar" class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 transition-transform duration-300 -translate-x-full md:translate-x-0">
+<button class="md:hidden absolute top-4 right-4 text-stone-400 hover:text-white" onclick="closeSidebar()" aria-label="Close menu">
+<span class="material-symbols-outlined">close</span>
+</button>
 <div>
 <div class="px-6 mb-8">
 <div class="text-lg font-black text-[#00FF41] font-headline">INTEL_CORE_V.2</div>
@@ -178,7 +185,7 @@
 </nav>
 <!-- Main Content Canvas -->
 <main class="pt-14 md:pl-64 min-h-screen bg-surface">
-<div class="p-6 md:p-10 max-w-[1600px] mx-auto flex flex-col gap-10">
+<div class="p-3 md:p-10 max-w-[1600px] mx-auto flex flex-col gap-6 md:gap-10">
 <!-- Header Section -->
 <header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-surface-variant pb-6 relative overflow-hidden">
 <div class="absolute -right-10 top-0 opacity-5 pointer-events-none select-none z-0">
@@ -331,4 +338,14 @@
 </div>
 </div>
 </main>
+<script>
+function openSidebar() {
+  document.getElementById('sidebar').style.transform = 'translateX(0)';
+  document.getElementById('sidebar-backdrop').classList.remove('hidden');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').style.transform = '';
+  document.getElementById('sidebar-backdrop').classList.add('hidden');
+}
+</script>
 </body></html>
