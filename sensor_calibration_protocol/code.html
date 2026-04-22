@@ -95,7 +95,7 @@
 <!-- Sidebar overlay backdrop (mobile only) -->
 <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-30 hidden" onclick="closeSidebar()"></div>
 
-<!-- Mobile-visible header bar -->
+<!-- Mobile-visible header bar (branding only, no top nav) -->
 <header class="md:hidden bg-[#131313] fixed top-0 w-full h-14 border-b border-[#3b4b37]/20 z-50 flex items-center justify-between px-4">
   <button class="text-[#00FF41]" onclick="openSidebar()" aria-label="Open menu">
     <span class="material-symbols-outlined">menu</span>
@@ -104,24 +104,8 @@
   <span class="material-symbols-outlined text-[#00FF41]">notifications_active</span>
 </header>
 
-<!-- Desktop top nav -->
-<nav class="hidden md:flex flex-row justify-between items-center w-full px-6 bg-[#131313] docked full-width top-0 h-16 border-b border-[#3b4b37]/20 z-50 fixed top-0 w-full">
-  <div class="flex items-center gap-8">
-    <span class="font-['Space_Grotesk'] text-xl font-black tracking-tighter text-[#00FF41]">DISCLOSURE FILES</span>
-    <div class="flex gap-6">
-      <a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../global_surveillance_dashboard/code.html">SIGHTINGS MAP</a>
-      <a class="text-[#00FF41] border-b-2 border-[#00FF41] pb-1 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="#">THE FILES</a>
-      <a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../incident_reporting_interface/code.html">REPORT A SIGHTING</a>
-    </div>
-  </div>
-  <div class="flex items-center gap-4">
-    <span class="hidden md:block font-mono text-xs text-[#00FF41]/70 tracking-widest uppercase">THE DISCLOSURE FILES</span>
-    <span class="material-symbols-outlined text-[#00FF41] cursor-pointer hover:text-primary-container transition-colors">notifications_active</span>
-  </div>
-</nav>
-
 <!-- Sidebar -->
-<nav id="sidebar" class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 transition-transform duration-300 -translate-x-full md:translate-x-0">
+<nav id="sidebar" class="bg-[#1c1b1b] fixed left-0 top-0 h-screen w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 transition-transform duration-300 -translate-x-full md:translate-x-0">
   <button class="md:hidden absolute top-4 right-4 text-stone-400 hover:text-white" onclick="closeSidebar()" aria-label="Close menu">
     <span class="material-symbols-outlined">close</span>
   </button>
@@ -146,36 +130,33 @@
     </div>
   </div>
   <div class="px-6 flex flex-col gap-4">
-    <button class="w-full bg-primary-container text-on-primary py-3 px-4 font-headline text-xs font-bold tracking-widest hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2" onclick="window.location.href='../incident_reporting_interface/code.html'">
-                    SUBMIT A SIGHTING
-                </button>
-<!-- CONTRACT ADDRESS -->
-<div class="bg-stone-950 border border-stone-700 px-3 py-2 mt-1">
-  <div class="font-['Inter'] text-[9px] text-stone-500 uppercase tracking-widest mb-1">CONTRACT ADDRESS</div>
-  <div class="font-mono text-[9px] text-[#00FF41] break-all select-all">YOUR_CONTRACT_ADDRESS_HERE</div>
-</div>
-<!-- SOCIAL BUTTONS -->
-<div class="flex gap-2">
-  <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
-    <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-    <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">TWITTER</span>
-  </a>
-  <a href="https://dexscreener.com/YOUR_DEX_LINK" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
-    <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-    <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">DEXSCR</span>
-  </a>
-</div>
-<div class="flex flex-col gap-2">
-<a class="text-error-container flex items-center gap-3 hover:text-error cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums mt-1" href="../security_clearance_access/code.html">
-<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
-                        Return to Home
-                    </a>
-</div>
+    <button class="w-full bg-primary-container text-on-primary py-3 px-4 font-headline text-xs font-bold tracking-widest hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2" onclick="window.location.href='../incident_reporting_interface/code.html'">SUBMIT A SIGHTING</button>
+    <!-- CONTRACT ADDRESS -->
+    <div class="bg-stone-950 border border-stone-700 px-3 py-2 mt-1">
+      <div class="font-['Inter'] text-[9px] text-stone-500 uppercase tracking-widest mb-1">CONTRACT ADDRESS</div>
+      <div class="font-mono text-[9px] text-[#00FF41] break-all select-all">YOUR_CONTRACT_ADDRESS_HERE</div>
+    </div>
+    <!-- SOCIAL BUTTONS -->
+    <div class="flex gap-2">
+      <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+        <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">TWITTER</span>
+      </a>
+      <a href="https://dexscreener.com/YOUR_DEX_LINK" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+        <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">DEXSCR</span>
+      </a>
+    </div>
+    <div class="flex flex-col gap-2">
+      <a class="text-error-container flex items-center gap-3 hover:text-error cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums mt-1" href="../security_clearance_access/code.html">
+        <span class="material-symbols-outlined text-[16px]">power_settings_new</span>Return to Home
+      </a>
+    </div>
   </div>
 </nav>
 
 <!-- Main Content Area -->
-<main class="flex-1 md:ml-64 mt-14 md:mt-16 p-3 md:p-6 overflow-y-auto md:h-[calc(100vh-3.5rem)] flex flex-col gap-4 md:gap-6 pb-6">
+<main class="flex-1 md:ml-64 mt-14 md:mt-0 p-4 md:p-8 overflow-y-auto md:h-screen flex flex-col gap-4 md:gap-6 pb-6">
 
   <!-- Header Section -->
   <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
