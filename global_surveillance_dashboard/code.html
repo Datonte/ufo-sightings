@@ -283,32 +283,32 @@
 <span class="text-xs font-headline font-bold text-on-surface tracking-widest">ACTIVITY LOG</span>
 <span class="material-symbols-outlined text-[16px] text-on-surface-variant">list_alt</span>
 </div>
-<div id="activity-log" class="p-4 flex-1 overflow-y-auto flex flex-col gap-3 font-mono text-[10px]">
-<div class="flex items-start gap-3 border-l-2 border-error-container pl-2 py-1 bg-error-container/5">
+<div id="activity-log" class="p-4 flex-1 overflow-y-auto flex flex-col gap-4 font-mono text-[10px]">
+<div class="flex items-start gap-3 border-l-2 border-error-container pl-3 py-2 bg-error-container/5">
 <span class="text-error-container opacity-80 min-w-[60px]">14:51:22</span>
 <div class="text-on-surface">
 <span class="text-error-container font-bold">ALERT:</span> Unidentified anomaly detected in designated no-fly zone (Sector 7G).
                             </div>
 </div>
-<div class="flex items-start gap-3 border-l-2 border-secondary-container pl-2 py-1 bg-secondary-container/5">
+<div class="flex items-start gap-3 border-l-2 border-secondary-container pl-3 py-2 bg-secondary-container/5">
 <span class="text-secondary-container opacity-80 min-w-[60px]">14:48:05</span>
 <div class="text-on-surface">
 <span class="text-secondary-container font-bold">WARN:</span> Signal interference on comms channel Beta. Attempting re-routing.
                             </div>
 </div>
-<div class="flex items-start gap-3 border-l-2 border-outline-variant pl-2 py-1">
+<div class="flex items-start gap-3 border-l-2 border-outline-variant pl-3 py-2">
 <span class="text-on-surface-variant opacity-80 min-w-[60px]">14:45:00</span>
 <div class="text-on-surface-variant">
                                 System routine diagnostic completed. All systems nominal.
                             </div>
 </div>
-<div class="flex items-start gap-3 border-l-2 border-primary-container pl-2 py-1">
+<div class="flex items-start gap-3 border-l-2 border-primary-container pl-3 py-2">
 <span class="text-primary-container opacity-80 min-w-[60px]">14:30:12</span>
 <div class="text-on-surface">
 <span class="text-primary-container font-bold">UPLINK:</span> Connection to orbital asset Alpha-9 established. Data stream stable.
                             </div>
 </div>
-<div class="flex items-start gap-3 border-l-2 border-outline-variant pl-2 py-1">
+<div class="flex items-start gap-3 border-l-2 border-outline-variant pl-3 py-2">
 <span class="text-on-surface-variant opacity-80 min-w-[60px]">14:15:33</span>
 <div class="text-on-surface-variant">
                                 Scheduled data dump to secure archive initiated.
@@ -553,6 +553,17 @@ function initiateScan() {
   const btn = document.getElementById('scan-btn');
   if (!btn || btn.dataset.scanning === '1') return;
   btn.dataset.scanning = '1';
+
+  // — On mobile: close sidebar then scroll radar into view
+  if (window.innerWidth < 768) {
+    closeSidebar();
+    setTimeout(() => {
+      const radarWidget = document.getElementById('radar-sweep');
+      if (radarWidget) {
+        radarWidget.closest('.bg-surface-container-low').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 350);
+  }
 
   // — Button → SCANNING state
   btn.textContent = '';

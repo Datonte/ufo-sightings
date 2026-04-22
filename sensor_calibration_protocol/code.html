@@ -86,7 +86,7 @@
         .bg-grid { background-size: 24px 24px; background-image: theme('backgroundImage.grid-pattern'); }
     </style>
 </head>
-<body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-hidden text-on-background">
+<body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-y-auto md:overflow-hidden text-on-background" style="background-color:#131313;">
 <!-- Sidebar overlay backdrop (mobile only) -->
 <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-30 hidden" onclick="closeSidebar()"></div>
 <!-- Top Navigation (Web) / Mobile Header -->
@@ -164,7 +164,7 @@
 </div>
 </nav>
 <!-- Main Content Area -->
-<main class="flex-1 md:ml-64 mt-14 md:mt-16 p-3 md:p-6 overflow-y-auto h-[calc(100vh-4rem)] flex flex-col gap-4 md:gap-6 pb-20 md:pb-6">
+<main class="flex-1 md:ml-64 mt-14 md:mt-16 p-3 md:p-6 overflow-y-auto md:h-[calc(100vh-3.5rem)] flex flex-col gap-4 md:gap-6 pb-6">
 <!-- Header Section -->
 <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
 <div>
