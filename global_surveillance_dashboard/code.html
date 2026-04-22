@@ -527,6 +527,22 @@
   animate();
 })();
 
+// ── Auto-scan on arrival from another page ─────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  if (new URLSearchParams(window.location.search).get('scan') === '1') {
+    setTimeout(() => {
+      // Scroll the radar into view first
+      const radarEl = document.getElementById('radar-sweep');
+      if (radarEl) {
+        const widget = radarEl.closest('.bg-surface-container-low');
+        if (widget) widget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      // Then fire the scan
+      setTimeout(initiateScan, 300);
+    }, 600);
+  }
+});
+
 // ── Mobile Sidebar ──────────────────────────────────────────────────
 function openSidebar() {
   document.getElementById('sidebar').style.transform = 'translateX(0)';
