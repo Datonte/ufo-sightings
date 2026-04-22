@@ -200,7 +200,7 @@
 </div>
 </div>
 <!-- Main Map Canvas -->
-<div class="flex-1 bg-surface-container-low relative border border-outline-variant/20 overflow-hidden min-h-[300px] md:min-h-[400px]">
+<div id="globe-wrapper" class="flex-1 bg-surface-container-low relative border border-outline-variant/20 overflow-hidden min-h-[300px] md:min-h-[400px]">
 <!-- Three.js Interactive Globe -->
 <div id="globe-container" class="absolute inset-0" style="cursor:grab;"></div>
 <!-- Sighting Tooltip -->
@@ -636,12 +636,15 @@
   });
 
   let globeHovered = false;
-  container.addEventListener('mouseenter', () => { globeHovered = true; });
-  container.addEventListener('mouseleave', () => {
-    globeHovered = false;
-    if (infoEl) infoEl.style.display = 'none';
-    container.style.cursor = 'default';
-  });
+  const wrapper = document.getElementById('globe-wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('mouseenter', () => { globeHovered = true; });
+    wrapper.addEventListener('mouseleave', () => {
+      globeHovered = false;
+      if (infoEl) infoEl.style.display = 'none';
+      container.style.cursor = 'default';
+    });
+  }
 
   // URL map — click any globe dot to open its source
   const sightingUrls = {
