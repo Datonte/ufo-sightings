@@ -181,39 +181,46 @@
 
     <!-- Left Sidebar: Filter Controls -->
     <section class="lg:col-span-3 flex flex-col gap-6 relative">
-      <div class="absolute -top-3 -left-2 text-[10px] font-mono text-on-surface-variant/50 bg-background px-1">CTRL_PNL</div>
+      <div class="absolute -top-3 -left-2 text-[10px] font-mono text-on-surface-variant/50 bg-background px-1 hidden lg:block">CTRL_PNL</div>
 
       <div class="bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4">
-        <div class="text-[10px] font-headline font-bold text-on-surface uppercase tracking-[0.2em]">FILTER BY CATEGORY</div>
+        <!-- Mobile toggle header -->
+        <button onclick="toggleFilters()" class="flex items-center justify-between w-full lg:cursor-default" id="filter-toggle">
+          <div class="text-[10px] font-headline font-bold text-on-surface uppercase tracking-[0.2em]">FILTER BY CATEGORY</div>
+          <span class="material-symbols-outlined text-[16px] text-on-surface-variant lg:hidden" id="filter-chevron">expand_more</span>
+        </button>
 
-        <!-- Filter buttons -->
-        <div class="flex flex-col gap-1">
-          <button onclick="filterArticles('all')" id="filter-all" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest bg-primary-container/10 text-primary-container border-l-2 border-primary-container transition-colors">ALL FILES <span class="float-right">36</span></button>
-          <button onclick="filterArticles('whistleblower')" id="filter-whistleblower" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">WHISTLEBLOWERS <span class="float-right">6</span></button>
-          <button onclick="filterArticles('crash')" id="filter-crash" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">CRASH RETRIEVALS <span class="float-right">2</span></button>
-          <button onclick="filterArticles('missing')" id="filter-missing" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MISSING RESEARCHERS <span class="float-right">5</span></button>
-          <button onclick="filterArticles('coverup')" id="filter-coverup" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">GOVT COVER-UPS <span class="float-right">5</span></button>
-          <button onclick="filterArticles('sighting')" id="filter-sighting" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MASS SIGHTINGS <span class="float-right">3</span></button>
-          <button onclick="filterArticles('evidence')" id="filter-evidence" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">PHYSICAL EVIDENCE <span class="float-right">4</span></button>
-          <button onclick="filterArticles('news')" id="filter-news" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">NEWS ARTICLES <span class="float-right">6</span></button>
-          <button onclick="filterArticles('social')" id="filter-social" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">SOCIAL MEDIA <span class="float-right">5</span></button>
-        </div>
+        <!-- Collapsible content (hidden on mobile by default) -->
+        <div id="filter-body" class="hidden lg:flex flex-col gap-4">
+          <!-- Filter buttons -->
+          <div class="flex flex-col gap-1">
+            <button onclick="filterArticles('all')" id="filter-all" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest bg-primary-container/10 text-primary-container border-l-2 border-primary-container transition-colors">ALL FILES <span class="float-right">36</span></button>
+            <button onclick="filterArticles('whistleblower')" id="filter-whistleblower" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">WHISTLEBLOWERS <span class="float-right">6</span></button>
+            <button onclick="filterArticles('crash')" id="filter-crash" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">CRASH RETRIEVALS <span class="float-right">2</span></button>
+            <button onclick="filterArticles('missing')" id="filter-missing" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MISSING RESEARCHERS <span class="float-right">5</span></button>
+            <button onclick="filterArticles('coverup')" id="filter-coverup" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">GOVT COVER-UPS <span class="float-right">5</span></button>
+            <button onclick="filterArticles('sighting')" id="filter-sighting" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MASS SIGHTINGS <span class="float-right">3</span></button>
+            <button onclick="filterArticles('evidence')" id="filter-evidence" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">PHYSICAL EVIDENCE <span class="float-right">4</span></button>
+            <button onclick="filterArticles('news')" id="filter-news" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">NEWS ARTICLES <span class="float-right">6</span></button>
+            <button onclick="filterArticles('social')" id="filter-social" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">SOCIAL MEDIA <span class="float-right">5</span></button>
+          </div>
 
-        <!-- Search -->
-        <div class="border-t border-outline-variant/20 pt-4">
-          <div class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">KEYWORD SEARCH</div>
-          <input oninput="searchArticles(this.value)" placeholder="Search files..." class="w-full bg-transparent border-b border-surface-variant text-on-surface font-mono text-xs py-2 focus:outline-none focus:border-primary-container placeholder:text-on-surface-variant/30 uppercase" />
-        </div>
+          <!-- Search -->
+          <div class="border-t border-outline-variant/20 pt-4">
+            <div class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">KEYWORD SEARCH</div>
+            <input oninput="searchArticles(this.value)" placeholder="Search files..." class="w-full bg-transparent border-b border-surface-variant text-on-surface font-mono text-xs py-2 focus:outline-none focus:border-primary-container placeholder:text-on-surface-variant/30 uppercase" />
+          </div>
 
-        <!-- Featured researcher card -->
-        <div class="border-t border-outline-variant/20 pt-4">
-          <div class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mb-3">FEATURED RESEARCHER</div>
-          <div class="bg-surface-container border-l-2 border-primary-container p-3">
-            <div class="font-headline text-sm font-bold text-on-surface">David Grusch</div>
-            <div class="font-mono text-[9px] text-on-surface-variant mt-1">Pentagon Intelligence Officer</div>
-            <div class="flex items-center gap-1 mt-2 font-mono text-[9px] text-primary-container">
-              <span class="w-1.5 h-1.5 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
-              ACTIVE — 2023
+          <!-- Featured researcher card -->
+          <div class="border-t border-outline-variant/20 pt-4">
+            <div class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mb-3">FEATURED RESEARCHER</div>
+            <div class="bg-surface-container border-l-2 border-primary-container p-3">
+              <div class="font-headline text-sm font-bold text-on-surface">David Grusch</div>
+              <div class="font-mono text-[9px] text-on-surface-variant mt-1">Pentagon Intelligence Officer</div>
+              <div class="flex items-center gap-1 mt-2 font-mono text-[9px] text-primary-container">
+                <span class="w-1.5 h-1.5 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
+                ACTIVE — 2023
+              </div>
             </div>
           </div>
         </div>
@@ -773,6 +780,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const panelTab = document.querySelector('.absolute.top-2.left-2 span:last-child');
   if (panelTab) panelTab.textContent = total + ' DOCUMENTS';
 });
+
+// Mobile filter toggle
+function toggleFilters() {
+  const body = document.getElementById('filter-body');
+  const chevron = document.getElementById('filter-chevron');
+  if (!body) return;
+  const isHidden = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !isHidden);
+  body.classList.toggle('flex', isHidden);
+  body.classList.toggle('flex-col', isHidden);
+  body.classList.toggle('gap-4', isHidden);
+  if (chevron) chevron.textContent = isHidden ? 'expand_less' : 'expand_more';
+}
 
 // Mobile sidebar
 function openSidebar() {
