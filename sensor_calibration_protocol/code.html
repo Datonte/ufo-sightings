@@ -90,7 +90,7 @@
         ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
     </style>
 </head>
-<body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-y-auto md:overflow-hidden text-on-background" style="background-color:#131313;">
+<body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-y-auto text-on-background" style="background-color:#131313;">
 
 <!-- Sidebar overlay backdrop (mobile only) -->
 <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-30 hidden" onclick="closeSidebar()"></div>
@@ -156,7 +156,7 @@
 </nav>
 
 <!-- Main Content Area -->
-<main class="flex-1 md:ml-64 mt-14 md:mt-0 p-4 md:p-8 overflow-y-auto md:h-screen flex flex-col gap-4 md:gap-6 pb-6">
+<main class="flex-1 md:ml-64 mt-14 md:mt-0 p-4 md:p-8 flex flex-col gap-4 md:gap-6 pb-24">
 
   <!-- Header Section -->
   <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
@@ -177,7 +177,7 @@
   </header>
 
   <!-- Main Layout Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-[500px]">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
 
     <!-- Left Sidebar: Filter Controls -->
     <section class="lg:col-span-3 flex flex-col gap-6 relative">
@@ -221,7 +221,7 @@
     </section>
 
     <!-- Central Content: Article Grid -->
-    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col overflow-hidden min-h-[300px]">
+    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col min-h-[300px]">
       <!-- Watermark -->
       <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none overflow-hidden z-0">
         <span class="font-headline text-8xl font-black tracking-tighter text-on-surface transform -rotate-12 whitespace-nowrap">TOP SECRET</span>
@@ -229,10 +229,10 @@
       <!-- Panel header tabs -->
       <div class="absolute top-2 left-2 flex gap-2 z-10">
         <span class="px-2 py-0.5 bg-primary-fixed-dim/20 text-primary-fixed border border-primary-fixed/30 font-mono text-[10px]">RESEARCH ARCHIVE</span>
-        <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">12 DOCUMENTS</span>
+        <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">36 DOCUMENTS</span>
       </div>
 
-      <div id="article-grid" class="p-4 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto flex-1 z-10">
+      <div id="article-grid" class="p-4 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 z-10">
 
         <!-- CARD 1 -->
         <div class="article-card" data-cat="whistleblower">
@@ -740,7 +740,7 @@
       </div>
 
       <!-- SYS_LOG -->
-      <div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative flex-1" style="min-height: 8rem;">
+      <div class="mt-4 bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative" style="min-height: 8rem;">
         <div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
         <div id="sys-log" class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80 flex flex-col">
           <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Archive initialized. 36 documents indexed.</div>
@@ -752,7 +752,7 @@
   </div>
 
   <!-- Footer Action Bar -->
-  <footer class="bg-surface-container border border-outline-variant/30 p-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative overflow-hidden">
+  <div class="mt-8 bg-surface-container border border-outline-variant/30 p-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative overflow-hidden">
     <div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] pointer-events-none"></div>
     <div class="flex items-center gap-3">
       <span class="w-2 h-2 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
@@ -762,11 +762,18 @@
       <span class="material-symbols-outlined text-sm">send</span>
       SUBMIT A CASE
     </a>
-  </footer>
+  </div>
 
 </main>
 
 <script>
+// Set document count dynamically so it always reflects the real number
+document.addEventListener('DOMContentLoaded', () => {
+  const total = document.querySelectorAll('.article-card').length;
+  const panelTab = document.querySelector('.absolute.top-2.left-2 span:last-child');
+  if (panelTab) panelTab.textContent = total + ' DOCUMENTS';
+});
+
 // Mobile sidebar
 function openSidebar() {
   document.getElementById('sidebar').classList.remove('-translate-x-full');
