@@ -99,6 +99,12 @@
         @keyframes ao-fadein { from{opacity:0;letter-spacing:0.5em} to{opacity:1;letter-spacing:0.3em} }
         @keyframes ao-glitch { 0%,100%{clip-path:none;transform:none} 10%{clip-path:inset(10% 0 80% 0);transform:translateX(-4px)} 20%{clip-path:inset(60% 0 20% 0);transform:translateX(4px)} 30%{clip-path:none;transform:none} }
         #access-overlay { transition: background-color 0.15s; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; border-left: 1px solid #1c1c1c; }
+        ::-webkit-scrollbar-thumb { background: #00FF41; box-shadow: 0 0 8px #00FF41aa; }
+        ::-webkit-scrollbar-thumb:hover { background: #72ff70; box-shadow: 0 0 14px #00FF41; }
+        * { scrollbar-width: thin; scrollbar-color: #00FF41 #0e0e0e; }
         .ao-cursor::after { content:'█'; animation: ao-blink 0.8s step-end infinite; }
         .keypad-flash { background-color:#00FF41 !important; color:#003907 !important; transform:scale(0.95); transition: all 0.15s; }
     </style>
