@@ -84,10 +84,11 @@
 <style>
         body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
         .bg-grid { background-size: 24px 24px; background-image: theme('backgroundImage.grid-pattern'); }
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #131313; }
-        ::-webkit-scrollbar-thumb { background: #3b4b37; }
-        ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
+        ::-webkit-scrollbar { width: 6px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0e0e0e; border-left: 1px solid #1c1c1c; }
+        ::-webkit-scrollbar-thumb { background: #00FF41; box-shadow: 0 0 8px #00FF41aa; border-radius: 0; }
+        ::-webkit-scrollbar-thumb:hover { background: #72ff70; box-shadow: 0 0 14px #00FF41; }
+        * { scrollbar-width: thin; scrollbar-color: #00FF41 #0e0e0e; }
     </style>
 </head>
 <body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-y-auto text-on-background" style="background-color:#131313;">
