@@ -624,7 +624,13 @@
       infoEl.style.display = 'none';
     }
   });
-  container.addEventListener('mouseleave', () => { if (infoEl) infoEl.style.display = 'none'; container.style.cursor = 'default'; });
+  let globeHovered = false;
+  container.addEventListener('mouseenter', () => { globeHovered = true; });
+  container.addEventListener('mouseleave', () => {
+    globeHovered = false;
+    if (infoEl) infoEl.style.display = 'none';
+    container.style.cursor = 'default';
+  });
 
   // URL map — click any globe dot to open its source
   const sightingUrls = {
@@ -749,7 +755,7 @@
   function animate() {
     requestAnimationFrame(animate);
     if (!dragging) {
-      globe.rotation.y += 0.0015;
+      if (!globeHovered) globe.rotation.y += 0.0015;
       vx *= 0.93; vy *= 0.93;
       globe.rotation.y += vy;
       globe.rotation.x = Math.max(-1.2, Math.min(1.2, globe.rotation.x + vx));
