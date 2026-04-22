@@ -148,10 +148,6 @@
 <span class="material-symbols-outlined">terminal</span>
 <span>The Files</span>
 </a>
-<a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-4 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined">security</span>
-<span>Nimitz Case</span>
-</a>
 <a href="#" class="flex items-center gap-4 bg-[#00FF41]/5 text-[#00FF41] border-l-2 border-[#00FF41] py-3 px-4 cursor-pointer transition-colors duration-100">
 <span class="material-symbols-outlined">database</span>
 <span>Report a Sighting</span>
@@ -159,12 +155,30 @@
 </div>
 </div>
 <div class="px-6 flex flex-col gap-4">
-<button class="w-full bg-[#00FF41] text-[#003907] py-2 font-bold font-headline tracking-widest hover:bg-[#72ff70] transition-colors" onclick="document.getElementById('sighting-form').scrollIntoView({behavior:'smooth'})">SUBMIT A SIGHTING</button>
-<div class="flex flex-col">
-<a href="../security_clearance_access/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined text-sm">power_settings_new</span>
-<span>Return to Home</span>
-</a>
+<button class="w-full bg-primary-container text-on-primary py-3 px-4 font-headline text-xs font-bold tracking-widest hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2" onclick="window.location.href='../incident_reporting_interface/code.html'">
+                    SUBMIT A SIGHTING
+                </button>
+<!-- CONTRACT ADDRESS -->
+<div class="bg-stone-950 border border-stone-700 px-3 py-2 mt-1">
+  <div class="font-['Inter'] text-[9px] text-stone-500 uppercase tracking-widest mb-1">CONTRACT ADDRESS</div>
+  <div class="font-mono text-[9px] text-[#00FF41] break-all select-all">YOUR_CONTRACT_ADDRESS_HERE</div>
+</div>
+<!-- SOCIAL BUTTONS -->
+<div class="flex gap-2">
+  <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+    <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">TWITTER</span>
+  </a>
+  <a href="https://dexscreener.com/YOUR_DEX_LINK" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+    <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">DEXSCR</span>
+  </a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-error-container flex items-center gap-3 hover:text-error cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums mt-1" href="../security_clearance_access/code.html">
+<span class="material-symbols-outlined text-[16px]">power_settings_new</span>
+                        Return to Home
+                    </a>
 </div>
 </div>
 </nav>

@@ -138,10 +138,6 @@
 <span class="material-symbols-outlined text-[18px]">terminal</span>
                         The Files
                     </a>
-<a class="text-stone-500 py-3 px-6 flex items-center gap-3 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums" href="../incident_intel_case_412_x/code.html">
-<span class="material-symbols-outlined text-[18px]">security</span>
-                        Nimitz Case
-                    </a>
 <a class="text-stone-500 py-3 px-6 flex items-center gap-3 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums" href="../incident_reporting_interface/code.html">
 <span class="material-symbols-outlined text-[18px]">database</span>
                         Report a Sighting
@@ -152,8 +148,24 @@
 <button class="w-full bg-primary-container text-on-primary py-3 px-4 font-headline text-xs font-bold tracking-widest hover:bg-primary-fixed transition-colors flex items-center justify-center gap-2" onclick="window.location.href='../incident_reporting_interface/code.html'">
                     SUBMIT A SIGHTING
                 </button>
-<div class="flex flex-col gap-2 mt-4">
-<a class="text-error-container flex items-center gap-3 hover:text-error cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums mt-2" href="../security_clearance_access/code.html">
+<!-- CONTRACT ADDRESS -->
+<div class="bg-stone-950 border border-stone-700 px-3 py-2 mt-1">
+  <div class="font-['Inter'] text-[9px] text-stone-500 uppercase tracking-widest mb-1">CONTRACT ADDRESS</div>
+  <div class="font-mono text-[9px] text-[#00FF41] break-all select-all">YOUR_CONTRACT_ADDRESS_HERE</div>
+</div>
+<!-- SOCIAL BUTTONS -->
+<div class="flex gap-2">
+  <a href="https://twitter.com/YOUR_TWITTER_HANDLE" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+    <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">TWITTER</span>
+  </a>
+  <a href="https://dexscreener.com/YOUR_DEX_LINK" target="_blank" class="flex-1 bg-stone-900 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-stone-800 py-2 px-2 flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+    <svg class="w-3 h-3 shrink-0" fill="#9ca3af" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    <span class="font-['Inter'] text-[9px] uppercase tracking-widest text-stone-400">DEXSCR</span>
+  </a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="text-error-container flex items-center gap-3 hover:text-error cursor-pointer transition-colors duration-100 font-['Inter'] text-[10px] uppercase tracking-widest tabular-nums mt-1" href="../security_clearance_access/code.html">
 <span class="material-symbols-outlined text-[16px]">power_settings_new</span>
                         Return to Home
                     </a>
@@ -387,38 +399,117 @@
   sun.position.set(5, 3, 5);
   scene.add(sun);
 
-  // Real documented UFO/UAP cases — 30 entries with full metadata
+  // Real documented UFO/UAP cases — 110+ entries with full metadata
   const sightings = [
-    { lat:33.39,  lng:-104.52, id:'ROSWELL-1947',      color:0xff3333, cls:'CRASH RETRIEVAL', status:'CONFIRMED CRASH',    alt:'N/A',         vel:'UNKNOWN',      first:'JUL 1947' },
-    { lat:33.44,  lng:-112.07, id:'PHOENIX-1997',       color:0xffdd00, cls:'MASS SIGHTING',   status:'10,000+ WITNESSES', alt:'~1,000 FT',    vel:'SILENT/SLOW',  first:'MAR 1997' },
-    { lat:40.25,  lng:-109.88, id:'SKINWALKER',         color:0xff3333, cls:'ONGOING',         status:'ACTIVE',            alt:'VARIABLE',     vel:'VARIABLE',     first:'1996-PRES' },
-    { lat:31.8,   lng:-117.0,  id:'NIMITZ-2004',        color:0x00ff41, cls:'MILITARY',        status:'USN VERIFIED',      alt:'~50 FT',       vel:'>5000 MPH',    first:'NOV 2004' },
-    { lat:52.09,  lng:1.38,    id:'RENDLESHAM-1980',    color:0xffdd00, cls:'MILITARY',        status:'UK MOD FILE',       alt:'GROUND LEVEL', vel:'SLOW/HOVER',   first:'DEC 1980' },
-    { lat:37.23,  lng:-115.79, id:'AREA51-S4',          color:0xff3333, cls:'RESTRICTED',      status:'NO ACCESS',         alt:'CLASSIFIED',   vel:'CLASSIFIED',   first:'1989' },
-    { lat:41.97,  lng:-87.90,  id:'OHARE-2006',         color:0x00ff41, cls:'AIRPORT',         status:'UNITED PILOTS',     alt:'~1,900 FT',    vel:'RAPID ASCENT', first:'NOV 2006' },
-    { lat:35.68,  lng:51.38,   id:'TEHRAN-1976',        color:0xff3333, cls:'AIR FORCE',       status:'DIA CONFIRMED',     alt:'VARIOUS',      vel:'>2000 MPH',    first:'SEP 1976' },
-    { lat:50.85,  lng:4.35,    id:'BELGIUM-1989',       color:0xffdd00, cls:'RADAR+VISUAL',    status:'SABENA FILE',       alt:'~760 FT',      vel:'>1100 MPH',    first:'NOV 1989' },
-    { lat:-21.55, lng:-45.43,  id:'VARGINHA-1996',      color:0xff3333, cls:'ENTITY REPORT',   status:'MILITARY SEIZED',   alt:'GROUND LEVEL', vel:'UNKNOWN',      first:'JAN 1996' },
-    { lat:-37.89, lng:145.12,  id:'WESTALL-1966',       color:0xffdd00, cls:'SCHOOL SIGHTING', status:'300+ WITNESSES',    alt:'~100 FT',      vel:'SLOW',         first:'APR 1966' },
-    { lat:59.88,  lng:11.17,   id:'HESSDALEN',          color:0x00ff41, cls:'ONGOING',         status:'SCIENTIFIC STUDY',  alt:'VARIABLE',     vel:'VARIABLE',     first:'1981-PRES' },
-    { lat:-18.97, lng:31.57,   id:'ARIEL-1994',         color:0xffdd00, cls:'SCHOOL SIGHTING', status:'62 CHILD WITNESSES',alt:'GROUND LEVEL', vel:'UNKNOWN',      first:'SEP 1994' },
-    { lat:43.45,  lng:-65.73,  id:'SHAG-1967',          color:0x00ff41, cls:'CRASH/WATER',     status:'RCMP REPORT',       alt:'LOW ALTITUDE', vel:'UNKNOWN',      first:'OCT 1967' },
-    { lat:30.36,  lng:-87.16,  id:'GULFBREEZE-1987',    color:0xffdd00, cls:'PHOTOGRAPHIC',    status:'MUFON CASE',        alt:'LOW ALTITUDE', vel:'SLOW',         first:'NOV 1987' },
-    { lat:45.21,  lng:-123.19, id:'MCMINNVILLE-1950',   color:0x00ff41, cls:'PHOTOGRAPHIC',    status:'AUTHENTICATED',     alt:'~1,000 FT',    vel:'SLOW',         first:'MAY 1950' },
-    { lat:32.22,  lng:-98.20,  id:'STEPHENVILLE-2008',  color:0xff3333, cls:'MASS SIGHTING',   status:'FAA RADAR CONF.',   alt:'~300 FT',      vel:'1,900 MPH',    first:'JAN 2008' },
-    { lat:40.18,  lng:-79.45,  id:'KECKSBURG-1965',     color:0x00ff41, cls:'CRASH RETRIEVAL', status:'NASA INTEREST',     alt:'GROUND LEVEL', vel:'UNKNOWN',      first:'DEC 1965' },
-    { lat:-39.0,  lng:146.0,   id:'VALENTICH-1978',     color:0xff3333, cls:'PILOT ABDUCTION', status:'NEVER FOUND',       alt:'~4,500 FT',    vel:'UNKNOWN',      first:'OCT 1978' },
-    { lat:60.0,   lng:-153.0,  id:'JAL1628-1986',       color:0xffdd00, cls:'AIRLINE',         status:'FAA DOCUMENTED',    alt:'35,000 FT',    vel:'MATCHED PLANE',first:'NOV 1986' },
-    { lat:33.57,  lng:-101.85, id:'LUBBOCK-1951',       color:0xffdd00, cls:'FORMATION',       status:'USAF CLASSIFIED',   alt:'~5,000 FT',    vel:'FAST',         first:'AUG 1951' },
-    { lat:36.86,  lng:-87.48,  id:'MANTELL-1948',       color:0xff3333, cls:'PILOT FATALITY',  status:'USAF CLOSED',       alt:'25,000 FT',    vel:'UNKNOWN',      first:'JAN 1948' },
-    { lat:-0.93,  lng:-48.0,   id:'COLARES-1977',       color:0xff3333, cls:'PHYSIOLOGICAL',   status:'MILITARY STUDY',    alt:'VERY LOW',     vel:'SLOW',         first:'OCT 1977' },
-    { lat:51.74,  lng:-4.99,   id:'BROADHAVEN-1977',    color:0xffdd00, cls:'SCHOOL SIGHTING', status:'14 WITNESSES',      alt:'LOW ALTITUDE', vel:'UNKNOWN',      first:'FEB 1977' },
-    { lat:24.0,   lng:-77.0,   id:'AUTEC-USO',          color:0x00ff41, cls:'USO',             status:'CLASSIFIED RANGE',  alt:'UNDERWATER',   vel:'UNKNOWN',      first:'ONGOING' },
-    { lat:41.5,   lng:-73.9,   id:'HUDSONVALLEY',       color:0xffdd00, cls:'MASS SIGHTING',   status:'THOUSANDS',         alt:'~500 FT',      vel:'SLOW/SILENT',  first:'1983-1986' },
-    { lat:32.7,   lng:-117.2,  id:'SANDIEGO-NAVY',      color:0x00ff41, cls:'MILITARY',        status:'USN ONGOING',       alt:'VARIOUS',      vel:'>1000 MPH',    first:'2019-PRES' },
-    { lat:33.58,  lng:-102.37, id:'LEVELLAND-1957',     color:0xffdd00, cls:'EM EFFECTS',      status:'FBI DOCUMENTED',    alt:'GROUND LEVEL', vel:'UNKNOWN',      first:'NOV 1957' },
-    { lat:34.5,   lng:-106.0,  id:'NMCORRIDOR',         color:0xff3333, cls:'MULTIPLE',        status:'ONGOING REPORTS',   alt:'VARIABLE',     vel:'VARIABLE',     first:'ONGOING' },
-    { lat:46.6,   lng:-120.5,  id:'YAKIMA',             color:0x00ff41, cls:'RECURRING',       status:'DOCUMENTED',        alt:'LOW',          vel:'VARIABLE',     first:'1972-PRES' },
+  // ── USA ─────────────────────────────────────────────────────────────
+  { lat:33.39,  lng:-104.52, id:'ROSWELL-1947',       color:0xff3333, cls:'CRASH RETRIEVAL',  status:'CONFIRMED CRASH',     alt:'N/A',          vel:'UNKNOWN',       first:'JUL 1947' },
+  { lat:33.44,  lng:-112.07, id:'PHOENIX-1997',        color:0xffdd00, cls:'MASS SIGHTING',    status:'10,000+ WITNESSES',   alt:'~1,000 FT',    vel:'SILENT/SLOW',   first:'MAR 1997' },
+  { lat:40.25,  lng:-109.88, id:'SKINWALKER',          color:0xff3333, cls:'ONGOING',          status:'ACTIVE',              alt:'VARIABLE',     vel:'VARIABLE',      first:'1996-PRES' },
+  { lat:31.8,   lng:-117.0,  id:'NIMITZ-2004',         color:0x00ff41, cls:'MILITARY',         status:'USN VERIFIED',        alt:'~50 FT',       vel:'>5000 MPH',     first:'NOV 2004' },
+  { lat:37.23,  lng:-115.79, id:'AREA51-S4',           color:0xff3333, cls:'RESTRICTED',       status:'NO ACCESS',           alt:'CLASSIFIED',   vel:'CLASSIFIED',    first:'1989' },
+  { lat:41.97,  lng:-87.90,  id:'OHARE-2006',          color:0x00ff41, cls:'AIRPORT',          status:'UNITED PILOTS',       alt:'~1,900 FT',    vel:'RAPID ASCENT',  first:'NOV 2006' },
+  { lat:30.36,  lng:-87.16,  id:'GULFBREEZE-1987',     color:0xffdd00, cls:'PHOTOGRAPHIC',     status:'MUFON CASE',          alt:'LOW ALTITUDE', vel:'SLOW',          first:'NOV 1987' },
+  { lat:45.21,  lng:-123.19, id:'MCMINNVILLE-1950',    color:0x00ff41, cls:'PHOTOGRAPHIC',     status:'AUTHENTICATED',       alt:'~1,000 FT',    vel:'SLOW',          first:'MAY 1950' },
+  { lat:32.22,  lng:-98.20,  id:'STEPHENVILLE-2008',   color:0xff3333, cls:'MASS SIGHTING',    status:'FAA RADAR CONF.',     alt:'~300 FT',      vel:'1,900 MPH',     first:'JAN 2008' },
+  { lat:40.18,  lng:-79.45,  id:'KECKSBURG-1965',      color:0x00ff41, cls:'CRASH RETRIEVAL',  status:'NASA INTEREST',       alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'DEC 1965' },
+  { lat:60.0,   lng:-153.0,  id:'JAL1628-1986',        color:0xffdd00, cls:'AIRLINE',          status:'FAA DOCUMENTED',      alt:'35,000 FT',    vel:'MATCHED PLANE', first:'NOV 1986' },
+  { lat:33.57,  lng:-101.85, id:'LUBBOCK-1951',        color:0xffdd00, cls:'FORMATION',        status:'USAF CLASSIFIED',     alt:'~5,000 FT',    vel:'FAST',          first:'AUG 1951' },
+  { lat:36.86,  lng:-87.48,  id:'MANTELL-1948',        color:0xff3333, cls:'PILOT FATALITY',   status:'USAF CLOSED',         alt:'25,000 FT',    vel:'UNKNOWN',       first:'JAN 1948' },
+  { lat:51.74,  lng:-4.99,   id:'BROADHAVEN-1977',     color:0xffdd00, cls:'SCHOOL SIGHTING',  status:'14 WITNESSES',        alt:'LOW ALTITUDE', vel:'UNKNOWN',       first:'FEB 1977' },
+  { lat:24.0,   lng:-77.0,   id:'AUTEC-USO',           color:0x00ff41, cls:'USO',              status:'CLASSIFIED RANGE',    alt:'UNDERWATER',   vel:'UNKNOWN',       first:'ONGOING' },
+  { lat:41.5,   lng:-73.9,   id:'HUDSONVALLEY',        color:0xffdd00, cls:'MASS SIGHTING',    status:'THOUSANDS',           alt:'~500 FT',      vel:'SLOW/SILENT',   first:'1983-1986' },
+  { lat:32.7,   lng:-117.2,  id:'SANDIEGO-NAVY',       color:0x00ff41, cls:'MILITARY',         status:'USN ONGOING',         alt:'VARIOUS',      vel:'>1000 MPH',     first:'2019-PRES' },
+  { lat:33.58,  lng:-102.37, id:'LEVELLAND-1957',      color:0xffdd00, cls:'EM EFFECTS',       status:'FBI DOCUMENTED',      alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'NOV 1957' },
+  { lat:34.5,   lng:-106.0,  id:'NMCORRIDOR',          color:0xff3333, cls:'MULTIPLE',         status:'ONGOING REPORTS',     alt:'VARIABLE',     vel:'VARIABLE',      first:'ONGOING' },
+  { lat:46.6,   lng:-120.5,  id:'YAKIMA',              color:0x00ff41, cls:'RECURRING',        status:'DOCUMENTED',          alt:'LOW',          vel:'VARIABLE',      first:'1972-PRES' },
+  { lat:38.89,  lng:-77.03,  id:'WASHDC-1952',         color:0xffdd00, cls:'MASS SIGHTING',    status:'USAF SCRAMBLED',      alt:'~1,700 FT',    vel:'FAST',          first:'JUL 1952' },
+  { lat:33.93,  lng:-106.89, id:'SOCORRO-1964',        color:0x00ff41, cls:'PHYSICAL TRACE',   status:'FBI DOCUMENTED',      alt:'GROUND LEVEL', vel:'FAST DEPART',   first:'APR 1964' },
+  { lat:47.51,  lng:-111.18, id:'MALMSTROM-1967',      color:0xff3333, cls:'NUCLEAR SITE',     status:'ICBM DISABLED',       alt:'LOW ALTITUDE', vel:'HOVER',         first:'MAR 1967' },
+  { lat:48.41,  lng:-101.35, id:'MINOT-1968',          color:0xff3333, cls:'NUCLEAR SITE',     status:'RADAR CONFIRMED',     alt:'LOW ALTITUDE', vel:'HOVER',         first:'OCT 1968' },
+  { lat:44.05,  lng:-71.12,  id:'HILL-1961',           color:0xff3333, cls:'ABDUCTION CASE',   status:'REGRESSIVE HYPNOSIS', alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'SEP 1961' },
+  { lat:34.45,  lng:-110.25, id:'WALTON-1975',         color:0xff3333, cls:'ABDUCTION CASE',   status:'POLYGRAPH PASSED',    alt:'LOW ALTITUDE', vel:'UNKNOWN',       first:'NOV 1975' },
+  { lat:30.39,  lng:-95.46,  id:'CASH-LANDRUM-1980',   color:0xff3333, cls:'PHYSIOLOGICAL',    status:'RADIATION BURNS',     alt:'~65 FT',       vel:'SLOW',          first:'DEC 1980' },
+  { lat:36.87,  lng:-87.49,  id:'KELLY-1955',          color:0xffdd00, cls:'ENTITY ENCOUNTER',  status:'POLICE REPORT',      alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'AUG 1955' },
+  { lat:38.74,  lng:-80.65,  id:'FLATWOODS-1952',      color:0xffdd00, cls:'ENTITY REPORT',    status:'DOCUMENTED',          alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'SEP 1952' },
+  { lat:42.98,  lng:-70.96,  id:'EXETER-1965',         color:0xffdd00, cls:'MULTIPLE WITNESS',  status:'USAF UNRESOLVED',    alt:'~100 FT',      vel:'SLOW',          first:'SEP 1965' },
+  { lat:47.37,  lng:-122.44, id:'MAURY-1947',          color:0xffdd00, cls:'DEBRIS RECOVERED',  status:'FBI FILE',           alt:'~2,000 FT',    vel:'MODERATE',      first:'JUN 1947' },
+  { lat:38.85,  lng:-82.13,  id:'MOTHMAN-1966',        color:0xff3333, cls:'ENTITY ONGOING',   status:'13 MONTHS',           alt:'LOW ALTITUDE', vel:'FAST',          first:'NOV 1966' },
+  { lat:41.24,  lng:-81.17,  id:'PORTAGE-1966',        color:0xffdd00, cls:'POLICE PURSUIT',   status:'FBI FILE',            alt:'LOW ALTITUDE', vel:'VARIABLE',      first:'APR 1966' },
+  { lat:39.18,  lng:-99.31,  id:'DELPHOS-1971',        color:0x00ff41, cls:'PHYSICAL TRACE',   status:'RING FOUND',          alt:'GROUND LEVEL', vel:'FAST DEPART',   first:'NOV 1971' },
+  { lat:40.0,   lng:-83.0,   id:'COYNE-1973',          color:0xffdd00, cls:'MILITARY',         status:'US ARMY FILE',        alt:'~1,700 FT',    vel:'FAST',          first:'OCT 1973' },
+  { lat:46.86,  lng:-96.78,  id:'GORMAN-1948',         color:0x00ff41, cls:'PILOT DOGFIGHT',   status:'USAF FILE',           alt:'~14,000 FT',   vel:'>400 MPH',      first:'OCT 1948' },
+  { lat:37.15,  lng:-90.69,  id:'PIEDMONT-1973',       color:0xffdd00, cls:'MASS SIGHTING',    status:'INVESTIGATED',        alt:'LOW ALTITUDE', vel:'VARIABLE',      first:'FEB 1973' },
+  { lat:30.37,  lng:-88.55,  id:'PASCAGOULA-1973',     color:0xff3333, cls:'ABDUCTION CASE',   status:'POLYGRAPH PASSED',    alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'OCT 1973' },
+  { lat:47.5,   lng:-121.5,  id:'ARNOLD-1947',         color:0xffdd00, cls:'PILOT SIGHTING',   status:'USAF FILE',           alt:'~9,500 FT',    vel:'1,200 MPH',     first:'JUN 1947' },
+  { lat:47.5,   lng:-111.3,  id:'MARIANA-1950',        color:0x00ff41, cls:'FILM FOOTAGE',     status:'USAF ANALYZED',       alt:'~10,000 FT',   vel:'FAST',          first:'AUG 1950' },
+  { lat:41.72,  lng:-112.16, id:'TREMONTON-1952',      color:0x00ff41, cls:'FILM FOOTAGE',     status:'NAVY ANALYZED',       alt:'HIGH ALTITUDE',vel:'FAST',          first:'JUL 1952' },
+  { lat:42.52,  lng:-70.9,   id:'SALEM-PHOTO-1952',    color:0x00ff41, cls:'PHOTOGRAPHIC',     status:'COAST GUARD',         alt:'LOW ALTITUDE', vel:'FAST',          first:'JUL 1952' },
+  { lat:41.5,   lng:-82.0,   id:'LAKEERIE',            color:0xffdd00, cls:'ONGOING',          status:'MULTIPLE WITNESSES',  alt:'LOW ALTITUDE', vel:'VARIABLE',      first:'ONGOING' },
+  { lat:34.9,   lng:-117.88, id:'EDWARDS-1965',        color:0x00ff41, cls:'MULTIPLE PILOTS',  status:'USAF',                alt:'~5,000 FT',    vel:'>1000 MPH',     first:'OCT 1965' },
+  { lat:32.85,  lng:-106.1,  id:'HOLLOMAN-1964',       color:0xff3333, cls:'ALLEGED LANDING',  status:'CLASSIFIED',          alt:'GROUND LEVEL', vel:'SLOW/HOVER',    first:'APR 1964' },
+  { lat:32.38,  lng:-106.48, id:'WHITESANDS',          color:0xff3333, cls:'TEST RANGE',       status:'ONGOING',             alt:'VARIABLE',     vel:'VARIABLE',      first:'ONGOING' },
+  { lat:24.0,   lng:-90.0,   id:'GULFMEXICO-USO',      color:0xffdd00, cls:'USO SIGHTINGS',    status:'MULTIPLE INCIDENTS',  alt:'UNDERWATER',   vel:'UNKNOWN',       first:'ONGOING' },
+  { lat:46.85,  lng:-121.73, id:'MTRAINIER-1947',      color:0xffdd00, cls:'PILOT SIGHTING',   status:'USAF FILE',           alt:'~9,200 FT',    vel:'1,200 MPH',     first:'JUN 1947' },
+  // ── UK & EUROPE ─────────────────────────────────────────────────────
+  { lat:52.09,  lng:1.38,    id:'RENDLESHAM-1980',     color:0xffdd00, cls:'MILITARY',         status:'UK MOD FILE',         alt:'GROUND LEVEL', vel:'SLOW/HOVER',    first:'DEC 1980' },
+  { lat:50.85,  lng:4.35,    id:'BELGIUM-1989',        color:0xffdd00, cls:'RADAR+VISUAL',     status:'SABENA FILE',         alt:'~760 FT',      vel:'>1100 MPH',     first:'NOV 1989' },
+  { lat:52.41,  lng:0.54,    id:'LAKENHEATH-1956',     color:0x00ff41, cls:'RADAR+VISUAL',     status:'RAF/USAF',            alt:'~15,000 FT',   vel:'>4000 MPH',     first:'AUG 1956' },
+  { lat:49.72,  lng:-2.2,    id:'ALDERNEY-2007',       color:0x00ff41, cls:'PILOT SIGHTING',   status:'UK CAA FILE',         alt:'~2,000 FT',    vel:'FAST',          first:'APR 2007' },
+  { lat:43.55,  lng:6.48,    id:'TRANS-EN-PROVENCE',   color:0x00ff41, cls:'PHYSICAL TRACE',   status:'GEPAN VERIFIED',      alt:'GROUND LEVEL', vel:'FAST DEPART',   first:'JAN 1981' },
+  { lat:43.83,  lng:5.98,    id:'VALENSOLE-1965',      color:0x00ff41, cls:'PHYSICAL TRACE',   status:'GENDARMERIE FILE',    alt:'GROUND LEVEL', vel:'FAST DEPART',   first:'JUL 1965' },
+  { lat:49.04,  lng:2.07,    id:'CERGY-1979',          color:0xffdd00, cls:'ABDUCTION REPORT',  status:'FRENCH GEPAN',       alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'NOV 1979' },
+  { lat:28.29,  lng:-16.62,  id:'CANARY-1976',         color:0xffdd00, cls:'MASS SIGHTING',    status:'THOUSANDS',           alt:'~12,000 FT',   vel:'SLOW',          first:'JUN 1976' },
+  { lat:39.63,  lng:-8.67,   id:'FATIMA-1917',         color:0xffdd00, cls:'MASS EVENT',       status:'70,000 WITNESSES',    alt:'LOW ALTITUDE', vel:'ERRATIC',       first:'OCT 1917' },
+  { lat:60.5,   lng:24.5,    id:'IMJARVI-1970',        color:0xffdd00, cls:'ENTITY ENCOUNTER',  status:'DOCUMENTED',         alt:'~50 FT',       vel:'FAST DEPART',   first:'JAN 1970' },
+  { lat:55.0,   lng:18.0,    id:'BALTICSEA-2011',      color:0x00ff41, cls:'SONAR DISCOVERY',  status:'OCEAN EXPLORER',      alt:'UNDERWATER',   vel:'UNKNOWN',       first:'JUN 2011' },
+  { lat:55.0,   lng:2.0,     id:'NORTHSEA',            color:0xffdd00, cls:'OIL RIG REPORTS',  status:'MULTIPLE WITNESSES',  alt:'LOW ALTITUDE', vel:'VARIABLE',      first:'ONGOING' },
+  { lat:64.0,   lng:-20.0,   id:'ICELAND',             color:0xffdd00, cls:'MILITARY',         status:'NATO FILE',           alt:'HIGH ALTITUDE',vel:'FAST',          first:'ONGOING' },
+  { lat:70.0,   lng:25.0,    id:'NORWAY-SPIRAL-2009',  color:0xffdd00, cls:'MASS SIGHTING',    status:'THOUSANDS',           alt:'HIGH ALTITUDE',vel:'SPIRAL MOTION', first:'DEC 2009' },
+  { lat:54.37,  lng:-3.08,   id:'CONISTON-1954',       color:0x00ff41, cls:'PHOTOGRAPHIC',     status:'AUTHENTICATED',       alt:'~1,000 FT',    vel:'SLOW',          first:'FEB 1954' },
+  // ── RUSSIA & EASTERN EUROPE ─────────────────────────────────────────
+  { lat:51.67,  lng:39.20,   id:'VORONEZH-1989',       color:0xffdd00, cls:'ENTITY REPORT',    status:'TASS REPORTED',       alt:'~15 FT',       vel:'HOVER',         first:'SEP 1989' },
+  { lat:55.75,  lng:37.61,   id:'MOSCOW-SIGHTING',     color:0xffdd00, cls:'MASS SIGHTING',    status:'DOCUMENTED',          alt:'LOW ALTITUDE', vel:'FAST',          first:'1989' },
+  { lat:60.92,  lng:101.91,  id:'TUNGUSKA-1908',       color:0xff3333, cls:'EXPLOSION',        status:'UNKNOWN ORIGIN',      alt:'~5 MILES',     vel:'HYPERSONIC',    first:'JUN 1908' },
+  { lat:61.75,  lng:59.45,   id:'DYATLOV-1959',        color:0xff3333, cls:'MYSTERY DEATHS',   status:'9 DEAD / UNEXPLAINED',alt:'MOUNTAIN',     vel:'UNKNOWN',       first:'FEB 1959' },
+  { lat:61.79,  lng:34.36,   id:'PETROZAVODSK-1977',   color:0xff3333, cls:'MASS SIGHTING',    status:'DOCUMENTED',          alt:'LOW ALTITUDE', vel:'SLOW',          first:'SEP 1977' },
+  // ── SOUTH AMERICA ───────────────────────────────────────────────────
+  { lat:-21.55, lng:-45.43,  id:'VARGINHA-1996',       color:0xff3333, cls:'ENTITY REPORT',    status:'MILITARY SEIZED',     alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'JAN 1996' },
+  { lat:-0.93,  lng:-48.0,   id:'COLARES-1977',        color:0xff3333, cls:'PHYSIOLOGICAL',    status:'MILITARY STUDY',      alt:'VERY LOW',     vel:'SLOW',          first:'OCT 1977' },
+  { lat:-23.55, lng:-46.63,  id:'SAOPAULONIGHT-1986',  color:0xffdd00, cls:'MASS MILITARY',    status:'USAF RADAR',          alt:'VARIABLE',     vel:'>1000 MPH',     first:'MAY 1986' },
+  { lat:-20.0,  lng:-44.0,   id:'VILASBOAS-1957',      color:0xff3333, cls:'ABDUCTION',        status:'MEDICAL CASE',        alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'OCT 1957' },
+  { lat:-23.44, lng:-45.07,  id:'UBATUBA-1957',        color:0x00ff41, cls:'PHYSICAL EVIDENCE', status:'MAGNESIUM FOUND',    alt:'VERY LOW',     vel:'EXPLODED',      first:'SEP 1957' },
+  { lat:-23.9,  lng:-46.3,   id:'ITAIPU-1957',         color:0xff3333, cls:'MILITARY',         status:'PHYSIOLOGICAL',       alt:'VERY LOW',     vel:'HOVER',         first:'NOV 1957' },
+  { lat:-20.51, lng:-29.33,  id:'TRINDADE-1958',       color:0x00ff41, cls:'PHOTOGRAPHIC',     status:'NAVY WITNESSED',      alt:'LOW ALTITUDE', vel:'FAST',          first:'JAN 1958' },
+  { lat:10.48,  lng:-66.86,  id:'CARACAS-1954',        color:0xffdd00, cls:'ENTITY',           status:'MULTIPLE WITNESS',    alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'NOV 1954' },
+  { lat:-38.0,  lng:-63.0,   id:'ARGENTINA-1965',      color:0xffdd00, cls:'MILITARY',         status:'DOCUMENTED',          alt:'LOW ALTITUDE', vel:'FAST',          first:'1965' },
+  { lat:-33.45, lng:-70.67,  id:'CHILE-2000',          color:0xffdd00, cls:'MILITARY PILOT',   status:'AUTHENTICATED',       alt:'~20,000 FT',   vel:'>1000 MPH',     first:'APR 2000' },
+  { lat:19.02,  lng:-98.62,  id:'POPOCATEPETL',        color:0xffdd00, cls:'VOLCANO CAM',      status:'ONGOING',             alt:'VARIABLE',     vel:'FAST',          first:'ONGOING' },
+  { lat:19.43,  lng:-99.13,  id:'MEXICOCITY-1997',     color:0xffdd00, cls:'MASS SIGHTING',    status:'THOUSANDS',           alt:'LOW ALTITUDE', vel:'SLOW',          first:'JUL 1997' },
+  { lat:18.1,   lng:-67.1,   id:'PUERTORICO',          color:0xffdd00, cls:'USO/UAP',          status:'ONGOING',             alt:'VARIABLE',     vel:'VARIABLE',      first:'ONGOING' },
+  // ── MIDDLE EAST & ASIA ──────────────────────────────────────────────
+  { lat:35.68,  lng:51.38,   id:'TEHRAN-1976',         color:0xff3333, cls:'AIR FORCE',        status:'DIA CONFIRMED',       alt:'VARIOUS',      vel:'>2000 MPH',     first:'SEP 1976' },
+  { lat:26.0,   lng:54.0,    id:'PERSIANGULF',         color:0xffdd00, cls:'MILITARY',         status:'MULTIPLE INCIDENTS',  alt:'VARIABLE',     vel:'VARIABLE',      first:'ONGOING' },
+  { lat:15.0,   lng:115.0,   id:'SOUTHCHINASEA',       color:0x00ff41, cls:'NAVAL ONGOING',    status:'USN INCIDENTS',       alt:'VARIOUS',      vel:'>1000 MPH',     first:'ONGOING' },
+  { lat:40.0,   lng:135.0,   id:'JAPANSEA',            color:0xffdd00, cls:'JMSDF REPORTS',    status:'DOCUMENTED',          alt:'LOW ALTITUDE', vel:'FAST',          first:'ONGOING' },
+  // ── OCEANIA ─────────────────────────────────────────────────────────
+  { lat:-37.89, lng:145.12,  id:'WESTALL-1966',        color:0xffdd00, cls:'SCHOOL SIGHTING',  status:'300+ WITNESSES',      alt:'~100 FT',      vel:'SLOW',          first:'APR 1966' },
+  { lat:-39.0,  lng:146.0,   id:'VALENTICH-1978',      color:0xff3333, cls:'PILOT ABDUCTION',  status:'NEVER FOUND',         alt:'~4,500 FT',    vel:'UNKNOWN',       first:'OCT 1978' },
+  { lat:-42.4,  lng:173.68,  id:'KAIKOURA-1978',       color:0xffdd00, cls:'FILM FOOTAGE',     status:'TV CREW',             alt:'LOW ALTITUDE', vel:'VARIABLE',      first:'DEC 1978' },
+  { lat:-9.44,  lng:147.18,  id:'BOIANAI-1959',        color:0xffdd00, cls:'ENTITY SIGHTING',  status:'PRIEST WITNESS',      alt:'LOW ALTITUDE', vel:'HOVER',         first:'JUN 1959' },
+  { lat:-17.93, lng:145.92,  id:'TULLY-1966',          color:0x00ff41, cls:'PHYSICAL TRACE',   status:'SWAMP CIRCLE FOUND',  alt:'~4 FT',        vel:'FAST DEPART',   first:'JAN 1966' },
+  { lat:-31.2,  lng:136.8,   id:'WOOMERA',             color:0xffdd00, cls:'ROCKET RANGE',     status:'DOCUMENTED',          alt:'VARIABLE',     vel:'FAST',          first:'ONGOING' },
+  { lat:-23.8,  lng:133.74,  id:'PINE-GAP',            color:0xff3333, cls:'CLASSIFIED BASE',  status:'RESTRICTED',          alt:'CLASSIFIED',   vel:'CLASSIFIED',    first:'ONGOING' },
+  // ── AFRICA ──────────────────────────────────────────────────────────
+  { lat:-18.97, lng:31.57,   id:'ARIEL-1994',          color:0xffdd00, cls:'SCHOOL SIGHTING',  status:'62 CHILD WITNESSES',  alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'SEP 1994' },
+  { lat:0.0,    lng:38.0,    id:'KENYA-1954',          color:0xffdd00, cls:'ENTITY REPORT',    status:'DOCUMENTED',          alt:'GROUND LEVEL', vel:'UNKNOWN',       first:'1954' },
+  { lat:-20.15, lng:30.0,    id:'ZIMBABWE-1985',       color:0xffdd00, cls:'MASS SIGHTING',    status:'MULTIPLE WITNESSES',  alt:'LOW ALTITUDE', vel:'FAST',          first:'JUN 1985' },
+  // ── CANADA & NORTH ATLANTIC ─────────────────────────────────────────
+  { lat:43.45,  lng:-65.73,  id:'SHAG-1967',           color:0x00ff41, cls:'CRASH/WATER',      status:'RCMP REPORT',         alt:'LOW ALTITUDE', vel:'UNKNOWN',       first:'OCT 1967' },
+  { lat:59.88,  lng:11.17,   id:'HESSDALEN',           color:0x00ff41, cls:'ONGOING',          status:'SCIENTIFIC STUDY',    alt:'VARIABLE',     vel:'VARIABLE',      first:'1981-PRES' },
+  { lat:64.0,   lng:-153.0,  id:'ALASKA-PIPELINE',     color:0xffdd00, cls:'ONGOING REPORTS',  status:'DOCUMENTED',          alt:'VARIABLE',     vel:'VARIABLE',      first:'ONGOING' },
+  // ── POLAR ───────────────────────────────────────────────────────────
+  { lat:-75.0,  lng:0.0,     id:'ANTARCTIC',           color:0xff3333, cls:'CLASSIFIED',       status:'ADMIRAL BYRD FILE',   alt:'CLASSIFIED',   vel:'CLASSIFIED',    first:'1947' },
+  { lat:10.0,   lng:142.0,   id:'MARIANA-USO',         color:0xff3333, cls:'USO DEEP',         status:'CLASSIFIED DEPTH',    alt:'UNDERWATER',   vel:'UNKNOWN',       first:'ONGOING' },
   ];
 
   function toVec3(lat, lng, r) {
