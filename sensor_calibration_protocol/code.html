@@ -710,6 +710,14 @@
         </div>
 
       </div>
+
+      <!-- Load More button (mobile only) -->
+      <div id="load-more-wrap" class="lg:hidden p-4 border-t border-outline-variant/20">
+        <button onclick="loadMoreArticles()" id="load-more-btn" class="w-full font-mono text-[10px] uppercase tracking-widest text-primary-container border border-primary-container/40 py-3 hover:bg-primary-container/10 transition-colors flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[14px]">expand_more</span>
+          LOAD MORE FILES <span id="load-more-count" class="text-on-surface-variant"></span>
+        </button>
+      </div>
     </section>
 
     <!-- Right Sidebar: Key Figures + SYS_LOG -->
@@ -781,6 +789,48 @@ document.addEventListener('DOMContentLoaded', () => {
   if (panelTab) panelTab.textContent = total + ' DOCUMENTS';
 });
 
+// Mobile article pagination — show 6 at a time
+const MOBILE_PAGE_SIZE = 6;
+let mobileVisible = MOBILE_PAGE_SIZE;
+
+function initMobilePagination() {
+  if (window.innerWidth >= 1024) return; // desktop handles via CSS scroll
+  applyMobileVisibility();
+}
+
+function applyMobileVisibility(activeCards) {
+  const cards = activeCards || Array.from(document.querySelectorAll('.article-card:not([style*="display: none"])'));
+  cards.forEach((c, i) => {
+    c.dataset.mobileHidden = i >= mobileVisible ? 'true' : 'false';
+    if (window.innerWidth < 1024) {
+      c.style.display = i >= mobileVisible ? 'none' : '';
+    }
+  });
+  const wrap = document.getElementById('load-more-wrap');
+  const countEl = document.getElementById('load-more-count');
+  const remaining = Math.max(0, cards.length - mobileVisible);
+  if (wrap) wrap.style.display = remaining > 0 ? 'block' : 'none';
+  if (countEl) countEl.textContent = remaining > 0 ? `(${remaining} remaining)` : '';
+}
+
+function loadMoreArticles() {
+  mobileVisible += MOBILE_PAGE_SIZE;
+  const cards = Array.from(document.querySelectorAll('.article-card'));
+  applyMobileVisibility(cards);
+}
+
+document.addEventListener('DOMContentLoaded', initMobilePagination);
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 1024) {
+    // On desktop: always show all
+    document.querySelectorAll('.article-card').forEach(c => { if (c.dataset.mobileHidden) c.style.display = ''; });
+    const wrap = document.getElementById('load-more-wrap');
+    if (wrap) wrap.style.display = 'none';
+  } else {
+    applyMobileVisibility();
+  }
+});
+
 // Mobile filter toggle
 function toggleFilters() {
   const body = document.getElementById('filter-body');
@@ -806,9 +856,14 @@ function closeSidebar() {
 
 // Category filter
 function filterArticles(cat) {
+  mobileVisible = MOBILE_PAGE_SIZE; // reset pagination on filter change
+  const matchingCards = [];
   document.querySelectorAll('.article-card').forEach(card => {
-    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+    const matches = cat === 'all' || card.dataset.cat === cat;
+    card.style.display = matches ? '' : 'none';
+    if (matches) matchingCards.push(card);
   });
+  if (window.innerWidth < 1024) applyMobileVisibility(matchingCards);
   document.querySelectorAll('[id^="filter-"]').forEach(btn => {
     btn.className = btn.className.replace('bg-primary-container/10 text-primary-container border-l-2 border-primary-container', '');
     btn.classList.add('text-stone-400', 'hover:bg-stone-800/50', 'hover:text-stone-200');
