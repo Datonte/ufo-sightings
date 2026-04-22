@@ -158,10 +158,10 @@
         <span class="material-symbols-outlined text-sm">public</span>
         <span>Sightings Map</span>
       </button>
-      <a href="../sensor_calibration_protocol/code.html" class="flex-1 border border-primary-container text-primary-container font-headline font-bold uppercase tracking-[0.2em] py-4 flex items-center justify-center gap-2 hover:bg-primary-container/10 transition-colors">
+      <button onclick="loadFilesPage()" class="flex-1 border border-primary-container text-primary-container font-headline font-bold uppercase tracking-[0.2em] py-4 flex items-center justify-center gap-2 hover:bg-primary-container/10 transition-colors">
         <span class="material-symbols-outlined text-sm">folder_open</span>
         <span>Browse The Files</span>
-      </a>
+      </button>
     </div>
   </section>
 
@@ -329,6 +329,29 @@ function loadSightingsMap() {
     setTimeout(() => {
       overlay.style.backgroundColor = '#00FF41';
       setTimeout(() => { overlay.style.backgroundColor = '#000'; setTimeout(() => { window.location.href = '../global_surveillance_dashboard/code.html'; }, 200); }, 120);
+    }, 500);
+  }, 3600);
+}
+
+function loadFilesPage() {
+  const overlay = document.getElementById('access-overlay');
+  // Clear any previous typewriter text
+  ['ao-line0','ao-line1','ao-line2','ao-line3','ao-line4'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = ''; });
+  document.getElementById('ao-divider').style.opacity = '0';
+  overlay.style.backgroundColor = '#000';
+  overlay.style.animation = '';
+  overlay.style.display = 'flex';
+  setTimeout(() => typeText('ao-line0', '[ DECRYPTING ARCHIVE ]', 30), 300);
+  setTimeout(() => typeText('ao-line1', 'LOADING', 80), 700);
+  setTimeout(() => { document.getElementById('ao-divider').style.opacity='1'; document.getElementById('ao-divider').style.transition='opacity 0.4s'; }, 1200);
+  setTimeout(() => typeText('ao-line2', 'DISCLOSURE FILES — RESEARCH ARCHIVE', 30), 1300);
+  setTimeout(() => typeText('ao-line3', 'DECRYPTION: COMPLETE  ·  36 DOCUMENTS INDEXED', 25), 1900);
+  setTimeout(() => typeText('ao-line4', 'ROUTING TO THE FILES...', 25), 2500);
+  setTimeout(() => {
+    overlay.style.animation = 'ao-flicker 0.5s ease-in-out';
+    setTimeout(() => {
+      overlay.style.backgroundColor = '#00FF41';
+      setTimeout(() => { overlay.style.backgroundColor = '#000'; setTimeout(() => { window.location.href = '../sensor_calibration_protocol/code.html'; }, 200); }, 120);
     }, 500);
   }, 3600);
 }
