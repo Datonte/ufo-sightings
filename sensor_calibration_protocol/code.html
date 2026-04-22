@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Iron Sentry - Sensor Calibration Protocol</title>
+<title>THE DISCLOSURE FILES — The Files</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
@@ -84,358 +84,453 @@
 <style>
         body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
         .bg-grid { background-size: 24px 24px; background-image: theme('backgroundImage.grid-pattern'); }
-        #spec-bars > div { transition: height 0.35s ease; }
-        @keyframes scan-sweep { 0% { left: 5%; } 100% { left: 95%; } }
-        .scanner-line { animation: scan-sweep 2s linear infinite; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #3b4b37; }
+        ::-webkit-scrollbar-thumb:hover { background: #00ff41; }
     </style>
 </head>
 <body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-y-auto md:overflow-hidden text-on-background" style="background-color:#131313;">
+
 <!-- Sidebar overlay backdrop (mobile only) -->
 <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 z-30 hidden" onclick="closeSidebar()"></div>
-<!-- Top Navigation (Web) / Mobile Header -->
+
 <!-- Mobile-visible header bar -->
 <header class="md:hidden bg-[#131313] fixed top-0 w-full h-14 border-b border-[#3b4b37]/20 z-50 flex items-center justify-between px-4">
-<button class="text-[#00FF41]" onclick="openSidebar()" aria-label="Open menu">
-<span class="material-symbols-outlined">menu</span>
-</button>
-<span class="font-['Space_Grotesk'] text-sm font-black tracking-tighter text-[#00FF41]">IRON SENTRY</span>
-<span class="material-symbols-outlined text-[#00FF41]">notifications_active</span>
+  <button class="text-[#00FF41]" onclick="openSidebar()" aria-label="Open menu">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+  <span class="font-['Space_Grotesk'] text-sm font-black tracking-tighter text-[#00FF41]">DISCLOSURE FILES</span>
+  <span class="material-symbols-outlined text-[#00FF41]">notifications_active</span>
 </header>
+
 <!-- Desktop top nav -->
 <nav class="hidden md:flex flex-row justify-between items-center w-full px-6 bg-[#131313] docked full-width top-0 h-16 border-b border-[#3b4b37]/20 z-50 fixed top-0 w-full">
-<div class="flex items-center gap-8">
-<span class="font-['Space_Grotesk'] text-xl font-black tracking-tighter text-[#00FF41]">IRON SENTRY</span>
-<div class="flex gap-6">
-<a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../global_surveillance_dashboard/code.html">DIAGNOSTICS</a>
-<a class="text-[#00FF41] border-b-2 border-[#00FF41] pb-1 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="#">CALIBRATION</a>
-<a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../incident_intel_case_412_x/code.html">LOGS</a>
-<a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../global_surveillance_dashboard/code.html">TELEMETRY</a>
-</div>
-</div>
-<div class="flex items-center gap-4 text-[#00FF41]">
-<span class="material-symbols-outlined text-[#00FF41] cursor-pointer hover:text-primary-container transition-colors" data-icon="notifications_active">notifications_active</span>
-</div>
+  <div class="flex items-center gap-8">
+    <span class="font-['Space_Grotesk'] text-xl font-black tracking-tighter text-[#00FF41]">DISCLOSURE FILES</span>
+    <div class="flex gap-6">
+      <a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../global_surveillance_dashboard/code.html">SIGHTINGS MAP</a>
+      <a class="text-[#00FF41] border-b-2 border-[#00FF41] pb-1 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="#">THE FILES</a>
+      <a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../incident_intel_case_412_x/code.html">NIMITZ CASE</a>
+      <a class="text-[#72ff70]/50 font-['Space_Grotesk'] uppercase tracking-[0.2em] text-xs font-bold hover:bg-[#1c1b1b] hover:text-[#00FF41] transition-colors duration-150 active:opacity-80" href="../incident_reporting_interface/code.html">REPORT A SIGHTING</a>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <span class="hidden md:block font-mono text-xs text-[#00FF41]/70 tracking-widest uppercase">THE DISCLOSURE FILES</span>
+    <span class="material-symbols-outlined text-[#00FF41] cursor-pointer hover:text-primary-container transition-colors">notifications_active</span>
+  </div>
 </nav>
-<!-- Side Navigation (Shared Component Integration) -->
+
+<!-- Sidebar -->
 <nav id="sidebar" class="bg-[#1c1b1b] fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 border-r border-stone-800 rounded-none flex flex-col justify-between py-8 z-40 transition-transform duration-300 -translate-x-full md:translate-x-0">
-<button class="md:hidden absolute top-4 right-4 text-stone-400 hover:text-white" onclick="closeSidebar()" aria-label="Close menu">
-<span class="material-symbols-outlined">close</span>
-</button>
-<div>
-<div class="px-6 mb-8">
-<div class="text-lg font-black text-[#00FF41] font-headline">INTEL_CORE_V.2</div>
-<div class="font-['Inter'] text-[10px] uppercase tracking-widest text-stone-500 mt-1">STATUS: ENCRYPTED</div>
-</div>
-<div class="flex flex-col w-full">
-<a href="../global_surveillance_dashboard/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined text-sm">radar</span>
-<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Live Feed</span>
-</a>
-<a href="#" class="flex items-center gap-4 bg-[#00FF41]/5 text-[#00FF41] border-l-2 border-[#00FF41] py-3 px-6 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined text-sm">terminal</span>
-<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Signal Logs</span>
-</a>
-<a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined text-sm">security</span>
-<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Threat Matrix</span>
-</a>
-<a href="../incident_reporting_interface/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined text-sm">database</span>
-<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Archived Data</span>
-</a>
-</div>
-</div>
-<div class="px-6 flex flex-col gap-4">
-<button class="w-full bg-[#00FF41] text-[#003907] py-2 font-bold font-headline tracking-widest hover:bg-[#72ff70] transition-colors" onclick="window.location.href='../global_surveillance_dashboard/code.html?scan=1'">INITIATE SCAN</button>
-<div class="flex flex-col gap-3 mb-4">
-<div class="text-[10px] font-headline font-bold text-stone-500 uppercase tracking-[0.2em] mb-1">TOKEN_DATA_STREAM</div>
-<div class="bg-[#00FF41]/5 border border-[#00FF41]/20 p-2 flex flex-col gap-1">
-<div class="flex justify-between items-center">
-<span class="text-[8px] font-mono text-[#00FF41]/60 uppercase tracking-widest">CONTRACT_ADDRESS</span>
-<button class="hover:text-[#00FF41] transition-colors text-stone-500" title="Copy Address" onclick="navigator.clipboard.writeText('0x0000000000000000000000000000000000000000')">
-<span class="material-symbols-outlined text-[14px]">content_copy</span>
-</button>
-</div>
-<div class="font-mono text-[10px] text-[#00FF41] break-all selection:bg-[#00FF41] selection:text-black">0x0000000000000000000000000000000000000000</div>
-</div>
-<div class="flex gap-2">
-<a class="flex-1 bg-stone-800/50 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-[#00FF41]/5 transition-all p-2 flex items-center justify-center gap-2 group" href="#">
-<svg class="w-3.5 h-3.5 fill-current text-stone-400 group-hover:text-[#00FF41]" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"/></svg>
-<span class="text-[9px] font-mono text-stone-400 group-hover:text-[#00FF41] uppercase tracking-tighter">X_FEED</span>
-</a>
-<a class="flex-1 bg-stone-800/50 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-[#00FF41]/5 transition-all p-2 flex items-center justify-center gap-2 group" href="#">
-<span class="material-symbols-outlined text-[16px] text-stone-400 group-hover:text-[#00FF41]">monitoring</span>
-<span class="text-[9px] font-mono text-stone-400 group-hover:text-[#00FF41] uppercase tracking-tighter">DEX_SCR</span>
-</a>
-</div>
-</div>
-<div class="flex flex-col">
-<a href="../security_clearance_access/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
-<span class="material-symbols-outlined text-sm">power_settings_new</span>
-<span class="font-['Inter'] text-[10px] uppercase tracking-widest">Emergency Purge</span>
-</a>
-</div>
-</div>
+  <button class="md:hidden absolute top-4 right-4 text-stone-400 hover:text-white" onclick="closeSidebar()" aria-label="Close menu">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+  <div>
+    <div class="px-6 mb-8">
+      <div class="text-lg font-black text-[#00FF41] font-headline">DISCLOSURE FILES</div>
+      <div class="font-['Inter'] text-[10px] uppercase tracking-widest text-stone-500 mt-1">TRUTH CANNOT BE CLASSIFIED</div>
+    </div>
+    <div class="flex flex-col w-full">
+      <a href="../global_surveillance_dashboard/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+        <span class="material-symbols-outlined text-sm">radar</span>
+        <span class="font-['Inter'] text-[10px] uppercase tracking-widest">Sightings Map</span>
+      </a>
+      <a href="#" class="flex items-center gap-4 bg-[#00FF41]/5 text-[#00FF41] border-l-2 border-[#00FF41] py-3 px-6 cursor-pointer transition-colors duration-100">
+        <span class="material-symbols-outlined text-sm">folder_open</span>
+        <span class="font-['Inter'] text-[10px] uppercase tracking-widest">The Files</span>
+      </a>
+      <a href="../incident_intel_case_412_x/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+        <span class="material-symbols-outlined text-sm">security</span>
+        <span class="font-['Inter'] text-[10px] uppercase tracking-widest">Nimitz Case</span>
+      </a>
+      <a href="../incident_reporting_interface/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-6 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+        <span class="material-symbols-outlined text-sm">database</span>
+        <span class="font-['Inter'] text-[10px] uppercase tracking-widest">Report a Sighting</span>
+      </a>
+    </div>
+  </div>
+  <div class="px-6 flex flex-col gap-4">
+    <button class="w-full bg-[#00FF41] text-[#003907] py-2 font-bold font-headline tracking-widest hover:bg-[#72ff70] transition-colors" onclick="window.location.href='../incident_reporting_interface/code.html'">SUBMIT A SIGHTING</button>
+    <div class="flex flex-col">
+      <a href="../security_clearance_access/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
+        <span class="material-symbols-outlined text-sm">power_settings_new</span>
+        <span class="font-['Inter'] text-[10px] uppercase tracking-widest">Return to Home</span>
+      </a>
+    </div>
+  </div>
 </nav>
+
 <!-- Main Content Area -->
 <main class="flex-1 md:ml-64 mt-14 md:mt-16 p-3 md:p-6 overflow-y-auto md:h-[calc(100vh-3.5rem)] flex flex-col gap-4 md:gap-6 pb-6">
-<!-- Header Section -->
-<header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
-<div>
-<div class="flex items-center gap-2 text-on-surface-variant font-mono text-[10px] mb-2 uppercase tracking-widest">
-<span>SYSTEM</span>
-<span class="material-symbols-outlined text-[12px]">chevron_right</span>
-<span>SENSORS</span>
-<span class="material-symbols-outlined text-[12px]">chevron_right</span>
-<span class="text-primary-fixed">CALIBRATION</span>
-</div>
-<h1 class="font-headline text-3xl md:text-4xl font-bold tracking-[0.1em] text-on-surface">SENSOR CALIBRATION PROTOCOL</h1>
-</div>
-<div class="flex items-center gap-3">
-<span class="px-2 py-1 bg-surface-container border border-outline-variant text-[10px] font-mono tracking-widest text-on-surface-variant">CLEARANCE LEVEL 5</span>
-<span class="px-2 py-1 bg-surface-container border border-error/30 text-[10px] font-mono tracking-widest text-error">CLASSIFIED</span>
-</div>
-</header>
-<!-- Main Layout Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-[500px]">
-<!-- Left Sidebar: Controls -->
-<section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-6 relative">
-<div class="absolute -top-3 -left-2 text-[10px] font-mono text-on-surface-variant/50 bg-background px-1">CTRL_PNL</div>
-<div class="flex flex-col gap-1 border-b border-outline-variant/20 pb-4">
-<h3 class="font-headline text-sm tracking-widest text-primary-fixed">SIGNAL TUNING</h3>
-<p class="font-mono text-[10px] text-on-surface-variant">ADJUST ARRAY PARAMETERS</p>
-</div>
-<!-- Sliders -->
-<div class="flex flex-col gap-5">
-<div class="flex flex-col gap-2">
-<div class="flex justify-between items-center font-mono text-xs">
-<label class="text-on-surface">GAIN CONTROL</label>
-<span id="gain-val" class="text-primary-fixed">42.5 dB</span>
-</div>
-<input class="w-full h-1 bg-surface-variant rounded-none appearance-none [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:w-3 [&amp;::-webkit-slider-thumb]:h-5 [&amp;::-webkit-slider-thumb]:bg-primary-container [&amp;::-webkit-slider-thumb]:cursor-pointer cursor-pointer" max="100" min="0" type="range" value="42.5"/>
-</div>
-<div class="flex flex-col gap-2">
-<div class="flex justify-between items-center font-mono text-xs">
-<label class="text-on-surface">FREQ OFFSET</label>
-<span id="freq-val" class="text-secondary-container">+1.04 MHz</span>
-</div>
-<input class="w-full h-1 bg-surface-variant rounded-none appearance-none [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:w-3 [&amp;::-webkit-slider-thumb]:h-5 [&amp;::-webkit-slider-thumb]:bg-secondary-container [&amp;::-webkit-slider-thumb]:cursor-pointer cursor-pointer" max="5" min="-5" step="0.01" type="range" value="1.04"/>
-</div>
-<div class="flex flex-col gap-2">
-<div class="flex justify-between items-center font-mono text-xs">
-<label class="text-on-surface">SIGNAL FILTERING</label>
-<span class="text-primary-fixed">HIGH PASS</span>
-</div>
-<select class="bg-surface-container border border-outline-variant/50 text-on-surface font-mono text-xs p-2 focus:ring-1 focus:ring-primary-container focus:border-primary-container outline-none rounded-none cursor-pointer appearance-none">
-<option>LOW PASS</option>
-<option selected="">HIGH PASS</option>
-<option>BAND PASS</option>
-<option>NOTCH</option>
-</select>
-</div>
-</div>
-<!-- Contract Info (Repurposed for UI consistency) -->
-<div class="mt-auto pt-4 border-t border-outline-variant/20">
-<p class="font-mono text-[10px] text-on-surface-variant mb-2">SYSTEM IDENTIFIER</p>
-<div class="flex items-center justify-between bg-surface-container border border-outline-variant/30 p-2 font-mono text-[10px] text-on-surface break-all">
-<span>0x7F2a...98B4</span>
-<span class="material-symbols-outlined text-[14px] cursor-pointer hover:text-primary-fixed">content_copy</span>
-</div>
-<div class="flex gap-2 mt-3">
-<button class="flex-1 bg-surface-container border border-outline-variant/30 py-1.5 text-[10px] font-mono hover:bg-surface-variant hover:text-primary-fixed transition-colors flex justify-center items-center gap-1">
-<span>EXT_LNK_1</span>
-</button>
-<button class="flex-1 bg-surface-container border border-outline-variant/30 py-1.5 text-[10px] font-mono hover:bg-surface-variant hover:text-primary-fixed transition-colors flex justify-center items-center gap-1">
-<span>EXT_LNK_2</span>
-</button>
-</div>
-</div>
-</section>
-<!-- Central Visualization -->
-<section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col overflow-hidden min-h-[300px]">
-<!-- Stamp -->
-<div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none overflow-hidden z-0">
-<span class="font-headline text-8xl font-black tracking-tighter text-on-surface transform -rotate-12 whitespace-nowrap">TOP SECRET</span>
-</div>
-<div class="absolute top-2 left-2 flex gap-2 z-10">
-<span class="px-2 py-0.5 bg-primary-fixed-dim/20 text-primary-fixed border border-primary-fixed/30 font-mono text-[10px]">LIVE FEED</span>
-<span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">FREQ_SPECTROGRAM</span>
-</div>
-<!-- Abstract Visualization Area (CSS gradient based) -->
-<div class="flex-1 relative bg-surface-dim mt-8 mx-2 mb-2 border border-outline-variant/20 flex items-center justify-center z-10" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, #3b4b3720 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, #3b4b3720 20px);">
-<!-- Waveform representation using gradients and borders -->
-<div class="absolute inset-0 bg-gradient-to-t from-primary-fixed/5 via-primary-fixed/10 to-transparent opacity-50"></div>
-<div class="w-full h-1/2 flex items-end justify-center px-4 gap-1 opacity-70">
-<!-- Simulated Spectrogram Bars -->
-<div id="spec-bars" class="w-full h-full flex items-end gap-1">
-<div class="flex-1 bg-primary-fixed" style="height: 20%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 35%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 15%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 60%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 85%;"></div>
-<div class="flex-1 bg-primary-container" style="height: 100%;"></div>
-<div class="flex-1 bg-primary-container" style="height: 90%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 50%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 30%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 25%;"></div>
-<div class="flex-1 bg-secondary-container" style="height: 40%;"></div>
-<div class="flex-1 bg-primary-fixed" style="height: 10%;"></div>
-</div>
-</div>
-<!-- Scanner line -->
-<div class="scanner-line absolute top-0 bottom-0 w-px bg-primary-container shadow-[0_0_10px_#00ff41]"></div>
-<!-- Grid labels -->
-<div class="absolute bottom-1 left-2 font-mono text-[8px] text-outline">0 MHz</div>
-<div class="absolute bottom-1 right-2 font-mono text-[8px] text-outline">100 MHz</div>
-<div class="absolute top-2 left-2 font-mono text-[8px] text-outline">+10 dB</div>
-<div class="absolute bottom-6 left-2 font-mono text-[8px] text-outline">-90 dB</div>
-</div>
-</section>
-<!-- Right Sidebar: Diagnostics -->
-<section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4">
-<div class="flex flex-col gap-1 border-b border-outline-variant/20 pb-4">
-<h3 class="font-headline text-sm tracking-widest text-on-surface">DIAGNOSTIC STATUS</h3>
-<p class="font-mono text-[10px] text-on-surface-variant">ARRAY TELEMETRY</p>
-</div>
-<div class="flex flex-col gap-3">
-<!-- Status Item 1 -->
-<div class="bg-surface-container p-3 border-l-2 border-primary-container">
-<div class="flex justify-between items-start mb-1">
-<span class="font-mono text-[10px] text-on-surface-variant">ARRAY ALPHA</span>
-<span class="px-1.5 py-0.5 bg-primary-container/10 text-primary-fixed font-mono text-[9px] tracking-widest">OK</span>
-</div>
-<div class="font-mono text-xs text-on-surface">ONLINE / CALIBRATING</div>
-</div>
-<!-- Status Item 2 -->
-<div class="bg-surface-container p-3 border-l-2 border-outline-variant">
-<div class="flex justify-between items-start mb-1">
-<span class="font-mono text-[10px] text-on-surface-variant">SYNC DELTA</span>
-</div>
-<div class="font-mono text-sm text-secondary-container"><span id="sync-delta">0.002ms</span></div>
-</div>
-<!-- Status Item 3 -->
-<div class="bg-surface-container p-3 border-l-2 border-outline-variant">
-<div class="flex justify-between items-start mb-1">
-<span class="font-mono text-[10px] text-on-surface-variant">INTERFERENCE LVL</span>
-</div>
-<div class="font-mono text-sm text-primary-fixed"><span id="interf-label">LOW</span></div>
-<div class="w-full bg-surface-variant h-1 mt-2">
-<div id="interf-bar" class="bg-primary-fixed h-full" style="width: 15%"></div>
-</div>
-<div class="font-mono text-xs text-on-surface-variant mt-1"><span id="interf-pct">15%</span></div>
-</div>
-</div>
-<!-- Log Snippet -->
-<div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative" style="min-height: 6rem;">
-<div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
-<div id="sys-log" class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80 flex flex-col">
-<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; INIT CALIBRATION SEQ...</div>
-<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; ALIGNING SENSOR ALPHA... [DONE]</div>
-<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; CHECKING SYNC... DELTA 0.002ms</div>
-<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; FILTERING FREQUENCIES...</div>
-</div>
-</div>
-</section>
-</div>
-<!-- Footer / Action Area -->
-<footer class="bg-surface-container border border-outline-variant/30 p-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative overflow-hidden">
-<!-- Ambient Glow behind button -->
-<div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] pointer-events-none"></div>
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed animate-pulse">check_circle</span>
-<span class="font-mono text-sm tracking-widest text-primary-fixed">CALIBRATION COMPLETE</span>
-</div>
-<button class="bg-gradient-to-r from-primary-fixed to-primary-container text-on-primary font-headline font-bold text-sm px-8 py-3 tracking-widest hover:opacity-90 transition-opacity flex items-center gap-2 rounded-none border-none cursor-pointer">
-                APPLY SETTINGS
-                <span class="material-symbols-outlined text-[18px]">publish</span>
-</button>
-</footer>
+
+  <!-- Header Section -->
+  <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/30 pb-4">
+    <div>
+      <div class="flex items-center gap-2 text-on-surface-variant font-mono text-[10px] mb-2 uppercase tracking-widest">
+        <span>HOME</span>
+        <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+        <span>RESEARCH</span>
+        <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+        <span class="text-primary-fixed">THE FILES</span>
+      </div>
+      <h1 class="font-headline text-3xl md:text-4xl font-bold tracking-[0.1em] text-on-surface">THE FILES</h1>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="px-2 py-1 bg-surface-container border border-outline-variant text-[10px] font-mono tracking-widest text-on-surface-variant">INDEPENDENT RESEARCH ARCHIVE</span>
+      <span class="px-2 py-1 bg-surface-container border border-primary-container/30 text-[10px] font-mono tracking-widest text-primary-container">UPDATED: <span id="files-clock">--:--:-- UTC</span></span>
+    </div>
+  </header>
+
+  <!-- Main Layout Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-[500px]">
+
+    <!-- Left Sidebar: Filter Controls -->
+    <section class="lg:col-span-3 flex flex-col gap-6 relative">
+      <div class="absolute -top-3 -left-2 text-[10px] font-mono text-on-surface-variant/50 bg-background px-1">CTRL_PNL</div>
+
+      <div class="bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4">
+        <div class="text-[10px] font-headline font-bold text-on-surface uppercase tracking-[0.2em]">FILTER BY CATEGORY</div>
+
+        <!-- Filter buttons -->
+        <div class="flex flex-col gap-1">
+          <button onclick="filterArticles('all')" id="filter-all" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest bg-primary-container/10 text-primary-container border-l-2 border-primary-container transition-colors">ALL FILES <span class="float-right">12</span></button>
+          <button onclick="filterArticles('whistleblower')" id="filter-whistleblower" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">WHISTLEBLOWERS <span class="float-right">2</span></button>
+          <button onclick="filterArticles('crash')" id="filter-crash" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">CRASH RETRIEVALS <span class="float-right">2</span></button>
+          <button onclick="filterArticles('missing')" id="filter-missing" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MISSING RESEARCHERS <span class="float-right">3</span></button>
+          <button onclick="filterArticles('coverup')" id="filter-coverup" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">GOVT COVER-UPS <span class="float-right">2</span></button>
+          <button onclick="filterArticles('sighting')" id="filter-sighting" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MASS SIGHTINGS <span class="float-right">1</span></button>
+          <button onclick="filterArticles('evidence')" id="filter-evidence" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">PHYSICAL EVIDENCE <span class="float-right">2</span></button>
+        </div>
+
+        <!-- Search -->
+        <div class="border-t border-outline-variant/20 pt-4">
+          <div class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mb-2">KEYWORD SEARCH</div>
+          <input oninput="searchArticles(this.value)" placeholder="Search files..." class="w-full bg-transparent border-b border-surface-variant text-on-surface font-mono text-xs py-2 focus:outline-none focus:border-primary-container placeholder:text-on-surface-variant/30 uppercase" />
+        </div>
+
+        <!-- Featured researcher card -->
+        <div class="border-t border-outline-variant/20 pt-4">
+          <div class="text-[9px] font-mono text-on-surface-variant uppercase tracking-widest mb-3">FEATURED RESEARCHER</div>
+          <div class="bg-surface-container border-l-2 border-primary-container p-3">
+            <div class="font-headline text-sm font-bold text-on-surface">David Grusch</div>
+            <div class="font-mono text-[9px] text-on-surface-variant mt-1">Pentagon Intelligence Officer</div>
+            <div class="flex items-center gap-1 mt-2 font-mono text-[9px] text-primary-container">
+              <span class="w-1.5 h-1.5 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
+              ACTIVE — 2023
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Central Content: Article Grid -->
+    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col overflow-hidden min-h-[300px]">
+      <!-- Watermark -->
+      <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none overflow-hidden z-0">
+        <span class="font-headline text-8xl font-black tracking-tighter text-on-surface transform -rotate-12 whitespace-nowrap">TOP SECRET</span>
+      </div>
+      <!-- Panel header tabs -->
+      <div class="absolute top-2 left-2 flex gap-2 z-10">
+        <span class="px-2 py-0.5 bg-primary-fixed-dim/20 text-primary-fixed border border-primary-fixed/30 font-mono text-[10px]">RESEARCH ARCHIVE</span>
+        <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">12 DOCUMENTS</span>
+      </div>
+
+      <div id="article-grid" class="p-4 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto flex-1 z-10">
+
+        <!-- CARD 1 -->
+        <div class="article-card" data-cat="whistleblower">
+          <div class="bg-surface-container border border-outline-variant/20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WHISTLEBLOWER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">1989 / 2016</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Bob Lazar: S-4 Facility — Element 115 and Gravity Drive Propulsion</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Former Los Alamos physicist describes nine alien craft at Papoose Lake. Claims propulsion used element 115 — Moscovium added to periodic table in 2016, corroborating his 1989 testimony.</p>
+            <a href="https://www.popularmechanics.com/military/research/a24489/bob-lazar-element-115/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="article-card" data-cat="whistleblower">
+          <div class="bg-surface-container border border-outline-variant/20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WHISTLEBLOWER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JUL 2023</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">David Grusch: The Congressional Testimony That Changed Everything</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Pentagon intelligence officer testifies under oath before House Oversight Committee, July 26 2023. Claims non-human biologics recovered and crash retrieval programs exist.</p>
+            <a href="https://apnews.com/article/ufo-congressional-hearing-military-whistleblower-a6b9b7c8b8f2" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="article-card" data-cat="missing">
+          <div class="bg-surface-container border border-error-container/20 p-4 flex flex-col gap-3 h-full hover:border-error-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-error-container bg-error-container/10 px-2 py-0.5">MISSING RESEARCHER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JAN 1996</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Philip Schneider: The Dulce Base Firefight — Dead 11 Months After Going Public</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Military engineer claimed to survive underground battle with alien entities at Dulce, NM. Found dead January 1996, ruled suicide. Had spoken at 30 public events warning about government cover-up.</p>
+            <a href="https://www.theguardian.com/world/2016/oct/17/max-spiers-conspiracy-theorist-death" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="article-card" data-cat="coverup">
+          <div class="bg-surface-container border border-secondary-container/20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">GOVT COVER-UP</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">1952</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">The Majestic 12 Documents: Fake, Leaked, or Both?</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Documents allege a Truman-era secret committee managing UFO crash retrievals. FBI authenticated the paper stock as period-correct but cannot verify content. Neither confirmed nor denied.</p>
+            <a href="https://www.archives.gov/news/articles/majestic-12" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="article-card" data-cat="missing">
+          <div class="bg-surface-container border border-error-container/20 p-4 flex flex-col gap-3 h-full hover:border-error-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-error-container bg-error-container/10 px-2 py-0.5">MISSING RESEARCHER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">APR 1959</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Morris K. Jessup: The Man Who Knew Too Much</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Author of 'The Case for the UFO.' Found dead in his car, April 20 1959. Carbon monoxide — ruled suicide. His annotated copy of his own book had been secretly sent to Naval Intelligence months prior.</p>
+            <a href="https://en.wikipedia.org/wiki/Morris_K._Jessup" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="article-card" data-cat="missing">
+          <div class="bg-surface-container border border-error-container/20 p-4 flex flex-col gap-3 h-full hover:border-error-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-error-container bg-error-container/10 px-2 py-0.5">MISSING RESEARCHER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JUL 2016</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Max Spiers: Found Dead in Poland — The Last Voicemail</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">UFO researcher investigating US military black sites in Europe. Found dead in Warsaw, July 2016. Cause: "natural causes." His final voicemail to his mother: "If anything happens to me, investigate."</p>
+            <a href="https://www.theguardian.com/world/2016/oct/17/max-spiers-conspiracy-theorist-death" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 7 -->
+        <div class="article-card" data-cat="coverup">
+          <div class="bg-surface-container border border-secondary-container/20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">GOVT COVER-UP</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2001–2002</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Gary McKinnon: What He Found on NASA's Servers Before They Deleted It</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Scottish hacker accessed NASA and US military systems. Claims to have found files listing "non-terrestrial officers" and an off-world fleet with ship names and transfer logs. Files were deleted during his access.</p>
+            <a href="https://www.bbc.com/news/uk-scotland-40498548" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 8 -->
+        <div class="article-card" data-cat="sighting">
+          <div class="bg-surface-container border border-secondary-container/20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">MASS SIGHTING</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">MAR 1997</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">The Phoenix Lights: Governor Fife Symington Admits He Saw It Too</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">March 13, 1997. V-shaped craft over a mile wide flew silently over Phoenix. 10,000+ witnesses. Governor held a joke press conference — then admitted years later: "I saw a craft that did not come from planet Earth."</p>
+            <a href="https://www.nbcnews.com/id/wbna17879108" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 9 -->
+        <div class="article-card" data-cat="evidence">
+          <div class="bg-surface-container border border-outline-variant/20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WITNESS TESTIMONY</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">MAY 2001</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">The Disclosure Project: 500 Government Witnesses Who Cannot All Be Lying</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Dr. Steven Greer's 2001 National Press Club event: 20 government, military and intelligence witnesses on record. 500 sworn testimonies collected. Formal Congressional hearings: never held.</p>
+            <a href="https://disclosureproject.org" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 10 -->
+        <div class="article-card" data-cat="crash">
+          <div class="bg-surface-container border border-error-container/20 p-4 flex flex-col gap-3 h-full hover:border-error-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-error-container bg-error-container/10 px-2 py-0.5">CRASH RETRIEVAL</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JUL 1947</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Roswell 1947: The Three Press Releases and the Colonel Who Changed His Story</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">July 8, 1947: RAAF Lt. Walter Haut issues official press release confirming "flying disc" recovery. Retracted within 24 hours. Haut's sealed affidavit opened after his 2005 death: "It was not a weather balloon."</p>
+            <a href="https://www.history.com/news/roswell-ufo-sighting-what-really-happened" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 11 -->
+        <div class="article-card" data-cat="crash">
+          <div class="bg-surface-container border border-outline-variant/20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">MILITARY CASE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">DEC 1980</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">The Rendlesham Forest Incident: Colonel Halt's Classified Memo</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">December 1980, RAF Bentwaters. Multiple USAF personnel encounter a landed craft in Rendlesham Forest over two nights. Deputy Base Commander Lt. Col. Charles Halt files classified memo. UK MoD declassified 2001.</p>
+            <a href="https://www.nationalarchives.gov.uk/ufos/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 12 -->
+        <div class="article-card" data-cat="evidence">
+          <div class="bg-surface-container border border-primary-container/20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">PHYSICAL EVIDENCE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2016</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Element 115 Confirmed: Bob Lazar Vindicated by the Periodic Table</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">In 1989 Lazar described propulsion systems using element 115 as fuel. Scientists said no such element existed. Moscovium (element 115) was synthesized in 2003 and officially named and added to the table in 2016.</p>
+            <a href="https://iupac.org/iupac-announces-the-names-of-the-elements-113-115-117-and-118/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Right Sidebar: Key Figures + SYS_LOG -->
+    <section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4">
+      <div class="flex flex-col gap-1 border-b border-outline-variant/20 pb-4">
+        <h3 class="font-headline text-sm tracking-widest text-on-surface">KEY FIGURES</h3>
+        <p class="font-mono text-[10px] text-on-surface-variant">PERSONS OF INTEREST</p>
+      </div>
+
+      <!-- Grusch -->
+      <div class="border-l-2 border-primary-container bg-surface-container p-3 mb-0">
+        <div class="font-headline text-sm font-bold text-on-surface">David Grusch</div>
+        <div class="font-mono text-[9px] text-on-surface-variant mt-0.5">Pentagon Intelligence Officer</div>
+        <div class="flex items-center gap-1 mt-1 font-mono text-[9px] text-primary-container">
+          <span class="w-1.5 h-1.5 bg-primary-container animate-pulse" style="border-radius:50%;"></span> ACTIVE
+        </div>
+      </div>
+
+      <!-- Lazar -->
+      <div class="border-l-2 border-primary-container bg-surface-container p-3 mb-0">
+        <div class="font-headline text-sm font-bold text-on-surface">Bob Lazar</div>
+        <div class="font-mono text-[9px] text-on-surface-variant mt-0.5">S-4 Physicist (claimed)</div>
+        <div class="flex items-center gap-1 mt-1 font-mono text-[9px] text-primary-container">
+          <span class="w-1.5 h-1.5 bg-primary-container animate-pulse" style="border-radius:50%;"></span> ACTIVE
+        </div>
+      </div>
+
+      <!-- Schneider -->
+      <div class="border-l-2 border-error-container bg-surface-container p-3 mb-4">
+        <div class="font-headline text-sm font-bold text-on-surface">Philip Schneider</div>
+        <div class="font-mono text-[9px] text-on-surface-variant mt-0.5">Military Engineer / Whistleblower</div>
+        <div class="flex items-center gap-1 mt-1 font-mono text-[9px] text-error-container">
+          <span class="w-1.5 h-1.5 bg-error-container" style="border-radius:50%;"></span> DECEASED 1996
+        </div>
+      </div>
+
+      <!-- SYS_LOG -->
+      <div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative flex-1" style="min-height: 8rem;">
+        <div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
+        <div id="sys-log" class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80 flex flex-col">
+          <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Archive initialized. 12 documents indexed.</div>
+          <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Grusch testimony on record — Jul 26, 2023.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer Action Bar -->
+  <footer class="bg-surface-container border border-outline-variant/30 p-4 flex flex-col sm:flex-row justify-between items-center gap-4 relative overflow-hidden">
+    <div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] pointer-events-none"></div>
+    <div class="flex items-center gap-3">
+      <span class="w-2 h-2 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
+      <span class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">ARCHIVE STATUS: 12 DOCUMENTS INDEXED</span>
+    </div>
+    <a href="../incident_reporting_interface/code.html" class="bg-primary-container text-on-primary font-headline font-bold uppercase tracking-[0.2em] px-6 py-3 text-xs flex items-center gap-2 hover:opacity-90 transition-opacity">
+      <span class="material-symbols-outlined text-sm">send</span>
+      SUBMIT A CASE
+    </a>
+  </footer>
+
 </main>
+
 <script>
+// Mobile sidebar
 function openSidebar() {
-  document.getElementById('sidebar').style.transform = 'translateX(0)';
+  document.getElementById('sidebar').classList.remove('-translate-x-full');
   document.getElementById('sidebar-backdrop').classList.remove('hidden');
 }
 function closeSidebar() {
-  document.getElementById('sidebar').style.transform = '';
+  document.getElementById('sidebar').classList.add('-translate-x-full');
   document.getElementById('sidebar-backdrop').classList.add('hidden');
 }
-</script>
-<script>
-// CHANGE 1: Animate spectrogram bars
-function animateSpectrogram() {
-  const container = document.getElementById('spec-bars');
-  if (!container) return;
-  const bars = container.querySelectorAll('div');
-  bars.forEach(bar => {
-    const min = 8, max = 100;
-    bar.style.height = (min + Math.random() * (max - min)) + '%';
+
+// Category filter
+function filterArticles(cat) {
+  document.querySelectorAll('.article-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
   });
-  setTimeout(animateSpectrogram, 380 + Math.random() * 80);
+  document.querySelectorAll('[id^="filter-"]').forEach(btn => {
+    btn.className = btn.className.replace('bg-primary-container/10 text-primary-container border-l-2 border-primary-container', '');
+    btn.classList.add('text-stone-400', 'hover:bg-stone-800/50', 'hover:text-stone-200');
+  });
+  const active = document.getElementById('filter-' + cat);
+  if (active) {
+    active.classList.remove('text-stone-400', 'hover:bg-stone-800/50', 'hover:text-stone-200');
+    active.classList.add('bg-primary-container/10', 'text-primary-container', 'border-l-2', 'border-primary-container');
+  }
 }
-animateSpectrogram();
 
-// CHANGE 3: Live SYNC DELTA readout
-setInterval(() => {
-  const el = document.getElementById('sync-delta');
-  if (el) el.textContent = (0.001 + Math.random() * 0.008).toFixed(3) + 'ms';
-}, 2000);
+// Keyword search
+function searchArticles(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.article-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(q) ? '' : 'none';
+  });
+}
 
-// CHANGE 4: Live INTERFERENCE LVL
-let interfPct = 15;
-setInterval(() => {
-  interfPct = Math.max(8, Math.min(40, interfPct + (Math.random() - 0.45) * 5));
-  const pct = Math.round(interfPct);
-  const el_label = document.getElementById('interf-label');
-  const el_pct = document.getElementById('interf-pct');
-  const el_bar = document.getElementById('interf-bar');
-  if (el_label) el_label.textContent = pct < 20 ? 'LOW' : 'MODERATE';
-  if (el_pct) el_pct.textContent = pct + '%';
-  if (el_bar) el_bar.style.width = pct + '%';
-}, 3000);
-
-// CHANGE 5: Live GAIN CONTROL value drift
-let gainVal = 42.5;
-setInterval(() => {
-  gainVal = Math.max(38, Math.min(47, gainVal + (Math.random() - 0.5) * 0.8));
-  const el = document.getElementById('gain-val');
-  if (el) el.textContent = gainVal.toFixed(1) + ' dB';
-}, 3500);
-
-// CHANGE 6: Live FREQ OFFSET value drift
-let freqVal = 1.04;
-setInterval(() => {
-  freqVal = Math.max(-2, Math.min(3, freqVal + (Math.random() - 0.5) * 0.05));
-  const el = document.getElementById('freq-val');
-  if (el) el.textContent = (freqVal >= 0 ? '+' : '') + freqVal.toFixed(2) + ' MHz';
-}, 4000);
-
-// CHANGE 7: System log streaming
-const SYS_LOG_POOL = [
-  'Array re-sync complete. Delta within tolerance.',
-  'New interference source detected on channel 7. Filtering applied.',
-  'Gain auto-adjusted by +0.3 dB. Array ALPHA compensating.',
-  'Calibration cycle 14 of 20 complete. No anomalies.',
-  'Carrier frequency lock confirmed at 433.92 MHz.',
-  'Background noise floor recalculated: -94.2 dBm.',
-  'Array BETA phase alignment verified. Offset: 0.001°.',
-  'Signal burst detected at 14.256 GHz — flagging for review.',
-  'Thermal drift compensation applied to sensor array 3–6.',
-  'Secondary verification sweep complete. All nodes nominal.',
-];
-function addSysLog() {
-  const log = document.getElementById('sys-log');
-  if (!log) return;
-  const msg = SYS_LOG_POOL[Math.floor(Math.random() * SYS_LOG_POOL.length)];
+// Live files clock
+function updateFilesClock() {
   const now = new Date();
   const t = [now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()].map(n => String(n).padStart(2,'0')).join(':');
-  const row = document.createElement('div');
-  row.className = 'text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1';
-  row.innerHTML = `<span class="text-stone-600 mr-2">${t}Z</span>${msg}`;
-  log.prepend(row);
-  while (log.children.length > 8) log.removeChild(log.lastChild);
-  setTimeout(addSysLog, 10000 + Math.random() * 5000);
+  const el = document.getElementById('files-clock');
+  if (el) el.textContent = t + ' UTC';
 }
-addSysLog();
+updateFilesClock();
+setInterval(updateFilesClock, 1000);
+
+// SYS_LOG streaming
+const SYS_LOG_POOL = [
+  'Pentagon UAP report: 510 new unexplained incidents logged in 2023.',
+  'US Navy authenticates FLIR1 Tic-Tac footage — Apr 27, 2020.',
+  'Grusch testimony: non-human biologics recovered — Jul 26, 2023.',
+  'NASA UAP study group established — Oct 2022.',
+  'Element 115 (Moscovium) officially named — IUPAC 2016.',
+  'UK MoD releases 18 volumes of UFO files — 2009–2013.',
+  'Chilean Navy UAP video released — CEFAA official acknowledgment 2017.',
+  'Ex-CIA Director Woolsey: UAP are real and not ours — 2014.',
+];
+let sysLogIdx = 0;
+function addFilesSysLog() {
+  const container = document.getElementById('sys-log');
+  if (!container) return;
+  const msg = SYS_LOG_POOL[sysLogIdx % SYS_LOG_POOL.length];
+  sysLogIdx++;
+  const now = new Date();
+  const t = [now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()].map(n => String(n).padStart(2,'0')).join(':');
+  const entry = document.createElement('div');
+  entry.className = 'font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5';
+  entry.innerHTML = `<span class="text-primary-container/60">${t}</span> ${msg}`;
+  container.insertBefore(entry, container.firstChild);
+  while (container.children.length > 8) container.removeChild(container.lastChild);
+}
+setInterval(addFilesSysLog, 12000);
+// Kick off first log entry shortly after load
+setTimeout(addFilesSysLog, 3000);
 </script>
 </body></html>
