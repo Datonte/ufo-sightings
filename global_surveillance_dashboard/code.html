@@ -218,6 +218,9 @@
     <span class="text-stone-500">SPEED</span><span id="sig-vel" class="text-on-surface">---</span>
     <span class="text-stone-500">DATE</span><span id="sig-first" class="text-on-surface">---</span>
   </div>
+  <div class="mt-2 pt-2 border-t border-[#00FF41]/20 font-mono text-[9px] text-[#00FF41]/60 flex items-center gap-1">
+    <span>▶</span><span>CLICK TO READ FILE</span>
+  </div>
 </div>
 <!-- Map UI Overlay -->
 <div class="absolute top-4 right-4 flex flex-col gap-2">
@@ -601,6 +604,7 @@
     raycaster.setFromCamera(mouse2d, camera);
     const hits = raycaster.intersectObjects(markers);
     if (hits.length) {
+      container.style.cursor = 'pointer';
       const s = hits[0].object.userData;
       const hexColor = '#' + s.color.toString(16).padStart(6,'0');
       document.getElementById('sig-dot').style.background = hexColor;
@@ -616,10 +620,130 @@
       document.getElementById('sig-first').textContent = s.first;
       infoEl.style.display = 'block';
     } else {
+      container.style.cursor = 'default';
       infoEl.style.display = 'none';
     }
   });
-  container.addEventListener('mouseleave', () => { if (infoEl) infoEl.style.display = 'none'; });
+  container.addEventListener('mouseleave', () => { if (infoEl) infoEl.style.display = 'none'; container.style.cursor = 'default'; });
+
+  // URL map — click any globe dot to open its source
+  const sightingUrls = {
+    'ROSWELL-1947':      'https://en.wikipedia.org/wiki/Roswell_incident',
+    'PHOENIX-1997':      'https://en.wikipedia.org/wiki/Phoenix_Lights',
+    'SKINWALKER':        'https://en.wikipedia.org/wiki/Skinwalker_Ranch',
+    'NIMITZ-2004':       'https://en.wikipedia.org/wiki/USS_Nimitz_UFO_incident',
+    'AREA51-S4':         'https://en.wikipedia.org/wiki/Area_51',
+    'OHARE-2006':        'https://en.wikipedia.org/wiki/2006_O%27Hare_International_Airport_UFO_sighting',
+    'GULFBREEZE-1987':   'https://en.wikipedia.org/wiki/Gulf_Breeze_UFO_incident',
+    'MCMINNVILLE-1950':  'https://en.wikipedia.org/wiki/McMinnville_UFO_photographs',
+    'STEPHENVILLE-2008': 'https://en.wikipedia.org/wiki/Stephenville_lights',
+    'KECKSBURG-1965':    'https://en.wikipedia.org/wiki/Kecksburg_UFO_incident',
+    'JAL1628-1986':      'https://en.wikipedia.org/wiki/Japan_Air_Lines_flight_1628_incident',
+    'LUBBOCK-1951':      'https://en.wikipedia.org/wiki/Lubbock_Lights',
+    'MANTELL-1948':      'https://en.wikipedia.org/wiki/Mantell_UFO_incident',
+    'BROADHAVEN-1977':   'https://en.wikipedia.org/wiki/Broad_Haven_UFO_sightings',
+    'AUTEC-USO':         'https://en.wikipedia.org/wiki/Atlantic_Underwater_Test_and_Evaluation_Center',
+    'HUDSONVALLEY':      'https://en.wikipedia.org/wiki/Hudson_Valley_UFO_sightings',
+    'SANDIEGO-NAVY':     'https://en.wikipedia.org/wiki/USS_Nimitz_UFO_incident',
+    'LEVELLAND-1957':    'https://en.wikipedia.org/wiki/Levelland_UFO_case',
+    'NMCORRIDOR':        'https://en.wikipedia.org/wiki/Roswell_incident',
+    'YAKIMA':            'https://en.wikipedia.org/wiki/Yakima_Indian_Reservation',
+    'WASHDC-1952':       'https://en.wikipedia.org/wiki/1952_Washington,_D.C._UFO_incident',
+    'SOCORRO-1964':      'https://en.wikipedia.org/wiki/Socorro_UFO_incident',
+    'MALMSTROM-1967':    'https://en.wikipedia.org/wiki/Malmstrom_Air_Force_Base_UFO_incident',
+    'MINOT-1968':        'https://en.wikipedia.org/wiki/Minot_AFB_UFO_incident',
+    'HILL-1961':         'https://en.wikipedia.org/wiki/Barney_and_Betty_Hill_incident',
+    'WALTON-1975':       'https://en.wikipedia.org/wiki/Travis_Walton_incident',
+    'CASH-LANDRUM-1980': 'https://en.wikipedia.org/wiki/Cash%E2%80%93Landrum_incident',
+    'KELLY-1955':        'https://en.wikipedia.org/wiki/Kelly%E2%80%93Hopkinsville_encounter',
+    'FLATWOODS-1952':    'https://en.wikipedia.org/wiki/Flatwoods_monster',
+    'EXETER-1965':       'https://en.wikipedia.org/wiki/Exeter_incident',
+    'MAURY-1947':        'https://en.wikipedia.org/wiki/Maury_Island_incident',
+    'MOTHMAN-1966':      'https://en.wikipedia.org/wiki/Mothman',
+    'PORTAGE-1966':      'https://en.wikipedia.org/wiki/Portage_County_UFO_chase',
+    'DELPHOS-1971':      'https://en.wikipedia.org/wiki/Delphos_UFO_incident',
+    'COYNE-1973':        'https://en.wikipedia.org/wiki/Coyne_UFO_incident',
+    'GORMAN-1948':       'https://en.wikipedia.org/wiki/Gorman_dogfight',
+    'PIEDMONT-1973':     'https://en.wikipedia.org/wiki/Piedmont,_Missouri',
+    'PASCAGOULA-1973':   'https://en.wikipedia.org/wiki/Pascagoula_Abduction',
+    'ARNOLD-1947':       'https://en.wikipedia.org/wiki/Kenneth_Arnold_UFO_sighting',
+    'MARIANA-1950':      'https://en.wikipedia.org/wiki/Mariana_UFO_incident',
+    'TREMONTON-1952':    'https://en.wikipedia.org/wiki/Tremonton_UFO_film',
+    'SALEM-PHOTO-1952':  'https://en.wikipedia.org/wiki/Salem,_Massachusetts_UFO_photograph',
+    'LAKEERIE':          'https://en.wikipedia.org/wiki/Lake_Erie_UFO_sightings',
+    'EDWARDS-1965':      'https://en.wikipedia.org/wiki/Edwards_Air_Force_Base',
+    'HOLLOMAN-1964':     'https://en.wikipedia.org/wiki/Holloman_Air_Force_Base',
+    'WHITESANDS':        'https://en.wikipedia.org/wiki/White_Sands_Missile_Range',
+    'GULFMEXICO-USO':    'https://en.wikipedia.org/wiki/Unidentified_submerged_object',
+    'MTRAINIER-1947':    'https://en.wikipedia.org/wiki/Kenneth_Arnold_UFO_sighting',
+    'RENDLESHAM-1980':   'https://en.wikipedia.org/wiki/Rendlesham_Forest_incident',
+    'BELGIUM-1989':      'https://en.wikipedia.org/wiki/Belgian_UFO_wave',
+    'LAKENHEATH-1956':   'https://en.wikipedia.org/wiki/1956_Lakenheath-Bentwaters_incident',
+    'ALDERNEY-2007':     'https://en.wikipedia.org/wiki/2007_Alderney_UFO_sighting',
+    'TRANS-EN-PROVENCE': 'https://en.wikipedia.org/wiki/Trans-en-Provence_case',
+    'VALENSOLE-1965':    'https://en.wikipedia.org/wiki/Valensole_UFO_incident',
+    'CERGY-1979':        'https://en.wikipedia.org/wiki/Cergy-Pontoise_abduction',
+    'CANARY-1976':       'https://en.wikipedia.org/wiki/Canary_Islands_UFO_sighting',
+    'FATIMA-1917':       'https://en.wikipedia.org/wiki/Miracle_of_the_Sun',
+    'IMJARVI-1970':      'https://en.wikipedia.org/wiki/Im%C3%A4rvi_UFO_incident',
+    'BALTICSEA-2011':    'https://en.wikipedia.org/wiki/Baltic_Sea_anomaly',
+    'NORTHSEA':          'https://en.wikipedia.org/wiki/Unidentified_submerged_object',
+    'ICELAND':           'https://en.wikipedia.org/wiki/UFO_sightings_in_Iceland',
+    'NORWAY-SPIRAL-2009':'https://en.wikipedia.org/wiki/2009_Norwegian_spiral_anomaly',
+    'CONISTON-1954':     'https://en.wikipedia.org/wiki/Coniston_UFO_photograph',
+    'VORONEZH-1989':     'https://en.wikipedia.org/wiki/Voronezh_incident',
+    'MOSCOW-SIGHTING':   'https://en.wikipedia.org/wiki/UFO_sightings_in_Russia',
+    'TUNGUSKA-1908':     'https://en.wikipedia.org/wiki/Tunguska_event',
+    'DYATLOV-1959':      'https://en.wikipedia.org/wiki/Dyatlov_Pass_incident',
+    'PETROZAVODSK-1977': 'https://en.wikipedia.org/wiki/Petrozavodsk_phenomenon',
+    'VARGINHA-1996':     'https://en.wikipedia.org/wiki/Varginha_incident',
+    'COLARES-1977':      'https://en.wikipedia.org/wiki/Colares_UFO_flap',
+    'SAOPAULONIGHT-1986':'https://en.wikipedia.org/wiki/Night_of_the_UFOs',
+    'VILASBOAS-1957':    'https://en.wikipedia.org/wiki/Ant%C3%B4nio_Villas-Boas_incident',
+    'UBATUBA-1957':      'https://en.wikipedia.org/wiki/Ubatuba_UFO_incident',
+    'ITAIPU-1957':       'https://en.wikipedia.org/wiki/Fort_Itaipu_UFO_incident',
+    'TRINDADE-1958':     'https://en.wikipedia.org/wiki/Trindade_Island_UFO_case',
+    'CARACAS-1954':      'https://en.wikipedia.org/wiki/1954_Venezuelan_UFO_wave',
+    'ARGENTINA-1965':    'https://en.wikipedia.org/wiki/UFO_sightings_in_Argentina',
+    'CHILE-2000':        'https://en.wikipedia.org/wiki/CEFAA',
+    'POPOCATEPETL':      'https://www.youtube.com/results?search_query=popocatepetl+ufo+sighting',
+    'MEXICOCITY-1997':   'https://en.wikipedia.org/wiki/1991_M%C3%A9xico_City_UFO_sighting',
+    'PUERTORICO':        'https://en.wikipedia.org/wiki/UFO_sightings_in_Puerto_Rico',
+    'TEHRAN-1976':       'https://en.wikipedia.org/wiki/1976_Tehran_UFO_incident',
+    'PERSIANGULF':       'https://en.wikipedia.org/wiki/Unidentified_aerial_phenomenon',
+    'SOUTHCHINASEA':     'https://en.wikipedia.org/wiki/USS_Nimitz_UFO_incident',
+    'JAPANSEA':          'https://en.wikipedia.org/wiki/UFO_sightings_in_Japan',
+    'WESTALL-1966':      'https://en.wikipedia.org/wiki/Westall_UFO',
+    'VALENTICH-1978':    'https://en.wikipedia.org/wiki/Frederick_Valentich_disappearance',
+    'KAIKOURA-1978':     'https://en.wikipedia.org/wiki/Kaikoura_lights',
+    'BOIANAI-1959':      'https://en.wikipedia.org/wiki/Boianai_UFO_incident',
+    'TULLY-1966':        'https://en.wikipedia.org/wiki/Tully_saucer_nest',
+    'WOOMERA':           'https://en.wikipedia.org/wiki/Woomera_Test_Range',
+    'PINE-GAP':          'https://en.wikipedia.org/wiki/Pine_Gap',
+    'ARIEL-1994':        'https://en.wikipedia.org/wiki/Ariel_School_UFO_incident',
+    'KENYA-1954':        'https://en.wikipedia.org/wiki/UFO_sightings_in_Africa',
+    'ZIMBABWE-1985':     'https://en.wikipedia.org/wiki/Zimbabwe_UFO_incident',
+    'SHAG-1967':         'https://en.wikipedia.org/wiki/Shag_Harbour_incident',
+    'HESSDALEN':         'https://en.wikipedia.org/wiki/Hessdalen_lights',
+    'ALASKA-PIPELINE':   'https://en.wikipedia.org/wiki/Trans-Alaska_Pipeline_System',
+    'ANTARCTIC':         'https://en.wikipedia.org/wiki/Operation_Highjump',
+    'MARIANA-USO':       'https://en.wikipedia.org/wiki/Unidentified_submerged_object',
+  };
+
+  // Click handler — navigate to source on dot click
+  container.addEventListener('click', e => {
+    if (dragging) return;
+    const r = container.getBoundingClientRect();
+    mouse2d.x =  ((e.clientX - r.left) / r.width)  * 2 - 1;
+    mouse2d.y = -((e.clientY - r.top)  / r.height) * 2 + 1;
+    raycaster.setFromCamera(mouse2d, camera);
+    const hits = raycaster.intersectObjects(markers);
+    if (hits.length) {
+      const id = hits[0].object.userData.id;
+      const url = sightingUrls[id];
+      if (url) window.open(url, '_blank');
+    }
+  });
 
   // Render loop
   function animate() {
