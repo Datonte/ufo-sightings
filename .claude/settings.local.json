@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(vercel --yes)",
+      "Bash(vercel --yes --name ufo-sightings)",
+      "Bash(vercel --prod)"
+    ]
+  }
+}

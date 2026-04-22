@@ -84,6 +84,9 @@
 <style>
         body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
         .bg-grid { background-size: 24px 24px; background-image: theme('backgroundImage.grid-pattern'); }
+        #spec-bars > div { transition: height 0.35s ease; }
+        @keyframes scan-sweep { 0% { left: 5%; } 100% { left: 95%; } }
+        .scanner-line { animation: scan-sweep 2s linear infinite; }
     </style>
 </head>
 <body class="min-h-screen bg-grid font-body flex flex-col md:flex-row overflow-y-auto md:overflow-hidden text-on-background" style="background-color:#131313;">
@@ -191,14 +194,14 @@
 <div class="flex flex-col gap-2">
 <div class="flex justify-between items-center font-mono text-xs">
 <label class="text-on-surface">GAIN CONTROL</label>
-<span class="text-primary-fixed">42.5 dB</span>
+<span id="gain-val" class="text-primary-fixed">42.5 dB</span>
 </div>
 <input class="w-full h-1 bg-surface-variant rounded-none appearance-none [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:w-3 [&amp;::-webkit-slider-thumb]:h-5 [&amp;::-webkit-slider-thumb]:bg-primary-container [&amp;::-webkit-slider-thumb]:cursor-pointer cursor-pointer" max="100" min="0" type="range" value="42.5"/>
 </div>
 <div class="flex flex-col gap-2">
 <div class="flex justify-between items-center font-mono text-xs">
 <label class="text-on-surface">FREQ OFFSET</label>
-<span class="text-secondary-container">+1.04 MHz</span>
+<span id="freq-val" class="text-secondary-container">+1.04 MHz</span>
 </div>
 <input class="w-full h-1 bg-surface-variant rounded-none appearance-none [&amp;::-webkit-slider-thumb]:appearance-none [&amp;::-webkit-slider-thumb]:w-3 [&amp;::-webkit-slider-thumb]:h-5 [&amp;::-webkit-slider-thumb]:bg-secondary-container [&amp;::-webkit-slider-thumb]:cursor-pointer cursor-pointer" max="5" min="-5" step="0.01" type="range" value="1.04"/>
 </div>
@@ -248,7 +251,7 @@
 <div class="absolute inset-0 bg-gradient-to-t from-primary-fixed/5 via-primary-fixed/10 to-transparent opacity-50"></div>
 <div class="w-full h-1/2 flex items-end justify-center px-4 gap-1 opacity-70">
 <!-- Simulated Spectrogram Bars -->
-<div class="w-full h-full flex items-end gap-1">
+<div id="spec-bars" class="w-full h-full flex items-end gap-1">
 <div class="flex-1 bg-primary-fixed" style="height: 20%;"></div>
 <div class="flex-1 bg-primary-fixed" style="height: 35%;"></div>
 <div class="flex-1 bg-primary-fixed" style="height: 15%;"></div>
@@ -264,7 +267,7 @@
 </div>
 </div>
 <!-- Scanner line -->
-<div class="absolute top-0 bottom-0 left-1/3 w-px bg-primary-container shadow-[0_0_10px_#00ff41]"></div>
+<div class="scanner-line absolute top-0 bottom-0 w-px bg-primary-container shadow-[0_0_10px_#00ff41]"></div>
 <!-- Grid labels -->
 <div class="absolute bottom-1 left-2 font-mono text-[8px] text-outline">0 MHz</div>
 <div class="absolute bottom-1 right-2 font-mono text-[8px] text-outline">100 MHz</div>
@@ -292,29 +295,29 @@
 <div class="flex justify-between items-start mb-1">
 <span class="font-mono text-[10px] text-on-surface-variant">SYNC DELTA</span>
 </div>
-<div class="font-mono text-sm text-secondary-container">0.002ms</div>
+<div class="font-mono text-sm text-secondary-container"><span id="sync-delta">0.002ms</span></div>
 </div>
 <!-- Status Item 3 -->
 <div class="bg-surface-container p-3 border-l-2 border-outline-variant">
 <div class="flex justify-between items-start mb-1">
 <span class="font-mono text-[10px] text-on-surface-variant">INTERFERENCE LVL</span>
 </div>
-<div class="font-mono text-sm text-primary-fixed">LOW</div>
+<div class="font-mono text-sm text-primary-fixed"><span id="interf-label">LOW</span></div>
 <div class="w-full bg-surface-variant h-1 mt-2">
-<div class="bg-primary-fixed h-full" style="width: 15%"></div>
+<div id="interf-bar" class="bg-primary-fixed h-full" style="width: 15%"></div>
 </div>
+<div class="font-mono text-xs text-on-surface-variant mt-1"><span id="interf-pct">15%</span></div>
 </div>
 </div>
 <!-- Log Snippet -->
-<div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 h-24 overflow-hidden relative">
+<div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative" style="min-height: 6rem;">
 <div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
-<ul class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80">
-<li>&gt; INIT CALIBRATION SEQ...</li>
-<li>&gt; ALIGNING SENSOR ALPHA... [DONE]</li>
-<li>&gt; CHECKING SYNC... DELTA 0.002ms</li>
-<li class="text-secondary-fixed">&gt; WARNING: MINOR NOISE DETECTED</li>
-<li>&gt; FILTERING FREQUENCIES...</li>
-</ul>
+<div id="sys-log" class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80 flex flex-col">
+<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; INIT CALIBRATION SEQ...</div>
+<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; ALIGNING SENSOR ALPHA... [DONE]</div>
+<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; CHECKING SYNC... DELTA 0.002ms</div>
+<div class="text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1"><span class="text-stone-600 mr-2">--:--:--Z</span>&gt; FILTERING FREQUENCIES...</div>
+</div>
 </div>
 </section>
 </div>
@@ -341,5 +344,82 @@ function closeSidebar() {
   document.getElementById('sidebar').style.transform = '';
   document.getElementById('sidebar-backdrop').classList.add('hidden');
 }
+</script>
+<script>
+// CHANGE 1: Animate spectrogram bars
+function animateSpectrogram() {
+  const container = document.getElementById('spec-bars');
+  if (!container) return;
+  const bars = container.querySelectorAll('div');
+  bars.forEach(bar => {
+    const min = 8, max = 100;
+    bar.style.height = (min + Math.random() * (max - min)) + '%';
+  });
+  setTimeout(animateSpectrogram, 380 + Math.random() * 80);
+}
+animateSpectrogram();
+
+// CHANGE 3: Live SYNC DELTA readout
+setInterval(() => {
+  const el = document.getElementById('sync-delta');
+  if (el) el.textContent = (0.001 + Math.random() * 0.008).toFixed(3) + 'ms';
+}, 2000);
+
+// CHANGE 4: Live INTERFERENCE LVL
+let interfPct = 15;
+setInterval(() => {
+  interfPct = Math.max(8, Math.min(40, interfPct + (Math.random() - 0.45) * 5));
+  const pct = Math.round(interfPct);
+  const el_label = document.getElementById('interf-label');
+  const el_pct = document.getElementById('interf-pct');
+  const el_bar = document.getElementById('interf-bar');
+  if (el_label) el_label.textContent = pct < 20 ? 'LOW' : 'MODERATE';
+  if (el_pct) el_pct.textContent = pct + '%';
+  if (el_bar) el_bar.style.width = pct + '%';
+}, 3000);
+
+// CHANGE 5: Live GAIN CONTROL value drift
+let gainVal = 42.5;
+setInterval(() => {
+  gainVal = Math.max(38, Math.min(47, gainVal + (Math.random() - 0.5) * 0.8));
+  const el = document.getElementById('gain-val');
+  if (el) el.textContent = gainVal.toFixed(1) + ' dB';
+}, 3500);
+
+// CHANGE 6: Live FREQ OFFSET value drift
+let freqVal = 1.04;
+setInterval(() => {
+  freqVal = Math.max(-2, Math.min(3, freqVal + (Math.random() - 0.5) * 0.05));
+  const el = document.getElementById('freq-val');
+  if (el) el.textContent = (freqVal >= 0 ? '+' : '') + freqVal.toFixed(2) + ' MHz';
+}, 4000);
+
+// CHANGE 7: System log streaming
+const SYS_LOG_POOL = [
+  'Array re-sync complete. Delta within tolerance.',
+  'New interference source detected on channel 7. Filtering applied.',
+  'Gain auto-adjusted by +0.3 dB. Array ALPHA compensating.',
+  'Calibration cycle 14 of 20 complete. No anomalies.',
+  'Carrier frequency lock confirmed at 433.92 MHz.',
+  'Background noise floor recalculated: -94.2 dBm.',
+  'Array BETA phase alignment verified. Offset: 0.001°.',
+  'Signal burst detected at 14.256 GHz — flagging for review.',
+  'Thermal drift compensation applied to sensor array 3–6.',
+  'Secondary verification sweep complete. All nodes nominal.',
+];
+function addSysLog() {
+  const log = document.getElementById('sys-log');
+  if (!log) return;
+  const msg = SYS_LOG_POOL[Math.floor(Math.random() * SYS_LOG_POOL.length)];
+  const now = new Date();
+  const t = [now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()].map(n => String(n).padStart(2,'0')).join(':');
+  const row = document.createElement('div');
+  row.className = 'text-[10px] font-mono text-on-surface-variant border-l border-outline-variant/30 pl-2 py-1';
+  row.innerHTML = `<span class="text-stone-600 mr-2">${t}Z</span>${msg}`;
+  log.prepend(row);
+  while (log.children.length > 8) log.removeChild(log.lastChild);
+  setTimeout(addSysLog, 10000 + Math.random() * 5000);
+}
+addSysLog();
 </script>
 </body></html>

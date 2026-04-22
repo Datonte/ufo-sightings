@@ -89,6 +89,8 @@
             font-family: 'Space Grotesk', monospace;
             font-variant-numeric: tabular-nums;
         }
+        @keyframes crosshair-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        #crosshair-ring { animation: crosshair-spin 12s linear infinite; }
       </style>
 </head>
 <body class="bg-surface text-on-surface font-body min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary">
@@ -189,8 +191,9 @@
 <div class="z-10 relative">
 <div class="flex items-center gap-3 mb-2">
 <span class="bg-secondary-fixed-dim text-on-secondary px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase font-mono-tech border border-secondary-container">CASE: 894-OMEGA</span>
-<span class="text-on-surface-variant text-[10px] tracking-widest uppercase font-mono-tech">LAT: 34.0522° N, LON: 118.2437° W</span>
+<span class="text-on-surface-variant text-[10px] tracking-widest uppercase font-mono-tech">LAT: <span id="track-lat">34.0522</span>° N, LON: <span id="track-lng">118.2437</span>° W</span>
 </div>
+<div class="font-mono text-[9px] text-stone-600 mt-1">LAST UPDATED: <span id="case-clock">--:--:-- UTC</span></div>
 <h1 class="font-headline text-4xl md:text-5xl font-bold text-white tracking-tight uppercase">Incident: Rendlesham Echo</h1>
 <p class="text-on-surface-variant mt-2 max-w-2xl text-sm leading-relaxed">Anomalous radar track detected descending from low earth orbit. Multi-spectral sensors indicate localized gravitational distortion and thermal signatures inconsistent with known propulsion technologies.</p>
 </div>
@@ -228,7 +231,7 @@
 <img alt="Infrared analysis" class="w-full h-full object-cover filter contrast-125 saturate-0 opacity-80 mix-blend-screen" data-alt="Grayscale high contrast radar map image showing anomalous thermal signature in a dense forest area with grid overlay and crosshairs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiYO2yUFeuBylR-G_FmUiZ-KPM4XfoyAkYrI18ygIQ1pLV1h1dxva784_CkMARD3gWzJKRLbPMdTBytiOR0Nl_FaGrlgHcKurMXRGZSahUdYoBLWgYdgTAQbK4ekJa1q5ldL2mgs54suimILnTOfVWhZD8JyLzjQHfg6paoWRaq5dFisbCpWj6BdjCzMDQmNhbgtsEywCOahcHyt_PAEm1rELfXpKl9f72WL88VVagTFKLHBIRjGCAZMvkjpv25BaDfOM7TBUwihM"/>
 <!-- Overlays -->
 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-<div class="w-32 h-32 border border-primary-container rounded-full opacity-50 relative animate-pulse flex items-center justify-center">
+<div id="crosshair-ring" class="w-32 h-32 border border-primary-container rounded-full opacity-50 relative animate-pulse flex items-center justify-center">
 <div class="w-2 h-2 bg-primary-container rounded-full shadow-[0_0_10px_#00ff41]"></div>
 <div class="absolute top-0 bottom-0 left-1/2 w-px bg-primary-container/30"></div>
 <div class="absolute left-0 right-0 top-1/2 h-px bg-primary-container/30"></div>
@@ -236,7 +239,7 @@
 </div>
 <div class="absolute bottom-6 right-6 text-right">
 <p class="text-[10px] font-mono-tech text-primary-container tracking-widest">TARGET ACQUIRED</p>
-<p class="text-[10px] font-mono-tech text-on-surface-variant tracking-widest">ALT: 450M | VEL: UNKNOWN</p>
+<p class="text-[10px] font-mono-tech text-on-surface-variant tracking-widest">ALT: <span id="obj-alt">450</span>M | VEL: <span id="obj-vel">312</span> KTS</p>
 </div>
 </div>
 </section>
@@ -256,6 +259,10 @@
 <h4 class="font-bold text-xs uppercase tracking-widest text-white">Vance, K.</h4>
 <p class="text-[10px] font-mono-tech text-on-surface-variant">ID: 44-A90</p>
 <span class="inline-block mt-1 bg-surface-container-highest text-primary-container border border-surface-variant px-1 text-[8px] font-mono-tech">FIELD OPS</span>
+<div class="flex items-center gap-1 mt-1">
+  <span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+  <span class="font-mono text-[9px] text-primary-container">ONLINE</span>
+</div>
 </div>
 </div>
 <!-- Agent Card 2 -->
@@ -267,6 +274,10 @@
 <h4 class="font-bold text-xs uppercase tracking-widest text-white">Chen, L.</h4>
 <p class="text-[10px] font-mono-tech text-on-surface-variant">ID: 88-B21</p>
 <span class="inline-block mt-1 bg-surface-container-highest text-secondary-fixed-dim border border-surface-variant px-1 text-[8px] font-mono-tech">ANALYST</span>
+<div class="flex items-center gap-1 mt-1">
+  <span class="inline-block w-2 h-2 rounded-full bg-secondary-container"></span>
+  <span class="font-mono text-[9px] text-secondary-container">STANDBY</span>
+</div>
 </div>
 </div>
 <!-- Request Personnel -->
@@ -314,7 +325,12 @@
 </div>
 <!-- Event 2 -->
 <div class="relative">
-<div class="absolute -left-[29px] top-1 h-3 w-3 bg-primary-container border-2 border-primary-container rounded-none shadow-[0_0_8px_#00ff41]"></div>
+<div class="absolute -left-[29px] top-1">
+  <div class="relative flex items-center justify-center">
+    <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-primary-container opacity-75"></span>
+    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+  </div>
+</div>
 <p class="text-[10px] font-mono-tech text-primary-container mb-1 tracking-widest">T-ZERO (IMPACT)</p>
 <h4 class="text-sm font-bold text-white mb-1">Visual Confirmation</h4>
 <p class="text-xs text-on-surface-variant">Ground units report glowing object hovering above tree line. EMP localized effect.</p>
@@ -342,5 +358,39 @@ function closeSidebar() {
   document.getElementById('sidebar').style.transform = '';
   document.getElementById('sidebar-backdrop').classList.add('hidden');
 }
+
+// CHANGE 1: Live tracking coordinates
+let trackLat = 34.0522, trackLng = -118.2437;
+setInterval(() => {
+  trackLat += (Math.random() - 0.5) * 0.002;
+  trackLng += (Math.random() - 0.5) * 0.002;
+  const latEl = document.getElementById('track-lat');
+  const lngEl = document.getElementById('track-lng');
+  if (latEl) latEl.textContent = Math.abs(trackLat).toFixed(4) + '° ' + (trackLat >= 0 ? 'N' : 'S');
+  if (lngEl) lngEl.textContent = Math.abs(trackLng).toFixed(4) + '° W';
+}, 8000);
+
+// CHANGE 2: Live ALT and VEL
+let objAlt = 450, objVel = 312;
+setInterval(() => {
+  objAlt = Math.max(400, Math.min(520, objAlt + Math.round((Math.random() - 0.5) * 20)));
+  const el = document.getElementById('obj-alt');
+  if (el) el.textContent = objAlt;
+}, 4000);
+setInterval(() => {
+  objVel = Math.max(280, Math.min(370, objVel + Math.round((Math.random() - 0.5) * 15)));
+  const el = document.getElementById('obj-vel');
+  if (el) el.textContent = objVel;
+}, 5000);
+
+// CHANGE 5: Live "LAST UPDATED" timestamp
+function updateCaseClock() {
+  const now = new Date();
+  const t = [now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()].map(n => String(n).padStart(2,'0')).join(':');
+  const el = document.getElementById('case-clock');
+  if (el) el.textContent = t + ' UTC';
+}
+updateCaseClock();
+setInterval(updateCaseClock, 1000);
 </script>
 </body></html>

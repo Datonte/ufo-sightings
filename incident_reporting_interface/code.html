@@ -181,11 +181,16 @@
 <span class="bg-secondary-fixed-dim text-on-secondary-fixed-variant px-2 py-0.5 text-xs font-bold font-headline tracking-widest">FORM: X-77</span>
 <span class="text-on-surface-variant text-xs mono-data">DOC_ID: 994-A/B</span>
 </div>
+<div class="flex items-center gap-6 mb-4 font-mono text-[10px] text-stone-500">
+  <span>OPEN CASES: <span id="open-cases" class="text-secondary-container">47</span></span>
+  <span>SUBMITTED TODAY: <span id="submitted-today" class="text-primary-container">12</span></span>
+  <span>ANALYST QUEUE: <span id="queue-count" class="text-on-surface-variant">8</span></span>
+</div>
 <h1 class="text-4xl md:text-5xl font-headline font-bold text-on-surface tracking-tight mb-2">INCIDENT REPORT</h1>
 <p class="text-on-surface-variant font-mono text-sm max-w-2xl">SUBMIT UNIDENTIFIED AERIAL PHENOMENA DATA FOR INTEL ANALYSIS. ALL ENTRIES ARE LOGGED AND ENCRYPTED OFF-SITE.</p>
 </div>
 <!-- Form Container -->
-<form class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10" onsubmit="window.location.href='../incident_intel_case_412_x/code.html'; return false;">
+<form class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10" onsubmit="document.getElementById('transmit-status').textContent='ENCRYPTING...'; setTimeout(()=>window.location.href='../incident_intel_case_412_x/code.html',800); return false;">
 <!-- Left Column (Data Entry) -->
 <div class="lg:col-span-7 space-y-8">
 <!-- Meta Information Panel -->
@@ -200,11 +205,11 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div>
 <label class="form-label">Date of Encounter</label>
-<input class="w-full bg-surface-container py-2 px-3 mono-data text-sm" required="" type="date"/>
+<input id="field-date" class="w-full bg-surface-container py-2 px-3 mono-data text-sm" required="" type="date"/>
 </div>
 <div>
 <label class="form-label">Time (Local/24H)</label>
-<input class="w-full bg-surface-container py-2 px-3 mono-data text-sm" required="" type="time"/>
+<input id="field-time" class="w-full bg-surface-container py-2 px-3 mono-data text-sm" required="" type="time"/>
 </div>
 <div class="md:col-span-2">
 <label class="form-label">Duration of Event</label>
@@ -259,7 +264,7 @@
 <!-- Coordinates Display -->
 <div class="absolute bottom-2 right-2 bg-surface px-2 py-1 flex items-center gap-2 border border-surface-variant">
 <span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-<span class="mono-data text-[10px] text-primary">LAT: 37.2431 N / LNG: 115.7930 W</span>
+<span class="mono-data text-[10px] text-primary">LAT: <span id="gps-lat">37.2431</span> N / LNG: <span id="gps-lng">115.7930</span> W</span>
 </div>
 </div>
 <div class="p-3">
@@ -279,6 +284,10 @@
 </section>
 <!-- Submit Action -->
 <div class="pt-4">
+<div class="flex items-center gap-2 mb-3 font-mono text-[10px]">
+  <span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+  <span id="transmit-status" class="text-primary-container">READY TO TRANSMIT</span>
+</div>
 <button class="w-full bg-primary-container text-on-primary font-headline font-bold text-lg py-4 flex items-center justify-center gap-2 hover:bg-primary transition-colors relative overflow-hidden group" type="submit">
 <div class="absolute inset-0 bg-gradient-to-r from-primary-fixed to-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></div>
 <span class="relative z-10 flex items-center gap-2">
@@ -301,5 +310,48 @@ function closeSidebar() {
   document.getElementById('sidebar').style.transform = '';
   document.getElementById('sidebar-backdrop').classList.add('hidden');
 }
+
+// CHANGE 1: Auto-fill date and time on load
+window.addEventListener('DOMContentLoaded', () => {
+  const now = new Date();
+  const dateEl = document.getElementById('field-date');
+  const timeEl = document.getElementById('field-time');
+  if (dateEl) dateEl.value = now.toISOString().split('T')[0];
+  if (timeEl) {
+    const h = String(now.getHours()).padStart(2,'0');
+    const m = String(now.getMinutes()).padStart(2,'0');
+    timeEl.value = h + ':' + m;
+  }
+});
+
+// CHANGE 2: Live GPS coordinates drift
+let gpsLat = 37.2431, gpsLng = 115.7930;
+function driftGPS() {
+  gpsLat += (Math.random() - 0.5) * 0.0008;
+  gpsLng += (Math.random() - 0.5) * 0.0008;
+  const latEl = document.getElementById('gps-lat');
+  const lngEl = document.getElementById('gps-lng');
+  if (latEl) latEl.textContent = gpsLat.toFixed(4);
+  if (lngEl) lngEl.textContent = gpsLng.toFixed(4);
+  setTimeout(driftGPS, 5000 + Math.random() * 2000);
+}
+driftGPS();
+
+// CHANGE 3: Active case counter
+let openCases = 47, submittedToday = 12;
+setInterval(() => {
+  if (Math.random() > 0.6) {
+    openCases++;
+    const el = document.getElementById('open-cases');
+    if (el) el.textContent = openCases;
+  }
+}, 45000);
+setInterval(() => {
+  if (Math.random() > 0.5) {
+    submittedToday++;
+    const el = document.getElementById('submitted-today');
+    if (el) el.textContent = submittedToday;
+  }
+}, 60000);
 </script>
 </body></html>

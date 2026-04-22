@@ -190,6 +190,14 @@
 </nav>
 <!-- Main Content -->
 <main class="md:ml-64 flex-1 p-3 md:p-6 grid grid-cols-12 gap-4 md:gap-6 grid-bg md:h-[calc(100vh-3.5rem)] overflow-y-auto relative">
+<!-- Live Stats Bar -->
+<div class="col-span-12 font-mono text-[9px] text-stone-500 flex gap-4 md:gap-8 px-1 flex-wrap">
+  <span>SIGNALS ACTIVE: <span id="stat-signals" class="text-[#00FF41]">30</span></span>
+  <span>UPLINKS: <span id="stat-uplinks" class="text-[#00FF41]">3</span></span>
+  <span>SECTORS MONITORED: <span id="stat-sectors" class="text-[#00FF41]">12</span></span>
+  <span>OBJECTS TRACKED: <span id="stat-tracked" class="text-[#00FF41]">18</span></span>
+  <span class="ml-auto text-stone-600">ENC_KEY: <span class="text-primary-container">VALID</span></span>
+</div>
 <!-- Global Map Area -->
 <div class="col-span-12 lg:col-span-8 flex flex-col gap-4 md:gap-6">
 <!-- Threat Indicator Banner -->
@@ -199,7 +207,7 @@
 <span class="material-symbols-outlined text-error-container text-3xl animate-pulse">warning</span>
 <div>
 <h2 id="threat-level" class="font-headline text-xl font-bold text-error-container tracking-widest">THREAT LEVEL: ALPHA</h2>
-<p class="font-mono text-xs text-error-container/70 mt-1">MULTIPLE UNIDENTIFIED SIGNATURES DETECTED IN SECTOR 7G</p>
+<p id="threat-sub" class="font-mono text-xs text-error-container/70 mt-1">MULTIPLE UNIDENTIFIED SIGNATURES DETECTED IN SECTOR 7G</p>
 </div>
 </div>
 <div class="z-10 font-mono text-xs text-error-container/50 text-right">
@@ -212,10 +220,20 @@
 <!-- Three.js Interactive Globe -->
 <div id="globe-container" class="absolute inset-0" style="cursor:grab;"></div>
 <!-- Sighting Tooltip -->
-<div id="sighting-info" class="absolute top-4 left-4 bg-surface-container-high/90 border border-outline-variant/30 p-2 backdrop-blur-sm w-36 pointer-events-none z-10" style="display:none;">
-<div class="font-mono text-[9px] mb-1" id="sig-id">SIG_ID: ---</div>
-<div class="font-mono text-[8px] text-on-surface-variant" id="sig-lat">LAT: ---</div>
-<div class="font-mono text-[8px] text-on-surface-variant" id="sig-lng">LNG: ---</div>
+<div id="sighting-info" class="absolute top-4 left-4 bg-surface-container-high/95 border border-[#00FF41]/40 p-3 backdrop-blur-sm w-52 pointer-events-none z-10" style="display:none;">
+  <div class="font-mono text-[10px] text-[#00FF41] font-bold mb-2 flex items-center gap-2">
+    <span id="sig-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;"></span>
+    <span id="sig-id">---</span>
+  </div>
+  <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono text-[9px]">
+    <span class="text-stone-500">LAT</span><span id="sig-lat" class="text-on-surface">---</span>
+    <span class="text-stone-500">LNG</span><span id="sig-lng" class="text-on-surface">---</span>
+    <span class="text-stone-500">CLASS</span><span id="sig-cls" class="text-on-surface">---</span>
+    <span class="text-stone-500">STATUS</span><span id="sig-status" class="text-on-surface">---</span>
+    <span class="text-stone-500">ALT</span><span id="sig-alt" class="text-on-surface">---</span>
+    <span class="text-stone-500">VEL</span><span id="sig-vel" class="text-on-surface">---</span>
+    <span class="text-stone-500">FIRST</span><span id="sig-first" class="text-on-surface">---</span>
+  </div>
 </div>
 <!-- Map UI Overlay -->
 <div class="absolute top-4 right-4 flex flex-col gap-2">
@@ -258,9 +276,23 @@
 <div class="absolute h-full w-[1px] bg-primary-container/20"></div>
 <!-- Sweep Line -->
 <div id="radar-sweep" class="absolute w-1/2 h-[1px] bg-gradient-to-r from-transparent to-primary-container origin-left top-1/2 left-1/2" style="transform:rotate(-45deg);transform-origin:left center;"></div>
-<!-- Blips -->
-<div class="absolute top-[30%] left-[60%] w-2 h-2 bg-secondary-container rounded-full shadow-[0_0_8px_#fdaf00]"></div>
-<div class="absolute top-[70%] left-[40%] w-1.5 h-1.5 bg-primary-container rounded-full shadow-[0_0_8px_#00ff41]"></div>
+<!-- Blips (animated ping versions) -->
+<div class="absolute top-[30%] left-[60%]">
+  <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-secondary-container opacity-75"></span>
+  <span class="relative inline-flex rounded-full h-2 w-2 bg-secondary-container shadow-[0_0_8px_#fdaf00]"></span>
+</div>
+<div class="absolute top-[70%] left-[40%]">
+  <span class="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full bg-primary-container opacity-75"></span>
+  <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container shadow-[0_0_8px_#00ff41]"></span>
+</div>
+<div class="absolute top-[50%] left-[75%]">
+  <span class="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full bg-error opacity-75" style="animation-delay:0.5s"></span>
+  <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-error shadow-[0_0_8px_#ff4444]"></span>
+</div>
+<div class="absolute top-[25%] left-[30%]">
+  <span class="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full bg-secondary-container opacity-75" style="animation-delay:1s"></span>
+  <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-secondary-container shadow-[0_0_8px_#fdaf00]"></span>
+</div>
 <!-- Center Dot -->
 <div class="absolute w-2 h-2 bg-primary-container rounded-full z-10"></div>
 </div>
@@ -383,18 +415,38 @@
   sun.position.set(5, 3, 5);
   scene.add(sun);
 
-  // UFO sighting locations
+  // UFO sighting locations — 30 entries with full metadata
   const sightings = [
-    { lat: 45.92,  lng:  12.04,  id: 'UNK-402', color: 0xfdaf00 },
-    { lat: 31.23,  lng: 121.47,  id: 'TRK-991', color: 0x00ff41 },
-    { lat: 51.51,  lng:  -0.12,  id: 'SIG-107', color: 0xfdaf00 },
-    { lat: 37.77,  lng:-122.42,  id: 'UNK-891', color: 0xff3333 },
-    { lat:-33.87,  lng: 151.21,  id: 'TRK-445', color: 0x00ff41 },
-    { lat: 55.75,  lng:  37.62,  id: 'SIG-230', color: 0xfdaf00 },
-    { lat: 19.43,  lng: -99.13,  id: 'UNK-512', color: 0xff3333 },
-    { lat: 28.61,  lng:  77.21,  id: 'TRK-003', color: 0x00ff41 },
-    { lat:-22.90,  lng: -43.17,  id: 'SIG-774', color: 0xfdaf00 },
-    { lat: 35.68,  lng: 139.69,  id: 'UNK-019', color: 0xff3333 },
+    { lat:45.92,  lng:12.04,   id:'UNK-402', color:0xff3333, cls:'CLASS B', status:'UNKNOWN',      alt:'38,200 FT', vel:'INDETERMINATE', first:'02:14:33' },
+    { lat:31.23,  lng:121.47,  id:'TRK-991', color:0x00ff41, cls:'CLASS A', status:'TRACKING',     alt:'12,400 FT', vel:'420 KTS',        first:'08:55:10' },
+    { lat:51.51,  lng:-0.12,   id:'SIG-107', color:0xffdd00, cls:'CLASS C', status:'SIGNAL LOST',  alt:'6,800 FT',  vel:'310 KTS',        first:'11:22:47' },
+    { lat:37.77,  lng:-122.42, id:'UNK-891', color:0xff3333, cls:'CLASS D', status:'UNKNOWN',      alt:'SURFACE',   vel:'INDETERMINATE', first:'00:03:59' },
+    { lat:-33.87, lng:151.21,  id:'TRK-445', color:0x00ff41, cls:'CLASS A', status:'CONFIRMED',    alt:'22,000 FT', vel:'580 KTS',        first:'19:41:02' },
+    { lat:55.75,  lng:37.62,   id:'SIG-230', color:0xffdd00, cls:'CLASS B', status:'TRACKING',     alt:'15,600 FT', vel:'290 KTS',        first:'06:08:21' },
+    { lat:19.43,  lng:-99.13,  id:'UNK-512', color:0xff3333, cls:'CLASS C', status:'UNKNOWN',      alt:'9,100 FT',  vel:'INDETERMINATE', first:'03:33:44' },
+    { lat:28.61,  lng:77.21,   id:'TRK-003', color:0x00ff41, cls:'CLASS A', status:'TRACKING',     alt:'31,500 FT', vel:'510 KTS',        first:'14:17:09' },
+    { lat:-22.90, lng:-43.17,  id:'SIG-774', color:0xffdd00, cls:'CLASS B', status:'SIGNAL LOST',  alt:'4,200 FT',  vel:'180 KTS',        first:'21:50:38' },
+    { lat:35.68,  lng:139.69,  id:'UNK-019', color:0xff3333, cls:'CLASS D', status:'UNKNOWN',      alt:'SURFACE',   vel:'INDETERMINATE', first:'17:29:55' },
+    { lat:48.85,  lng:2.35,    id:'TRK-228', color:0x00ff41, cls:'CLASS A', status:'CONFIRMED',    alt:'28,900 FT', vel:'490 KTS',        first:'09:12:01' },
+    { lat:-34.60, lng:-58.38,  id:'SIG-441', color:0xffdd00, cls:'CLASS C', status:'TRACKING',     alt:'11,300 FT', vel:'260 KTS',        first:'23:07:14' },
+    { lat:40.71,  lng:-74.01,  id:'UNK-673', color:0xff3333, cls:'CLASS B', status:'UNKNOWN',      alt:'7,500 FT',  vel:'INDETERMINATE', first:'01:44:22' },
+    { lat:39.90,  lng:116.40,  id:'TRK-817', color:0x00ff41, cls:'CLASS A', status:'TRACKING',     alt:'19,700 FT', vel:'530 KTS',        first:'07:38:50' },
+    { lat:1.35,   lng:103.82,  id:'SIG-092', color:0xffdd00, cls:'CLASS B', status:'SIGNAL LOST',  alt:'3,600 FT',  vel:'210 KTS',        first:'13:55:30' },
+    { lat:41.01,  lng:28.97,   id:'UNK-334', color:0xff3333, cls:'CLASS C', status:'UNKNOWN',      alt:'14,800 FT', vel:'INDETERMINATE', first:'05:21:17' },
+    { lat:59.33,  lng:18.07,   id:'TRK-156', color:0x00ff41, cls:'CLASS A', status:'CONFIRMED',    alt:'33,100 FT', vel:'560 KTS',        first:'10:09:43' },
+    { lat:6.52,   lng:3.38,    id:'SIG-509', color:0xffdd00, cls:'CLASS D', status:'TRACKING',     alt:'2,100 FT',  vel:'140 KTS',        first:'22:48:06' },
+    { lat:25.20,  lng:55.27,   id:'UNK-788', color:0xff3333, cls:'CLASS B', status:'UNKNOWN',      alt:'41,000 FT', vel:'INDETERMINATE', first:'04:36:29' },
+    { lat:-1.29,  lng:36.82,   id:'TRK-362', color:0x00ff41, cls:'CLASS C', status:'TRACKING',     alt:'17,200 FT', vel:'380 KTS',        first:'16:24:51' },
+    { lat:52.23,  lng:21.01,   id:'SIG-618', color:0xffdd00, cls:'CLASS A', status:'SIGNAL LOST',  alt:'8,700 FT',  vel:'330 KTS',        first:'12:03:37' },
+    { lat:33.57,  lng:-7.59,   id:'UNK-045', color:0xff3333, cls:'CLASS D', status:'UNKNOWN',      alt:'SURFACE',   vel:'INDETERMINATE', first:'20:15:08' },
+    { lat:14.69,  lng:-17.44,  id:'TRK-594', color:0x00ff41, cls:'CLASS B', status:'CONFIRMED',    alt:'24,600 FT', vel:'450 KTS',        first:'18:42:19' },
+    { lat:43.65,  lng:-79.38,  id:'SIG-837', color:0xffdd00, cls:'CLASS C', status:'TRACKING',     alt:'13,900 FT', vel:'275 KTS',        first:'08:31:04' },
+    { lat:-26.20, lng:28.04,   id:'UNK-211', color:0xff3333, cls:'CLASS A', status:'UNKNOWN',      alt:'5,400 FT',  vel:'INDETERMINATE', first:'15:58:23' },
+    { lat:64.13,  lng:-21.94,  id:'TRK-729', color:0x00ff41, cls:'CLASS B', status:'TRACKING',     alt:'29,800 FT', vel:'500 KTS',        first:'03:47:11' },
+    { lat:-4.32,  lng:15.32,   id:'SIG-163', color:0xffdd00, cls:'CLASS D', status:'SIGNAL LOST',  alt:'1,800 FT',  vel:'120 KTS',        first:'11:16:45' },
+    { lat:23.13,  lng:113.26,  id:'UNK-956', color:0xff3333, cls:'CLASS C', status:'UNKNOWN',      alt:'20,300 FT', vel:'INDETERMINATE', first:'07:04:38' },
+    { lat:47.50,  lng:19.04,   id:'TRK-481', color:0x00ff41, cls:'CLASS A', status:'CONFIRMED',    alt:'35,700 FT', vel:'590 KTS',        first:'09:53:27' },
+    { lat:-12.05, lng:-77.04,  id:'SIG-322', color:0xffdd00, cls:'CLASS B', status:'TRACKING',     alt:'10,500 FT', vel:'245 KTS',        first:'01:29:52' },
   ];
 
   function toVec3(lat, lng, r) {
@@ -418,7 +470,6 @@
     dot.position.copy(pos);
     dot.userData = s;
     globe.add(dot);
-    markers.push(dot);
 
     const halo = new THREE.Mesh(
       new THREE.TorusGeometry(0.035, 0.007, 6, 20),
@@ -427,6 +478,9 @@
     halo.position.copy(pos);
     halo.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), pos.clone().normalize());
     globe.add(halo);
+
+    dot.halo = halo; // store halo reference on dot for pulsing
+    markers.push(dot);
   });
 
   // Drag rotation
@@ -475,9 +529,6 @@
   const raycaster = new THREE.Raycaster();
   const mouse2d   = new THREE.Vector2();
   const infoEl  = document.getElementById('sighting-info');
-  const sigIdEl = document.getElementById('sig-id');
-  const sigLatEl = document.getElementById('sig-lat');
-  const sigLngEl = document.getElementById('sig-lng');
 
   container.addEventListener('mousemove', e => {
     if (dragging || !infoEl) return;
@@ -488,10 +539,18 @@
     const hits = raycaster.intersectObjects(markers);
     if (hits.length) {
       const s = hits[0].object.userData;
-      sigIdEl.textContent  = 'SIG_ID: ' + s.id;
-      sigIdEl.style.color  = '#' + s.color.toString(16).padStart(6, '0');
-      sigLatEl.textContent = 'LAT: ' + Math.abs(s.lat).toFixed(2) + (s.lat >= 0 ? ' N' : ' S');
-      sigLngEl.textContent = 'LNG: ' + Math.abs(s.lng).toFixed(2) + (s.lng >= 0 ? ' E' : ' W');
+      const hexColor = '#' + s.color.toString(16).padStart(6,'0');
+      document.getElementById('sig-dot').style.background = hexColor;
+      document.getElementById('sig-id').textContent = s.id;
+      document.getElementById('sig-id').style.color = hexColor;
+      document.getElementById('sig-lat').textContent = Math.abs(s.lat).toFixed(4) + (s.lat >= 0 ? ' N' : ' S');
+      document.getElementById('sig-lng').textContent = Math.abs(s.lng).toFixed(4) + (s.lng >= 0 ? ' E' : ' W');
+      document.getElementById('sig-cls').textContent = s.cls;
+      document.getElementById('sig-status').textContent = s.status;
+      document.getElementById('sig-status').style.color = s.status === 'TRACKING' || s.status === 'CONFIRMED' ? '#00ff41' : s.status === 'SIGNAL LOST' ? '#ff3333' : '#ffdd00';
+      document.getElementById('sig-alt').textContent = s.alt;
+      document.getElementById('sig-vel').textContent = s.vel;
+      document.getElementById('sig-first').textContent = s.first + ' UTC';
       infoEl.style.display = 'block';
     } else {
       infoEl.style.display = 'none';
@@ -515,6 +574,15 @@
       camera.aspect = cw / ch;
       camera.updateProjectionMatrix();
     }
+
+    // Pulse random marker halos
+    const pt = performance.now() * 0.001;
+    markers.forEach((m, idx) => {
+      if (m.halo) {
+        m.halo.material.opacity = 0.3 + 0.4 * Math.abs(Math.sin(pt * 0.8 + idx * 1.3));
+      }
+    });
+
     renderer.render(scene, camera);
   }
   animate();
@@ -534,6 +602,10 @@ window.addEventListener('DOMContentLoaded', () => {
       setTimeout(initiateScan, 300);
     }, 600);
   }
+
+  // Radar sweeps on page load
+  const sweepEl = document.getElementById('radar-sweep');
+  if (sweepEl) sweepEl.style.animation = 'radar-spin 3s linear infinite';
 });
 
 // ── Mobile Sidebar ──────────────────────────────────────────────────
@@ -545,6 +617,78 @@ function closeSidebar() {
   document.getElementById('sidebar').style.transform = '';
   document.getElementById('sidebar-backdrop').classList.add('hidden');
 }
+
+// ── Live Clock ──────────────────────────────────────────────────────
+function updateClock() {
+  const now = new Date();
+  const t = [now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()].map(n => String(n).padStart(2,'0')).join(':');
+  const el = document.getElementById('clock');
+  if (el) el.textContent = t + ' UTC';
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── Auto Activity Log Drip ──────────────────────────────────────────
+const LOG_POOL = [
+  { level:'UPLINK',  color:'border-primary-container text-primary-container',   bg:'',                      msg:'Orbital asset Bravo-3 telemetry nominal. Data stream stable at 98.4%.' },
+  { level:'ALERT',   color:'border-error-container text-error-container',        bg:'bg-error-container/5',  msg:'New unclassified signature acquired — CLASS C object, Sector 14F. Velocity: INDETERMINATE.' },
+  { level:'WARN',    color:'border-secondary-container text-secondary-container', bg:'bg-secondary-container/5', msg:'Comms channel Delta experiencing 12% packet loss. Re-routing in progress.' },
+  { level:'INFO',    color:'border-outline-variant text-on-surface-variant',     bg:'',                      msg:'Sector 7G sweep complete. 3 objects flagged for continued monitoring.' },
+  { level:'UPLINK',  color:'border-primary-container text-primary-container',   bg:'',                      msg:'Ground station Echo confirms lock on TRK-991. Handoff to Alpha-9 complete.' },
+  { level:'ALERT',   color:'border-error-container text-error-container',        bg:'bg-error-container/5',  msg:'EMP anomaly detected near grid 47°N 09°E — all sensors temporarily degraded.' },
+  { level:'INFO',    color:'border-outline-variant text-on-surface-variant',     bg:'',                      msg:'Automated sweep of Sector 2B initiated. Duration estimate: 4 minutes.' },
+  { level:'WARN',    color:'border-secondary-container text-secondary-container', bg:'bg-secondary-container/5', msg:'Signal strength on UNK-891 dropping — possible stealth countermeasure detected.' },
+  { level:'UPLINK',  color:'border-primary-container text-primary-container',   bg:'',                      msg:'Encryption key rotation complete. New key valid for next 6 hours.' },
+  { level:'ALERT',   color:'border-error-container text-error-container',        bg:'bg-error-container/5',  msg:'Gravitational distortion 3.2× baseline detected near SIG-107 last known position.' },
+  { level:'INFO',    color:'border-outline-variant text-on-surface-variant',     bg:'',                      msg:'Archive sync to secure offsite storage: 100% complete. Checksum verified.' },
+  { level:'WARN',    color:'border-secondary-container text-secondary-container', bg:'bg-secondary-container/5', msg:'Thermal bloom detected in Sector 9C — possible propulsion signature.' },
+  { level:'UPLINK',  color:'border-primary-container text-primary-container',   bg:'',                      msg:'SIG-322 re-acquired on secondary array. Triangulation in progress.' },
+  { level:'ALERT',   color:'border-error-container text-error-container',        bg:'bg-error-container/5',  msg:'Object TRK-729 changed heading by 47° without deceleration. No known propulsion match.' },
+  { level:'INFO',    color:'border-outline-variant text-on-surface-variant',     bg:'',                      msg:'System health check nominal. All 12 sensor arrays reporting within parameters.' },
+];
+
+function addLogEntry() {
+  const log = document.getElementById('activity-log');
+  if (!log) return;
+  const item = LOG_POOL[Math.floor(Math.random() * LOG_POOL.length)];
+  const now = new Date();
+  const t = [now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()].map(n => String(n).padStart(2,'0')).join(':');
+  const row = document.createElement('div');
+  row.className = `flex items-start gap-3 border-l-2 ${item.color} pl-3 py-2 ${item.bg}`;
+  row.innerHTML = `<span class="opacity-80 min-w-[60px]">${t}</span><div class="text-on-surface"><span class="font-bold">${item.level}:</span> ${item.msg}</div>`;
+  log.prepend(row);
+  while (log.children.length > 20) log.removeChild(log.lastChild);
+  scheduleNextLog();
+}
+function scheduleNextLog() {
+  setTimeout(addLogEntry, 8000 + Math.random() * 6000);
+}
+scheduleNextLog();
+
+// ── Threat Banner Subtitle Rotation ────────────────────────────────
+const THREAT_MSGS = [
+  'MULTIPLE UNIDENTIFIED SIGNATURES DETECTED IN SECTOR 7G',
+  'TRACKING ANOMALOUS OBJECT IN SECTOR 4A — VELOCITY UNKNOWN',
+  'SIGNAL ANOMALY NEAR GRID 77°N — SOURCE UNCONFIRMED',
+  'CLASS D OBJECT ACQUIRED — SECTOR 12B UNDER ACTIVE SWEEP',
+  'EMP DISRUPTION EVENT LOGGED — SECTORS 3F AND 9C AFFECTED',
+  'ORBITAL ASSET ALPHA-9 REPORTS NEW CONTACT — CLASSIFICATION PENDING',
+];
+let threatIdx = 0;
+setInterval(() => {
+  threatIdx = (threatIdx + 1) % THREAT_MSGS.length;
+  const el = document.getElementById('threat-sub');
+  if (el) el.textContent = THREAT_MSGS[threatIdx];
+}, 30000);
+
+// ── Live Stats Bar ──────────────────────────────────────────────────
+let sigCount = 30;
+setInterval(() => {
+  if (Math.random() > 0.4) sigCount++;
+  document.getElementById('stat-signals').textContent = sigCount;
+  const uplinks = 2 + Math.floor(Math.random() * 3);
+  document.getElementById('stat-uplinks').textContent = uplinks;
+}, 25000 + Math.random() * 15000);
 
 // ── Initiate Scan ──────────────────────────────────────────────────
 const DETECTIONS = [
@@ -579,7 +723,7 @@ function initiateScan() {
   btn.innerHTML = '<span style="animation:scan-flash 0.8s ease-in-out infinite">● SCANNING...</span>';
   btn.style.cssText = 'background:transparent;border:1px solid #00ff41;color:#00ff41;';
 
-  // — Radar sweep spins
+  // — Radar sweep spins faster
   const sweep = document.getElementById('radar-sweep');
   if (sweep) sweep.style.animation = 'radar-spin 1.5s linear infinite';
 
@@ -613,7 +757,8 @@ function initiateScan() {
   setTimeout(() => {
     clearInterval(drip);
 
-    if (sweep) sweep.style.animation = '';
+    // Keep radar spinning at normal speed after scan ends
+    if (sweep) sweep.style.animation = 'radar-spin 3s linear infinite';
     if (banner) {
       banner.textContent = 'THREAT LEVEL: ALPHA';
       banner.style.animation = '';
