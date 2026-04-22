@@ -208,13 +208,15 @@
 
         <!-- Filter buttons -->
         <div class="flex flex-col gap-1">
-          <button onclick="filterArticles('all')" id="filter-all" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest bg-primary-container/10 text-primary-container border-l-2 border-primary-container transition-colors">ALL FILES <span class="float-right">12</span></button>
-          <button onclick="filterArticles('whistleblower')" id="filter-whistleblower" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">WHISTLEBLOWERS <span class="float-right">2</span></button>
+          <button onclick="filterArticles('all')" id="filter-all" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest bg-primary-container/10 text-primary-container border-l-2 border-primary-container transition-colors">ALL FILES <span class="float-right">36</span></button>
+          <button onclick="filterArticles('whistleblower')" id="filter-whistleblower" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">WHISTLEBLOWERS <span class="float-right">6</span></button>
           <button onclick="filterArticles('crash')" id="filter-crash" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">CRASH RETRIEVALS <span class="float-right">2</span></button>
-          <button onclick="filterArticles('missing')" id="filter-missing" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MISSING RESEARCHERS <span class="float-right">3</span></button>
-          <button onclick="filterArticles('coverup')" id="filter-coverup" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">GOVT COVER-UPS <span class="float-right">2</span></button>
-          <button onclick="filterArticles('sighting')" id="filter-sighting" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MASS SIGHTINGS <span class="float-right">1</span></button>
-          <button onclick="filterArticles('evidence')" id="filter-evidence" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">PHYSICAL EVIDENCE <span class="float-right">2</span></button>
+          <button onclick="filterArticles('missing')" id="filter-missing" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MISSING RESEARCHERS <span class="float-right">5</span></button>
+          <button onclick="filterArticles('coverup')" id="filter-coverup" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">GOVT COVER-UPS <span class="float-right">5</span></button>
+          <button onclick="filterArticles('sighting')" id="filter-sighting" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">MASS SIGHTINGS <span class="float-right">3</span></button>
+          <button onclick="filterArticles('evidence')" id="filter-evidence" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">PHYSICAL EVIDENCE <span class="float-right">4</span></button>
+          <button onclick="filterArticles('news')" id="filter-news" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">NEWS ARTICLES <span class="float-right">6</span></button>
+          <button onclick="filterArticles('social')" id="filter-social" class="text-left py-2 px-3 text-[10px] font-mono uppercase tracking-widest text-stone-400 hover:bg-stone-800/50 hover:text-stone-200 transition-colors">SOCIAL MEDIA <span class="float-right">5</span></button>
         </div>
 
         <!-- Search -->
@@ -408,6 +410,318 @@
           </div>
         </div>
 
+        <!-- CARD 13 — NEWS -->
+        <div class="article-card" data-cat="news">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">NEWS ARTICLE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">DEC 2017</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">New York Times: "Glowing Auras and 'Black Money' — The Pentagon's Mysterious UFO Program"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">The bombshell NYT exposé that broke the AATIP story to the world. Revealed the Pentagon had a secret UFO program funded by $22M in "black money." Included the FLIR1 Tic-Tac video. Changed everything.</p>
+            <a href="https://www.nytimes.com/2017/12/16/us/politics/pentagon-program-ufo-harry-reid.html" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 14 — NEWS -->
+        <div class="article-card" data-cat="news">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">NEWS ARTICLE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">MAY 2021</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">CBS 60 Minutes: UAP Segment — The Night the US Military Admitted It Cannot Explain What It's Seeing</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">First major network television segment on UAPs. Featured Cdr. David Fravor and Lt. Cmdr. Alex Dietrich on camera. Reached 10M+ viewers and forced a Congressional response within weeks.</p>
+            <a href="https://www.cbsnews.com/news/ufo-military-60-minutes-2021-05-16/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 15 — NEWS -->
+        <div class="article-card" data-cat="news">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">NEWS ARTICLE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JUN 2023</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">The Debrief: "Intelligence Officials Say U.S. Has Retrieved Non-Human Craft" — The Grusch Exposé</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">The article that preceded Grusch's congressional testimony. Written by Pulitzer-winning journalists Leslie Kean and Ralph Blumenthal. Alleged multi-decade program to retrieve and reverse-engineer non-human technology.</p>
+            <a href="https://thedebrief.org/intelligence-officials-say-u-s-has-retrieved-non-human-craft/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 16 — NEWS -->
+        <div class="article-card" data-cat="news">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">NEWS ARTICLE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">SEP 2019</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Washington Post: "The Military Keeps Encountering UFOs — Why Doesn't the Pentagon Care?"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Post investigation into repeated UAP encounters by Navy pilots over years. Found a pattern of dismissal, ridicule, and suppression of incident reports. Triggered formal policy change in how military handles UAP reports.</p>
+            <a href="https://www.washingtonpost.com/national-security/2019/09/18/military-keeps-encountering-ufos-why-doesnt-pentagon-care/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 17 — NEWS -->
+        <div class="article-card" data-cat="news">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">NEWS ARTICLE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2022</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">UK MoD Releases The Calvine Photo: Britain's Best UFO Image, Classified for 30 Years</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Taken in 1990 near Calvine, Scotland. Six witnesses photographed a large diamond-shaped craft hovering for 10 minutes before accelerating vertically. UK MoD kept it classified. Released 2022 — still unexplained.</p>
+            <a href="https://www.bbc.com/news/uk-scotland-62740686" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 18 — SOCIAL MEDIA -->
+        <div class="article-card" data-cat="social">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">SOCIAL MEDIA</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">APR 2021</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Jeremy Corbell on X/Twitter: "BOMBSHELL — US Navy Filmed UFO Swarm Over Warship USS Russell"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Documentary filmmaker Jeremy Corbell leaked night-vision footage showing pyramid-shaped UAPs hovering over a US warship. Pentagon confirmed authenticity within days. Video went globally viral. 50M+ impressions.</p>
+            <a href="https://twitter.com/JeremyCorbell" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 19 — SOCIAL MEDIA -->
+        <div class="article-card" data-cat="social">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">SOCIAL MEDIA</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">OCT 2017</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Luis Elizondo on Twitter: Resignation Letter from the Pentagon — "Bureaucratic Inertia on a Subject That Demands Urgency"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Former head of AATIP publicly released his resignation letter from the DoD, citing the department's failure to take UAP seriously as a national security issue. Thread went viral. He joined Tom DeLonge's To The Stars Academy days later.</p>
+            <a href="https://twitter.com/LueElizondo" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 20 — SOCIAL MEDIA -->
+        <div class="article-card" data-cat="social">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">SOCIAL MEDIA</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2021</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Joe Rogan Experience #1361 — Lue Elizondo Goes Public: 30M Views, Pentagon Forced to Respond</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Elizondo's JRE appearance became the most-watched UFO interview in history. He described UAP performing maneuvers that violate known physics — instantaneous acceleration, hypersonic flight with no sonic boom, trans-medium travel. Pentagon issued a statement the next day.</p>
+            <a href="https://www.youtube.com/watch?v=cD6oOr1CVkc" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 21 — SOCIAL MEDIA -->
+        <div class="article-card" data-cat="social">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">SOCIAL MEDIA</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2020</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Cdr. David Fravor Reddit AMA: "I Know What I Saw. It Wasn't Ours."</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">The Navy pilot at the center of the Nimitz encounter did a Reddit AMA that became one of the most-upvoted in r/IAmA history. He answered every question directly, described the object's behavior and confirmed no conventional explanation was ever offered by the Navy.</p>
+            <a href="https://www.reddit.com/r/IAmA/comments/jvacg8/i_am_commander_david_fravor_us_navy_ret_i/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 22 — WHISTLEBLOWER -->
+        <div class="article-card" data-cat="whistleblower">
+          <div class="bg-surface-container border border-outline-variant\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WHISTLEBLOWER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2017–PRES</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Luis Elizondo — Pentagon AATIP Director: "We Are Not Alone and We Have Known for Some Time"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Former head of the Pentagon's Advanced Aerospace Threat Identification Program. Ran a classified $22M UFO investigation from 2007–2012. Resigned in 2017 citing cover-up. Has since publicly stated UAPs are real, non-human, and represent a national security threat.</p>
+            <a href="https://www.politico.com/news/magazine/2021/05/28/ufos-secret-history-government-washington-dc-487900" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 23 — WHISTLEBLOWER -->
+        <div class="article-card" data-cat="whistleblower">
+          <div class="bg-surface-container border border-outline-variant\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WHISTLEBLOWER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2019–2021</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Christopher Mellon — Fmr. Deputy Asst. Secretary of Defense: "The Government Has Known Since WWII"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Former Deputy Secretary of Defense for Intelligence. Authored op-eds in Washington Post claiming military bureaucracy actively suppresses UAP data. States intelligence community possesses material and footage it has never disclosed publicly. Key advisor to TTSA.</p>
+            <a href="https://www.washingtonpost.com/outlook/the-military-keeps-encountering-ufos-why-doesnt-the-pentagon-care/2019/09/18/49e14e90-daad-11e9-a688-303693fb4b0b_story.html" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 24 — WHISTLEBLOWER -->
+        <div class="article-card" data-cat="whistleblower">
+          <div class="bg-surface-container border border-outline-variant\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WHISTLEBLOWER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JUL 2023</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Karl Nell — Retired US Army Colonel: Corroborates Grusch Under Oath Before Congress</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Nell served as Army's UAP Task Force coordinator. Testified alongside Grusch confirming the existence of non-human intelligence programs. Called Grusch "forthright and trustworthy." Military career adds weight to testimony that cannot be easily dismissed.</p>
+            <a href="https://oversight.house.gov/hearing/unidentified-anomalous-phenomena-implications-on-national-security-public-safety-and-government-transparency/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 25 — WHISTLEBLOWER -->
+        <div class="article-card" data-cat="whistleblower">
+          <div class="bg-surface-container border border-outline-variant\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">WHISTLEBLOWER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2019</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Dr. Eric Davis — Physicist: Briefed Senate Armed Services Committee on "Off-World Vehicles Not Made on This Earth"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Astrophysicist and defense contractor briefed a Senate committee in 2019 on crash retrievals and reverse engineering of non-human technology. New York Times confirmed the briefings occurred. Davis worked with the DIA's Unidentified Aerial Phenomena program.</p>
+            <a href="https://www.nytimes.com/2020/07/23/us/politics/pentagon-ufo-crash-materials.html" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 26 — MISSING RESEARCHER -->
+        <div class="article-card" data-cat="missing">
+          <div class="bg-surface-container border border-error-container\20 p-4 flex flex-col gap-3 h-full hover:border-error-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-error-container bg-error-container/10 px-2 py-0.5">MISSING RESEARCHER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JUN 1971</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Dr. James McDonald — Found Shot in the Desert While Actively Testifying to Congress About UFOs</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Senior atmospheric physicist at University of Arizona. Spent years investigating UFO cases and presented evidence to Congress. Found shot in the desert in June 1971 with a gun nearby. His colleagues disputed the suicide ruling. No credible motive was established.</p>
+            <a href="https://en.wikipedia.org/wiki/James_E._McDonald" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 27 — MISSING RESEARCHER -->
+        <div class="article-card" data-cat="missing">
+          <div class="bg-surface-container border border-error-container\20 p-4 flex flex-col gap-3 h-full hover:border-error-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-error-container bg-error-container/10 px-2 py-0.5">MISSING RESEARCHER</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">AUG 1993</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Ron Rummel — Publisher of Alien Digest, Found Dead Months After Exposing Alleged Alien Agreements</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Former USAF intelligence agent who self-published the Alien Digest newsletter documenting alleged human-alien treaties. Found dead in a Portland park in August 1993 with a gunshot wound. Gun found near his right hand — he was left-handed. Ruled suicide.</p>
+            <a href="https://www.bibliotecapleyades.net/exopolitica/esp_exopolitica_zz01.htm" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 28 — GOVT COVER-UP -->
+        <div class="article-card" data-cat="coverup">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">GOVT COVER-UP</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">1947–1969</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Project Blue Book: 701 "Unknown" Cases the USAF Never Explained — Then Quietly Closed the Program</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">The official USAF UFO investigation ran for 22 years. Of 12,618 reported sightings, 701 remain officially "unidentified." The program was shut down in 1969 following the Condon Report — which critics say was rigged. Files are now public. Read them yourself.</p>
+            <a href="https://www.archives.gov/research/military/air-force/ufos" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 29 — GOVT COVER-UP -->
+        <div class="article-card" data-cat="coverup">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">GOVT COVER-UP</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">1953</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">The Robertson Panel: CIA Secretly Ordered Military to Debunk All UFO Reports — Declassified 1975</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">A secret CIA scientific panel convened in 1953 to address the UFO phenomenon. Its classified recommendation: actively debunk all reports, reduce public interest, and train groups like the Audubon Society to explain away sightings. Declassified in 1975. Policy effect lasted decades.</p>
+            <a href="https://www.cia.gov/readingroom/docs/CIA-RDP81R00560R000100010001-0.pdf" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 30 — GOVT COVER-UP -->
+        <div class="article-card" data-cat="coverup">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">GOVT COVER-UP</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">MAR 1950</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">FBI FOIA: Guy Hottel Memo — "Flying Saucers Recovered in New Mexico, Operated by Human Shapes 3 Feet Tall"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">The FBI's most-viewed FOIA document ever released. A 1950 memo from Special Agent Guy Hottel describes an informant's claim that three recovered flying saucers were found in New Mexico, each containing three 3-foot humanoid figures. The Bureau never formally investigated. The memo remains unexplained.</p>
+            <a href="https://vault.fbi.gov/hottel_guy/Guy%20Hottel%20Part%201%20of%201/view" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 31 — MASS SIGHTING -->
+        <div class="article-card" data-cat="sighting">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">MASS SIGHTING</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">NOV 2006</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">O'Hare Airport 2006: United Airlines Pilots Report Disc-Shaped Object — FAA Refuses to Investigate</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Multiple United Airlines crew members observed a metallic disc hovering over Gate C17 at O'Hare International. Object shot straight up, punching a hole in the cloud cover. FAA initially denied any reports — until FOIA forced release of tower communications. Investigation: none.</p>
+            <a href="https://www.chicagotribune.com/2007/01/01/in-chicago-ohare-airport-sighting-of-ufo-reported/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 32 — MASS SIGHTING -->
+        <div class="article-card" data-cat="sighting">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">MASS SIGHTING</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">JAN 2008</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Stephenville TX 2008: 200 Witnesses, FAA Radar Confirms Object at 1,900 MPH — No Sonic Boom</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Hundreds of witnesses in Stephenville, Texas reported a mile-wide silent craft moving at over 1,900 mph. FAA radar data, later released under FOIA, confirmed an unknown object moving at that speed with no flight plan. It then changed course toward President Bush's Crawford Ranch.</p>
+            <a href="https://www.dallasnews.com/news/2008/01/14/dozens-in-texas-town-report-seeing-ufos/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 33 — PHYSICAL EVIDENCE -->
+        <div class="article-card" data-cat="evidence">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">PHYSICAL EVIDENCE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2021–PRES</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Harvard's Avi Loeb — Project Galileo: First Scientific Search for Alien Artifacts in Earth's Oceans</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Harvard astrophysicist Avi Loeb launched Project Galileo to scientifically investigate UAPs. His team recovered spherules from the Pacific Ocean floor near the 2014 meteor impact site, showing anomalous isotope ratios inconsistent with known solar system materials. Peer review ongoing.</p>
+            <a href="https://projects.iq.harvard.edu/galileo" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 34 — PHYSICAL EVIDENCE -->
+        <div class="article-card" data-cat="evidence">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">PHYSICAL EVIDENCE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">APR 1964</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Socorro NM — Lonnie Zamora Encounter: Burned Soil, Landing Gear Impressions, Confirmed by FBI</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Police officer Lonnie Zamora reported landing craft and two figures in white coveralls in Socorro, NM. FBI and Army investigators documented physical evidence: burned vegetation in a defined pattern, four distinct landing gear impressions in hardened soil. Remained on USAF's Project Blue Book "unknown" list permanently.</p>
+            <a href="https://www.openminds.tv/socorro-ufo-landing-history-evidence/43779" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 35 — SOCIAL MEDIA -->
+        <div class="article-card" data-cat="social">
+          <div class="bg-surface-container border border-secondary-container\20 p-4 flex flex-col gap-3 h-full hover:border-secondary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-secondary-container bg-secondary-container/10 px-2 py-0.5">SOCIAL MEDIA</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2023</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">Rep. Tim Burchett on X: "There Is a Cover-Up. I've Seen the Classified Files. Congress Is Being Lied To."</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">Republican Congressman Tim Burchett became one of the most vocal UAP advocates in Congress, posting thread after thread on X demanding transparency. Stated publicly he had seen classified UAP briefings that confirm technology "not made by human hands." His posts regularly trended nationally.</p>
+            <a href="https://twitter.com/timburchett" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
+        <!-- CARD 36 — NEWS -->
+        <div class="article-card" data-cat="news">
+          <div class="bg-surface-container border border-primary-container\20 p-4 flex flex-col gap-3 h-full hover:border-primary-container/40 transition-colors">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[8px] uppercase tracking-widest text-primary-container bg-primary-container/10 px-2 py-0.5">NEWS ARTICLE</span>
+              <span class="font-mono text-[8px] text-on-surface-variant">2023</span>
+            </div>
+            <h3 class="font-headline text-sm font-bold text-on-surface leading-tight">NASA's UAP Independent Study Group: "Our Own Instruments Are Being Redirected Away From UAP Events"</h3>
+            <p class="font-mono text-[10px] text-on-surface-variant leading-relaxed flex-1">NASA's own independent UAP study group published a 33-page report in 2023 acknowledging UAPs as a serious scientific mystery. Panel member Dr. Scott Kelly stated that scientific instruments have repeatedly been redirected or deactivated before UAP events — raising the question of who is redirecting them and why.</p>
+            <a href="https://science.nasa.gov/uap/" target="_blank" class="font-mono text-[9px] text-primary-fixed-dim hover:text-primary-fixed transition-colors flex items-center gap-1 mt-auto">READ DOSSIER <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -449,7 +763,7 @@
       <div class="mt-auto bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative flex-1" style="min-height: 8rem;">
         <div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
         <div id="sys-log" class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80 flex flex-col">
-          <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Archive initialized. 12 documents indexed.</div>
+          <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Archive initialized. 36 documents indexed.</div>
           <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Grusch testimony on record — Jul 26, 2023.</div>
         </div>
       </div>
@@ -462,7 +776,7 @@
     <div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] pointer-events-none"></div>
     <div class="flex items-center gap-3">
       <span class="w-2 h-2 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
-      <span class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">ARCHIVE STATUS: 12 DOCUMENTS INDEXED</span>
+      <span class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">ARCHIVE STATUS: 36 DOCUMENTS INDEXED</span>
     </div>
     <a href="../incident_reporting_interface/code.html" class="bg-primary-container text-on-primary font-headline font-bold uppercase tracking-[0.2em] px-6 py-3 text-xs flex items-center gap-2 hover:opacity-90 transition-opacity">
       <span class="material-symbols-outlined text-sm">send</span>
