@@ -147,11 +147,27 @@
 </div>
 <div class="px-6 flex flex-col gap-4">
 <button class="w-full bg-[#00FF41] text-[#003907] py-2 font-bold font-headline tracking-widest hover:bg-[#72ff70] transition-colors" onclick="window.location.href='../global_surveillance_dashboard/code.html?scan=1'">INITIATE SCAN</button>
-<div class="border border-stone-700 p-3 text-[9px] text-stone-500 font-mono">
-<div class="text-[#00FF41] mb-2 tracking-widest">TOKEN_DATA_STREAM</div>
-<div class="flex justify-between mb-1"><span>CONTRACT</span><span class="text-stone-400">0x0000...0000</span></div>
-<div class="flex justify-between mb-1"><span>X_FEED</span><span class="text-stone-400">@INTEL_CORE</span></div>
-<div class="flex justify-between"><span>DEX_SCR</span><span class="text-[#00FF41]">LIVE</span></div>
+<div class="flex flex-col gap-3 mb-4">
+<div class="text-[10px] font-headline font-bold text-stone-500 uppercase tracking-[0.2em] mb-1">TOKEN_DATA_STREAM</div>
+<div class="bg-[#00FF41]/5 border border-[#00FF41]/20 p-2 flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<span class="text-[8px] font-mono text-[#00FF41]/60 uppercase tracking-widest">CONTRACT_ADDRESS</span>
+<button class="hover:text-[#00FF41] transition-colors text-stone-500" title="Copy Address" onclick="navigator.clipboard.writeText('0x0000000000000000000000000000000000000000')">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="font-mono text-[10px] text-[#00FF41] break-all selection:bg-[#00FF41] selection:text-black">0x0000000000000000000000000000000000000000</div>
+</div>
+<div class="flex gap-2">
+<a class="flex-1 bg-stone-800/50 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-[#00FF41]/5 transition-all p-2 flex items-center justify-center gap-2 group" href="#">
+<svg class="w-3.5 h-3.5 fill-current text-stone-400 group-hover:text-[#00FF41]" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.96H5.078z"/></svg>
+<span class="text-[9px] font-mono text-stone-400 group-hover:text-[#00FF41] uppercase tracking-tighter">X_FEED</span>
+</a>
+<a class="flex-1 bg-stone-800/50 border border-stone-700 hover:border-[#00FF41]/50 hover:bg-[#00FF41]/5 transition-all p-2 flex items-center justify-center gap-2 group" href="#">
+<span class="material-symbols-outlined text-[16px] text-stone-400 group-hover:text-[#00FF41]">monitoring</span>
+<span class="text-[9px] font-mono text-stone-400 group-hover:text-[#00FF41] uppercase tracking-tighter">DEX_SCR</span>
+</a>
+</div>
 </div>
 <div class="flex flex-col">
 <a href="../security_clearance_access/code.html" class="flex items-center gap-4 text-stone-500 py-3 px-2 hover:bg-stone-800/50 hover:text-stone-200 cursor-pointer transition-colors duration-100">
