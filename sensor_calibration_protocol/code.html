@@ -221,7 +221,7 @@
     </section>
 
     <!-- Central Content: Article Grid -->
-    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col min-h-[300px]">
+    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col min-h-[300px] lg:h-[calc(100vh-220px)]">
       <!-- Watermark -->
       <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none overflow-hidden z-0">
         <span class="font-headline text-8xl font-black tracking-tighter text-on-surface transform -rotate-12 whitespace-nowrap">TOP SECRET</span>
@@ -232,7 +232,7 @@
         <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">36 DOCUMENTS</span>
       </div>
 
-      <div id="article-grid" class="p-4 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 z-10">
+      <div id="article-grid" class="p-4 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 z-10 lg:overflow-y-auto lg:flex-1">
 
         <!-- CARD 1 -->
         <div class="article-card" data-cat="whistleblower">
