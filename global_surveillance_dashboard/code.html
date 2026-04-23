@@ -196,25 +196,6 @@
 <div id="globe-wrapper" class="flex-1 bg-surface-container-low relative border border-outline-variant/20 overflow-hidden min-h-[300px] md:min-h-[400px]">
 <!-- Three.js Interactive Globe -->
 <div id="globe-container" class="absolute inset-0" style="cursor:grab;"></div>
-<!-- Sighting Tooltip -->
-<div id="sighting-info" class="absolute bg-surface-container-high/95 border border-[#00FF41]/40 p-3 backdrop-blur-sm w-52 z-10" style="display:none;top:16px;left:16px;">
-  <div class="font-mono text-[10px] text-[#00FF41] font-bold mb-2 flex items-center gap-2">
-    <span id="sig-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;"></span>
-    <span id="sig-id">---</span>
-  </div>
-  <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono text-[9px]">
-    <span class="text-stone-500">LAT</span><span id="sig-lat" class="text-on-surface">---</span>
-    <span class="text-stone-500">LNG</span><span id="sig-lng" class="text-on-surface">---</span>
-    <span class="text-stone-500">CASE TYPE</span><span id="sig-cls" class="text-on-surface">---</span>
-    <span class="text-stone-500">VERIFICATION</span><span id="sig-status" class="text-on-surface">---</span>
-    <span class="text-stone-500">ELEVATION</span><span id="sig-alt" class="text-on-surface">---</span>
-    <span class="text-stone-500">SPEED</span><span id="sig-vel" class="text-on-surface">---</span>
-    <span class="text-stone-500">DATE</span><span id="sig-first" class="text-on-surface">---</span>
-  </div>
-  <a id="sig-link" href="#" target="_blank" class="mt-2 pt-2 border-t border-[#00FF41]/20 font-mono text-[9px] text-[#00FF41] flex items-center gap-1 hover:text-white transition-colors cursor-pointer" style="display:flex;text-decoration:none;">
-    <span>▶</span><span>OPEN CASE FILE</span>
-  </a>
-</div>
 <!-- Map UI Overlay -->
 <div class="absolute top-4 right-4 flex flex-col gap-2">
 <button onclick="globeZoomIn()" class="bg-surface-container-high/80 border border-outline-variant/50 w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary-container transition-colors backdrop-blur-sm">
@@ -633,59 +614,26 @@
   window.globeZoomOut = () => { camDist = Math.min(5,   camDist + 0.35); };
   window.globeReset   = () => { globe.rotation.set(0, 0, 0); camDist = 2.5; vx = vy = 0; };
 
-  // Hover tooltip
+  // Click-to-navigate: raycaster for cursor + click
   const raycaster = new THREE.Raycaster();
   const mouse2d   = new THREE.Vector2();
-  const infoEl  = document.getElementById('sighting-info');
 
-  const sigLink = document.getElementById('sig-link');
-
+  // Show pointer cursor when hovering a dot
   container.addEventListener('mousemove', e => {
-    if (dragging || !infoEl) return;
+    if (dragging) return;
     const r = container.getBoundingClientRect();
     mouse2d.x =  ((e.clientX - r.left) / r.width)  * 2 - 1;
     mouse2d.y = -((e.clientY - r.top)  / r.height) * 2 + 1;
     raycaster.setFromCamera(mouse2d, camera);
     const hits = raycaster.intersectObjects(markers);
-    if (hits.length) {
-      container.style.cursor = 'pointer';
-      const s = hits[0].object.userData;
-      const hexColor = '#' + s.color.toString(16).padStart(6,'0');
-      document.getElementById('sig-dot').style.background = hexColor;
-      document.getElementById('sig-id').textContent = s.id;
-      document.getElementById('sig-id').style.color = hexColor;
-      document.getElementById('sig-lat').textContent = Math.abs(s.lat).toFixed(4) + (s.lat >= 0 ? ' N' : ' S');
-      document.getElementById('sig-lng').textContent = Math.abs(s.lng).toFixed(4) + (s.lng >= 0 ? ' E' : ' W');
-      document.getElementById('sig-cls').textContent = s.cls;
-      document.getElementById('sig-status').textContent = s.status;
-      document.getElementById('sig-status').style.color = s.status === 'TRACKING' || s.status === 'CONFIRMED' ? '#00ff41' : s.status === 'SIGNAL LOST' ? '#ff3333' : '#ffdd00';
-      document.getElementById('sig-alt').textContent = s.alt;
-      document.getElementById('sig-vel').textContent = s.vel;
-      document.getElementById('sig-first').textContent = s.first;
-      if (sigLink) sigLink.href = sightingUrls[s.id] || '#';
-      // Position tooltip near the mouse cursor
-      const x = e.clientX - r.left;
-      const y = e.clientY - r.top;
-      const tipW = infoEl.offsetWidth || 210;
-      const tipH = infoEl.offsetHeight || 220;
-      infoEl.style.left = (x + 16 + tipW > r.width ? x - tipW - 8 : x + 16) + 'px';
-      infoEl.style.top  = (y - 10 + tipH > r.height ? r.height - tipH - 8 : Math.max(4, y - 10)) + 'px';
-      infoEl.style.display = 'block';
-    } else {
-      container.style.cursor = 'default';
-      // Don't hide — keep tooltip visible until mouse leaves globe entirely
-    }
+    container.style.cursor = hits.length ? 'pointer' : 'default';
   });
 
   let globeHovered = false;
   const wrapper = document.getElementById('globe-wrapper');
   if (wrapper) {
     wrapper.addEventListener('mouseenter', () => { globeHovered = true; });
-    wrapper.addEventListener('mouseleave', () => {
-      globeHovered = false;
-      if (infoEl) infoEl.style.display = 'none';
-      container.style.cursor = 'default';
-    });
+    wrapper.addEventListener('mouseleave', () => { globeHovered = false; container.style.cursor = 'default'; });
   }
 
   // URL map — click any globe dot to open its source
@@ -792,14 +740,14 @@
     'MARIANA-USO':       'https://en.wikipedia.org/wiki/Unidentified_submerged_object',
   };
 
-  // Click handler — navigate to source on dot click
+  // Click handler — navigate to source on dot click (uses hitMarkers for generous hit area)
   container.addEventListener('click', e => {
     if (dragging) return;
     const r = container.getBoundingClientRect();
     mouse2d.x =  ((e.clientX - r.left) / r.width)  * 2 - 1;
     mouse2d.y = -((e.clientY - r.top)  / r.height) * 2 + 1;
     raycaster.setFromCamera(mouse2d, camera);
-    const hits = raycaster.intersectObjects(markers);
+    const hits = raycaster.intersectObjects(hitMarkers);
     if (hits.length) {
       const id = hits[0].object.userData.id;
       const url = sightingUrls[id];
