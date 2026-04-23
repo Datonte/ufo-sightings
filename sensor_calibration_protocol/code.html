@@ -173,7 +173,7 @@
   </header>
 
   <!-- Main Layout Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full lg:items-stretch">
 
     <!-- Left Sidebar: Filter Controls -->
     <section class="lg:col-span-3 flex flex-col gap-6 relative">
@@ -224,7 +224,7 @@
     </section>
 
     <!-- Central Content: Article Grid -->
-    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col h-[70vh] lg:h-[calc(100vh-220px)]">
+    <section class="lg:col-span-6 bg-surface-container-high border border-outline-variant/30 relative flex flex-col h-[70vh] lg:h-full">
       <!-- Watermark -->
       <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none overflow-hidden z-0">
         <span class="font-headline text-8xl font-black tracking-tighter text-on-surface transform -rotate-12 whitespace-nowrap">TOP SECRET</span>
@@ -918,7 +918,7 @@
     </section>
 
     <!-- Right Sidebar: Key Figures + SYS_LOG -->
-    <section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4">
+    <section class="lg:col-span-3 bg-surface-container-low border border-outline-variant/20 p-4 flex flex-col gap-4 lg:overflow-y-auto">
       <div class="flex flex-col gap-1 border-b border-outline-variant/20 pb-4">
         <h3 class="font-headline text-sm tracking-widest text-on-surface">KEY FIGURES</h3>
         <p class="font-mono text-[10px] text-on-surface-variant">PERSONS OF INTEREST</p>
@@ -985,6 +985,21 @@ document.addEventListener('DOMContentLoaded', () => {
       el.textContent = 'ARCHIVE STATUS: ' + total + ' DOCUMENTS INDEXED';
     }
   });
+  // Update filter category counts dynamically
+  const cats = ['whistleblower','crash','missing','coverup','sighting','evidence','news','social'];
+  cats.forEach(cat => {
+    const btn = document.getElementById('filter-' + cat);
+    if (!btn) return;
+    const count = document.querySelectorAll('.article-card[data-cat="' + cat + '"]').length;
+    const floatSpan = btn.querySelector('span.float-right');
+    if (floatSpan) floatSpan.textContent = count;
+  });
+  // Update "ALL FILES" count
+  const allBtn = document.getElementById('filter-all');
+  if (allBtn) {
+    const floatSpan = allBtn.querySelector('span.float-right');
+    if (floatSpan) floatSpan.textContent = total;
+  }
 });
 
 // Mobile filter toggle

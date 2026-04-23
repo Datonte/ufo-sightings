@@ -196,6 +196,21 @@
 <div id="globe-wrapper" class="flex-1 bg-surface-container-low relative border border-outline-variant/20 overflow-hidden min-h-[300px] md:min-h-[400px]">
 <!-- Three.js Interactive Globe -->
 <div id="globe-container" class="absolute inset-0" style="cursor:grab;"></div>
+<!-- Hover Tooltip -->
+<div id="sighting-info" class="absolute pointer-events-none z-10 bg-surface-container-high/95 border border-[#00FF41]/40 p-3 backdrop-blur-sm w-52" style="display:none;top:16px;left:16px;">
+  <div class="font-mono text-[10px] text-[#00FF41] font-bold mb-2 flex items-center gap-2">
+    <span id="sig-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#00FF41;flex-shrink:0;"></span>
+    <span id="sig-id" class="truncate">---</span>
+  </div>
+  <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono text-[9px]">
+    <span class="text-stone-500">CASE TYPE</span><span id="sig-cls" class="text-on-surface text-right">---</span>
+    <span class="text-stone-500">VERIFIED</span><span id="sig-status" class="text-on-surface text-right">---</span>
+    <span class="text-stone-500">ELEVATION</span><span id="sig-alt" class="text-on-surface text-right">---</span>
+    <span class="text-stone-500">SPEED</span><span id="sig-vel" class="text-on-surface text-right">---</span>
+    <span class="text-stone-500">DATE</span><span id="sig-first" class="text-on-surface text-right">---</span>
+  </div>
+  <div class="mt-2 pt-2 border-t border-[#00FF41]/20 font-mono text-[9px] text-[#00FF41]/70">▶ CLICK TO OPEN CASE FILE</div>
+</div>
 <!-- Map UI Overlay -->
 <div class="absolute top-4 right-4 flex flex-col gap-2">
 <button onclick="globeZoomIn()" class="bg-surface-container-high/80 border border-outline-variant/50 w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary-container transition-colors backdrop-blur-sm">
@@ -614,11 +629,11 @@
   window.globeZoomOut = () => { camDist = Math.min(5,   camDist + 0.35); };
   window.globeReset   = () => { globe.rotation.set(0, 0, 0); camDist = 2.5; vx = vy = 0; };
 
-  // Click-to-navigate: raycaster for cursor + click
+  // Raycaster for hover tooltip + click navigation
   const raycaster = new THREE.Raycaster();
   const mouse2d   = new THREE.Vector2();
+  const infoEl    = document.getElementById('sighting-info');
 
-  // Show pointer cursor when hovering a dot
   container.addEventListener('mousemove', e => {
     if (dragging) return;
     const r = container.getBoundingClientRect();
@@ -626,14 +641,37 @@
     mouse2d.y = -((e.clientY - r.top)  / r.height) * 2 + 1;
     raycaster.setFromCamera(mouse2d, camera);
     const hits = raycaster.intersectObjects(markers);
-    container.style.cursor = hits.length ? 'pointer' : 'default';
+    if (hits.length) {
+      container.style.cursor = 'pointer';
+      const s = hits[0].object.userData;
+      // Position tooltip near cursor, flip left if near right edge
+      const mx = e.clientX - r.left, my = e.clientY - r.top;
+      const tipW = 215;
+      infoEl.style.left = (mx + 18 + tipW > r.width ? mx - tipW - 10 : mx + 18) + 'px';
+      infoEl.style.top  = Math.max(8, my - 70) + 'px';
+      infoEl.style.display = 'block';
+      document.getElementById('sig-id').textContent     = s.id || '---';
+      document.getElementById('sig-cls').textContent    = s.cls || '---';
+      document.getElementById('sig-status').textContent = s.status || '---';
+      document.getElementById('sig-alt').textContent    = s.alt || '---';
+      document.getElementById('sig-vel').textContent    = s.vel || '---';
+      document.getElementById('sig-first').textContent  = s.first || '---';
+      document.getElementById('sig-dot').style.background = '#' + hits[0].object.material.color.getHexString();
+    } else {
+      container.style.cursor = 'default';
+      infoEl.style.display = 'none';
+    }
   });
 
   let globeHovered = false;
   const wrapper = document.getElementById('globe-wrapper');
   if (wrapper) {
     wrapper.addEventListener('mouseenter', () => { globeHovered = true; });
-    wrapper.addEventListener('mouseleave', () => { globeHovered = false; container.style.cursor = 'default'; });
+    wrapper.addEventListener('mouseleave', () => {
+      globeHovered = false;
+      container.style.cursor = 'default';
+      if (infoEl) infoEl.style.display = 'none';
+    });
   }
 
   // URL map — click any globe dot to open its source
