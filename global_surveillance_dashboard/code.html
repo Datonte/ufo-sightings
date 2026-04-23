@@ -513,6 +513,7 @@
   }
 
   const markers = [];
+  const hitMarkers = [];
   sightings.forEach((s, idx) => {
     const pos = toVec3(s.lat, s.lng, 1.02);
     const orient = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1), pos.clone().normalize());
@@ -548,6 +549,16 @@
     dot.ring2 = ring2;
     dot.pingPhase = (idx / sightings.length) * Math.PI * 2; // stagger each dot's ping
     markers.push(dot);
+
+    // Invisible large hit-area sphere for touch — much easier to tap
+    const hitSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.06, 6, 6),
+      new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false })
+    );
+    hitSphere.position.copy(pos);
+    hitSphere.userData = s;
+    globe.add(hitSphere);
+    hitMarkers.push(hitSphere);
   });
 
   // Drag rotation
@@ -597,12 +608,13 @@
     const dy = Math.abs(t.clientY - touchStart.y);
     const dt = Date.now() - touchStart.time;
     // Only treat as a tap if finger barely moved and lifted quickly
-    if (dx < 10 && dy < 10 && dt < 300) {
+    if (dx < 14 && dy < 14 && dt < 400) {
       const r = container.getBoundingClientRect();
       mouse2d.x =  ((t.clientX - r.left) / r.width)  * 2 - 1;
       mouse2d.y = -((t.clientY - r.top)  / r.height) * 2 + 1;
       raycaster.setFromCamera(mouse2d, camera);
-      const hits = raycaster.intersectObjects(markers);
+      // Use large invisible hit spheres so single tap reliably registers
+      const hits = raycaster.intersectObjects(hitMarkers);
       if (hits.length) {
         const url = sightingUrls[hits[0].object.userData.id];
         if (url) window.open(url, '_blank');
