@@ -3,7 +3,14 @@
     "allow": [
       "Bash(vercel --yes)",
       "Bash(vercel --yes --name ufo-sightings)",
-      "Bash(vercel --prod)"
+      "Bash(vercel --prod)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(vercel deploy *)",
+      "Bash(npx vercel *)",
+      "WebSearch",
+      "Bash(powershell -Command ' *)",
+      "Bash(ping -n 2 github.com)",
+      "Bash(ping -n 2 8.8.8.8)"
     ]
   }
 }
