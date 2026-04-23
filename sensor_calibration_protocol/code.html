@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
@@ -232,7 +232,7 @@
       <!-- Panel header tabs -->
       <div class="absolute top-2 left-2 flex gap-2 z-10">
         <span class="px-2 py-0.5 bg-primary-fixed-dim/20 text-primary-fixed border border-primary-fixed/30 font-mono text-[10px]">RESEARCH ARCHIVE</span>
-        <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">36 DOCUMENTS</span>
+        <span class="px-2 py-0.5 bg-surface-container text-on-surface-variant border border-outline-variant/30 font-mono text-[10px]">51 DOCUMENTS</span>
       </div>
 
       <div id="article-grid" class="p-4 pt-10 grid grid-cols-1 md:grid-cols-2 gap-4 z-10 overflow-y-auto flex-1">
@@ -955,7 +955,7 @@
       <div class="mt-4 bg-surface-container-lowest border border-outline-variant/10 p-2 overflow-hidden relative" style="min-height: 8rem;">
         <div class="absolute -top-2 right-0 text-[8px] font-mono text-on-surface-variant/30 bg-background px-1">SYS_LOG</div>
         <div id="sys-log" class="font-mono text-[9px] text-outline space-y-1 mt-2 opacity-80 flex flex-col">
-          <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Archive initialized. 36 documents indexed.</div>
+          <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Archive initialized. 51 DOCUMENTS INDEXED.</div>
           <div class="font-mono text-[9px] text-on-surface-variant border-l border-outline-variant/30 pl-2 py-0.5"><span class="text-primary-container/60">--:--:--</span> Grusch testimony on record — Jul 26, 2023.</div>
         </div>
       </div>
@@ -967,7 +967,7 @@
   <div class="mt-8 bg-surface-container border border-outline-variant/30 p-4 flex items-center gap-3 relative overflow-hidden">
     <div class="absolute right-10 top-1/2 -translate-y-1/2 w-32 h-32 bg-primary-container/10 rounded-full blur-[40px] pointer-events-none"></div>
     <span class="w-2 h-2 bg-primary-container animate-pulse" style="border-radius:50%;"></span>
-    <span class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">ARCHIVE STATUS: 36 DOCUMENTS INDEXED</span>
+    <span class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">ARCHIVE STATUS: 51 DOCUMENTS INDEXED</span>
   </div>
 
 </main>
@@ -976,8 +976,15 @@
 // Set document count dynamically so it always reflects the real number
 document.addEventListener('DOMContentLoaded', () => {
   const total = document.querySelectorAll('.article-card').length;
+  // Update panel tab badge
   const panelTab = document.querySelector('.absolute.top-2.left-2 span:last-child');
   if (panelTab) panelTab.textContent = total + ' DOCUMENTS';
+  // Update footer archive status line
+  document.querySelectorAll('span').forEach(el => {
+    if (el.textContent.includes('DOCUMENTS INDEXED')) {
+      el.textContent = 'ARCHIVE STATUS: ' + total + ' DOCUMENTS INDEXED';
+    }
+  });
 });
 
 // Mobile filter toggle
@@ -1068,3 +1075,4 @@ setInterval(addFilesSysLog, 12000);
 setTimeout(addFilesSysLog, 3000);
 </script>
 </body></html>
+
