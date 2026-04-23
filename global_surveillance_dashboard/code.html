@@ -567,19 +567,88 @@
   });
   window.addEventListener('mouseup', () => { dragging = false; container.style.cursor = 'grab'; });
 
-  // Touch support
+  // Touch support — drag + tap to show tooltip & open link
+  let touchStartPos = { x: 0, y: 0 };
+  let touchHasMoved = false;
+  let touchedDot = null;
+
+  function raycastAtPoint(clientX, clientY) {
+    const r = container.getBoundingClientRect();
+    mouse2d.x =  ((clientX - r.left) / r.width)  * 2 - 1;
+    mouse2d.y = -((clientY - r.top)  / r.height) * 2 + 1;
+    raycaster.setFromCamera(mouse2d, camera);
+    const hits = raycaster.intersectObjects(markers);
+    return hits.length ? hits[0].object : null;
+  }
+
   container.addEventListener('touchstart', e => {
-    const t = e.touches[0]; dragging = true; prev = { x: t.clientX, y: t.clientY }; vx = vy = 0;
-  });
+    const t = e.touches[0];
+    dragging = false;
+    touchHasMoved = false;
+    touchStartPos = { x: t.clientX, y: t.clientY };
+    prev = { x: t.clientX, y: t.clientY };
+    vx = vy = 0;
+    globeHovered = true;
+
+    // Check if finger landed on a dot
+    touchedDot = raycastAtPoint(t.clientX, t.clientY);
+    if (touchedDot) {
+      const s = touchedDot.userData;
+      const r = container.getBoundingClientRect();
+      const x = t.clientX - r.left;
+      const y = t.clientY - r.top;
+      const tipW = infoEl.offsetWidth || 210;
+      const tipH = infoEl.offsetHeight || 220;
+      infoEl.style.left = (x + 16 + tipW > r.width ? x - tipW - 8 : x + 16) + 'px';
+      infoEl.style.top  = (y - 10 + tipH > r.height ? r.height - tipH - 8 : Math.max(4, y - 10)) + 'px';
+      const hexColor = '#' + s.color.toString(16).padStart(6,'0');
+      document.getElementById('sig-dot').style.background = hexColor;
+      document.getElementById('sig-id').textContent = s.id;
+      document.getElementById('sig-id').style.color = hexColor;
+      document.getElementById('sig-lat').textContent = Math.abs(s.lat).toFixed(4) + (s.lat >= 0 ? ' N' : ' S');
+      document.getElementById('sig-lng').textContent = Math.abs(s.lng).toFixed(4) + (s.lng >= 0 ? ' E' : ' W');
+      document.getElementById('sig-cls').textContent = s.cls;
+      document.getElementById('sig-status').textContent = s.status;
+      document.getElementById('sig-status').style.color = s.status === 'TRACKING' || s.status === 'CONFIRMED' ? '#00ff41' : s.status === 'SIGNAL LOST' ? '#ff3333' : '#ffdd00';
+      document.getElementById('sig-alt').textContent = s.alt;
+      document.getElementById('sig-vel').textContent = s.vel;
+      document.getElementById('sig-first').textContent = s.first;
+      if (sigLink) sigLink.href = sightingUrls[s.id] || '#';
+      infoEl.style.display = 'block';
+    }
+  }, { passive: true });
+
   container.addEventListener('touchmove', e => {
     e.preventDefault();
     const t = e.touches[0];
-    vy = (t.clientX - prev.x) * 0.005; vx = (t.clientY - prev.y) * 0.005;
+    const dx = t.clientX - touchStartPos.x;
+    const dy = t.clientY - touchStartPos.y;
+    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+      touchHasMoved = true;
+      dragging = true;
+      if (infoEl) infoEl.style.display = 'none'; // hide tooltip while dragging
+      touchedDot = null;
+    }
+    vy = (t.clientX - prev.x) * 0.005;
+    vx = (t.clientY - prev.y) * 0.005;
     globe.rotation.y += vy;
     globe.rotation.x = Math.max(-1.2, Math.min(1.2, globe.rotation.x + vx));
     prev = { x: t.clientX, y: t.clientY };
   }, { passive: false });
-  container.addEventListener('touchend', () => { dragging = false; });
+
+  container.addEventListener('touchend', e => {
+    dragging = false;
+    globeHovered = false;
+    // Tap on a dot (no significant drag) → open link
+    if (!touchHasMoved && touchedDot) {
+      const url = sightingUrls[touchedDot.userData.id];
+      if (url) window.open(url, '_blank');
+    }
+    if (!touchedDot) {
+      setTimeout(() => { if (infoEl) infoEl.style.display = 'none'; }, 2000);
+    }
+    touchedDot = null;
+  });
 
   // Scroll to zoom
   container.addEventListener('wheel', e => {
